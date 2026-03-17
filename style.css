@@ -530,6 +530,23 @@ p { color: var(--gray-200); line-height: 1.7; }
   font-weight: 700;
 }
 
+/* Service Card Links */
+.service-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.service-card-link:hover .service-card,
+.service-card-link:focus .service-card {
+  border-color: rgba(196, 30, 58, 0.2);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-4px);
+}
+.service-card-link:hover .service-card::before,
+.service-card-link:focus .service-card::before {
+  transform: scaleX(1);
+}
+
 /* Stat Cards */
 .stat-card {
   background: var(--black-2);
