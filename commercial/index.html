@@ -18,14 +18,40 @@
 <meta property="og:see_also" content="https://www.perplexity.ai/computer">
 <link rel="author" href="https://www.perplexity.ai/computer">
 
+<style>
+/* Critical CSS - above the fold */
+:root{--red:#C41E3A;--black:#0A0A0A;--black-2:#111;--white:#FFF;--gray-300:#B8B8B8;--gray-400:#888;--gray-700:#333;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-brand:'Montserrat',var(--font);--space-md:16px;--space-lg:24px;--space-xl:40px;--radius-md:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav .container{padding:0 var(--space-lg)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
+.nav-logo-icon{width:36px;height:36px}
+.wordmark{font-family:var(--font-brand);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
+.nav-logo .sub{font-size:0.6rem;color:var(--gray-400);display:block;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s}
+.nav-cta{background:var(--red);color:var(--white)!important;padding:10px 20px;border-radius:4px;font-weight:700;letter-spacing:0.04em;font-size:0.8rem!important;text-transform:uppercase}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+</style>
 <meta charset="UTF-8">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://app.roofle.com">
+<link rel="dns-prefetch" href="https://i.ytimg.com">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Commercial Roofing & Exterior Services | Hoyt Exteriors | Minnesota</title>
-<meta name="description" content="Commercial roofing, TPO systems, building envelope assessment & energy solutions for Minnesota businesses. GAF Master Elite certified. Thermal imaging & drone inspections. Get your commercial assessment.">
+<title>Commercial Exterior Contractor Minneapolis | Hoyt Exteriors</title>
+<meta name="description" content="AI-powered commercial exterior restoration in Minneapolis-St. Paul. Roofing, siding, and building envelope services for property managers and commercial building owners. Call 651-212-4965.">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Commercial Roofing & Exterior Services | Hoyt Exteriors">
-<meta property="og:description" content="Commercial roofing, TPO systems, building envelope assessment & energy solutions for Minnesota businesses. GAF Master Elite certified.">
+<meta property="og:title" content="Commercial Exterior Contractor Minneapolis | Hoyt Exteriors">
+<meta property="og:description" content="AI-powered commercial exterior restoration in Minneapolis-St. Paul. Roofing, siding, and building envelope services for property managers and commercial building owners.">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://hoytexteriors.com/commercial/">
 <meta property="og:image" content="https://hoytexteriors.com/assets/hero.jpg">
@@ -34,8 +60,8 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Hoyt Exteriors">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Commercial Roofing & Exterior Services | Hoyt Exteriors">
-<meta name="twitter:description" content="Commercial roofing, TPO systems, building envelope assessment & energy solutions for Minnesota businesses. GAF Master Elite certified.">
+<meta name="twitter:title" content="Commercial Exterior Contractor Minneapolis | Hoyt Exteriors">
+<meta name="twitter:description" content="AI-powered commercial exterior restoration in Minneapolis-St. Paul. Roofing, siding, and building envelope services for property managers and commercial building owners.">
 <meta name="twitter:image" content="https://hoytexteriors.com/assets/hero.jpg">
 <meta name="geo.region" content="US-MN">
 <meta name="geo.placename" content="Apple Valley">
@@ -47,16 +73,21 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
 
 <!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%23C41E3A'/><text x='16' y='22' font-family='Arial,sans-serif' font-weight='900' font-size='18' fill='white' text-anchor='middle'>H</text></svg>">
 
 <!-- Shared Stylesheet -->
-<link rel="stylesheet" href="../style.css">
+<link rel="preload" as="style" href="../style.css">
+<link href="../style.css" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="../style.css" rel="stylesheet"></noscript>
 
 <!-- Roofle Slideout Widget -->
-<script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async></script>
+<script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
 
 <!-- Schema.org Structured Data -->
 <script type="application/ld+json">
@@ -66,7 +97,7 @@
     {
       "@type": "LocalBusiness",
       "name": "Hoyt Exteriors Inc.",
-      "description": "Commercial roofing, TPO systems, building envelope assessment & energy solutions for Minnesota businesses.",
+      "description": "AI-powered commercial exterior restoration in Minneapolis-St. Paul. Roofing, siding, and building envelope services for property managers and commercial building owners.",
       "url": "https://hoytexteriors.com/commercial/",
       "telephone": "(651) 212-4965",
       "email": "info@hoytexteriors.com",
@@ -122,66 +153,42 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What commercial roofing systems do you install?",
+          "name": "What commercial exterior services does Hoyt Exteriors provide in Minneapolis?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We install three primary commercial roofing systems: TPO (Thermoplastic Polyolefin) for flat and low-slope roofs, EPDM rubber membrane roofing for large-footprint buildings, and standing seam metal roofing for any slope. Each system is selected based on your building's architecture, usage, budget, and long-term performance goals. We're certified by GAF (Master Elite \u2014 top 1% of contractors) and CertainTeed, so every installation meets the highest manufacturer standards."
+            "text": "We provide commercial roofing (flat, low-slope, and pitched), exterior siding, gutters, insulation, and window installation for commercial buildings across the Minneapolis-St. Paul metro. Every project starts with an AI-powered drone and thermal imaging inspection."
           }
         },
         {
           "@type": "Question",
-          "name": "How long does a commercial roof replacement take?",
+          "name": "How does Hoyt Exteriors use drones and AI for commercial inspections?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Timeline depends on the size and complexity of your building. A typical commercial roof replacement for a 10,000\u201320,000 sq ft building takes 1\u20133 weeks. Larger projects, such as warehouse or multi-building campuses, may take 4\u20138 weeks. We provide a detailed project timeline during the quoting phase, and our crews work efficiently to complete the project on schedule while maintaining safety and quality standards."
+            "text": "We fly drones over your building to capture high-resolution imagery of every roof surface. Combined with thermal imaging, our AI-assisted analysis identifies moisture intrusion, heat loss, membrane damage, and flashing issues that standard visual inspections miss. You receive a written report before any work begins."
           }
         },
         {
           "@type": "Question",
-          "name": "Can you work around our business hours to minimize disruption?",
+          "name": "Does Hoyt Exteriors work on multifamily buildings?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Absolutely. We understand that your business can't shut down for a roofing project. We routinely schedule work during off-hours, weekends, and phased sections to keep your operations running smoothly. For noise-sensitive environments like healthcare facilities and offices, we coordinate with your team to schedule the loudest work during low-traffic periods. Minimizing disruption is a core part of our commercial project planning."
+            "text": "Yes. Multifamily exterior restoration is a core part of what we do — roofing, siding, gutters, and insulation for apartment complexes, townhomes, condos, and HOA communities. We coordinate work around occupied units to minimize tenant disruption."
           }
         },
         {
           "@type": "Question",
-          "name": "What does a building envelope assessment include?",
+          "name": "How do I get a commercial exterior estimate in Minneapolis?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Our building envelope assessment is a comprehensive evaluation of your entire exterior shell \u2014 roof, walls, windows, doors, and foundation interface. It includes a drone-based aerial inspection, infrared thermal imaging to detect moisture and insulation deficiencies, visual inspection of all flashing, caulking, and penetration points, and a detailed report with prioritized recommendations. You receive high-resolution photos, thermal maps, and cost estimates for any remediation needed."
+            "text": "Call us at 651-212-4965 or fill out the form on our website. We'll schedule a drone inspection and provide a written assessment with itemized pricing — no runaround, no pressure."
           }
         },
         {
           "@type": "Question",
-          "name": "How much does commercial thermal imaging cost?",
+          "name": "Does Hoyt Exteriors handle storm damage and insurance claims?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Commercial thermal imaging typically ranges from $500\u2013$2,500 depending on building size and scope. Small retail or office buildings start around $500, while large warehouses or multi-building campuses may be $1,500\u2013$2,500. The investment pays for itself many times over \u2014 a single undetected moisture issue can cost $50,000+ in structural repairs. We also offer thermal imaging as part of maintenance contracts at a reduced rate. Contact us for a specific quote based on your property."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you handle commercial insurance claims?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. We have extensive experience navigating commercial insurance claims for storm damage, hail, wind, and water intrusion. Our process includes thorough damage documentation with drone photography, thermal imaging, and detailed written reports that insurance adjusters need. We work directly with your insurance company, attend adjuster meetings, and provide supplemental documentation when needed. Our thermal imaging and drone data often uncovers damage that visual inspections miss, which can significantly increase approved claim amounts."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What warranties are available for commercial roofing?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Warranty options depend on the roofing system. TPO systems offer manufacturer warranties up to 30 years covering both materials and labor. EPDM systems also carry warranties up to 30 years. Metal roofing systems can be warranted for up to 50 years. In addition to manufacturer warranties, Hoyt Exteriors provides a 3-year workmanship warranty on all installations. As a GAF Master Elite contractor, we can also offer enhanced warranty options not available through standard installers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer maintenance contracts for commercial properties?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, we offer annual and semi-annual maintenance contracts for commercial properties. Our maintenance programs include scheduled inspections (visual and thermal), gutter cleaning, minor repairs, sealant and flashing checks, and detailed condition reports. Regular maintenance extends your roof's lifespan by 5\u201310 years on average and helps you budget predictably instead of facing unexpected emergency repairs. We tailor each contract to your building's specific needs and can bundle multiple properties for volume pricing."
+            "text": "Yes. We document damage thoroughly, provide detailed estimates, and communicate directly with your insurance adjuster. Getting the full value of your claim depends on proper documentation — that's part of what we do."
           }
         }
       ]
@@ -1323,59 +1330,55 @@
 </style>
 </head>
 
+
 <body>
 
   <!-- ============ NAVIGATION ============ -->
   <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="../" class="nav-logo">
-        <span class="nav-logo-text" style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.08em;text-transform:uppercase;color:#fff;">HOYT EXTERIORS</span>
-        <span class="nav-logo-est" style="display:block;font-family:'Inter',sans-serif;font-size:0.55rem;font-weight:500;color:#888;letter-spacing:0.14em;text-transform:uppercase;">EST. 2000 · APPLE VALLEY, MN</span>
-      </a>
-
-      <!-- Lane Switcher -->
-      <div class="nav-lanes">
-        <a href="#" class="nav-lane-pill active" aria-current="page">Commercial</a>
-        <a href="../multifamily/" class="nav-lane-pill">Multifamily</a>
-        <a href="../residential/" class="nav-lane-pill">Residential</a>
-      </div>
-
-      <!-- Nav Links -->
-      <div class="nav-links" id="nav-links">
-        <a href="../about/" class="nav-link">About</a>
-        <div class="nav-dropdown">
-          <button class="nav-dropdown-trigger">Services</button>
-          <div class="nav-dropdown-menu">
-            <a href="../roofing/">Roofing</a>
-            <a href="../siding/">Siding</a>
-            <a href="../decks/">Decks</a>
-            <a href="../windows/">Windows</a>
-            <a href="../gutters/">Gutters</a>
-            <a href="../insulation/">Insulation</a>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../" class="nav-logo" aria-label="Hoyt Exteriors — Home">
+          <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span class="wordmark">Hoyt Exteriors</span>
+            <span class="sub">Est. 2000 · Apple Valley, MN</span>
           </div>
-        </div>
-        <a href="../testimonials/" class="nav-link">Testimonials</a>
-        <a href="../contact/" class="nav-link">Contact</a>
-        <a href="tel:6512124965" class="nav-link">(651) 212-4965</a>
+        </a>
+        <nav class="nav-links">
+          <a href="../about/">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger">Services</button>
+            <div class="nav-dropdown-menu">
+              <a href="../roofing/">Roofing</a>
+              <a href="../siding/">Siding</a>
+              <a href="../decks/">Decks</a>
+              <a href="../windows/">Windows</a>
+              <a href="../gutters/">Gutters</a>
+              <a href="../insulation/">Insulation</a>
+            </div>
+          </div>
+          <a href="../testimonials/">Testimonials</a>
+          <a href="../contact/">Contact</a>
+          <a href="tel:6512124965">(651) 212-4965</a>
+          <a href="../residential/" class="nav-cta">Get A Quote</a>
+        </nav>
+        <button class="hamburger" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-
-      <a href="#contact" class="nav-cta">Get Assessment</a>
-
-      <!-- Mobile Hamburger -->
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </nav>
+
+  <!-- Mobile Drawer -->
   <div class="mobile-drawer-overlay"></div>
   <div class="mobile-drawer">
-    <div class="lane-switcher">
-      <a href="./" class="active" aria-current="page">Commercial</a>
-      <a href="../multifamily/">Multifamily</a>
-      <a href="../residential/">Residential</a>
-    </div>
+    <a href="./">Commercial</a>
+    <a href="../multifamily/">Multifamily & HOA</a>
+    <a href="../residential/">Residential</a>
     <hr style="border:none;border-top:1px solid var(--gray-700);margin:8px 0;">
     <a href="../about/">About</a>
     <a href="../roofing/">Roofing</a>
@@ -1387,39 +1390,30 @@
     <a href="../testimonials/">Testimonials</a>
     <a href="../contact/">Contact</a>
     <a href="tel:6512124965">(651) 212-4965</a>
-    <a href="#contact" class="nav-cta" style="margin-top:16px;display:block;text-align:center;">Get Assessment</a>
+    <a href="../contact/" style="background:var(--red);color:white;text-align:center;border-radius:4px;margin-top:16px;border:none;">Get A Quote</a>
   </div>
+
+  <main>
 
   <!-- ============ SECTION 1: HERO ============ -->
   <section class="commercial-hero">
     <div class="commercial-hero-inner">
-      <div class="eyebrow">
-        HOYT EXTERIORS <span></span> COMMERCIAL DIVISION
+      <div class="eyebrow reveal"><span></span> COMMERCIAL DIVISION <span></span></div>
+      <h1 class="reveal reveal-delay-1">Commercial Exterior Restoration<br>Minneapolis&#8209;St.&nbsp;Paul</h1>
+      <p class="hero-subtitle reveal reveal-delay-2">AI-Powered Inspections · Drone Assessments · Thermal Imaging</p>
+      <p class="hero-description reveal reveal-delay-3">If you manage a commercial building in the Twin Cities, you know what Minnesota weather does to a building envelope. Forty to sixty freeze-thaw cycles every year. Temperature swings of over 100 degrees. Hail from May through September. We've seen what deferred maintenance looks like — and we know how to get your building back in shape before small problems become expensive ones.</p>
+      <div class="commercial-hero-ctas reveal reveal-delay-4">
+        <a href="tel:6512124965" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call (651) 212-4965
+        </a>
+        <a href="#contact" class="btn-outline">Request Free Assessment →</a>
       </div>
-      <h1>Protect Your Investment.</h1>
-      <p class="hero-subtitle">Commercial-Grade Exterior Solutions</p>
-      <p class="hero-description">From TPO roof systems to complete building envelope assessments, we bring precision engineering, thermal diagnostics, and 25+ years of experience to every commercial project.</p>
-      <div class="commercial-hero-ctas">
-        <a href="#contact" class="btn-primary">Get Commercial Assessment →</a>
-        <a href="#systems" class="btn-outline">Our Systems ↓</a>
-      </div>
-      <div class="commercial-hero-stats">
-        <div class="stat">
-          <div class="stat-value">25+</div>
-          <div class="stat-label">Years Experience</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">GAF</div>
-          <div class="stat-label">Master Elite</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">48hr</div>
-          <div class="stat-label">Response Time</div>
-        </div>
-        <div class="stat">
-          <div class="stat-value">MN</div>
-          <div class="stat-label">Licensed & Insured</div>
-        </div>
+      <div class="commercial-hero-stats reveal reveal-delay-5">
+        <div class="stat"><div class="stat-value">25+</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat"><div class="stat-value">200+</div><div class="stat-label">5-Star Reviews</div></div>
+        <div class="stat"><div class="stat-value">AI</div><div class="stat-label">Drone Inspections</div></div>
+        <div class="stat"><div class="stat-value">GAF</div><div class="stat-label">Master Elite</div></div>
       </div>
     </div>
   </section>
@@ -1428,666 +1422,353 @@
   <div class="commercial-trust-bar">
     <div class="commercial-trust-bar-inner">
       <div class="trust-item"><span class="trust-check">✓</span> GAF Master Elite Certified</div>
-      <div class="trust-item"><span class="trust-check">✓</span> CertainTeed Master Craftsman</div>
-      <div class="trust-item"><span class="trust-check">✓</span> MN Licensed &amp; Insured</div>
+      <div class="trust-item"><span class="trust-check">✓</span> MN Licensed & Insured</div>
       <div class="trust-item"><span class="trust-check">✓</span> Thermal Imaging Certified</div>
-      <div class="trust-item"><span class="trust-check">✓</span> Emergency Response 24/7</div>
+      <div class="trust-item"><span class="trust-check">✓</span> Two-Generation Family Business</div>
+      <div class="trust-item"><span class="trust-check">✓</span> Insurance Claim Coordination</div>
     </div>
   </div>
 
   <!-- ============ SECTION 3: COMMERCIAL SERVICES ============ -->
-  <section class="commercial-section" id="services">
-    <div class="commercial-section-inner">
-      <div class="commercial-section-label">COMMERCIAL SERVICES</div>
-      <h2 class="commercial-section-title">Enterprise-Grade Exterior Solutions</h2>
-      <p class="commercial-section-subtitle">Comprehensive commercial exterior services backed by decades of expertise, advanced diagnostics, and manufacturer-certified installation.</p>
-
-      <div class="commercial-services-grid">
-        <!-- TPO -->
-        <div class="commercial-service-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M8 11h0M12 11h0M16 11h0M8 15h0M12 15h0M16 15h0"/></svg>
-          </div>
-          <h3>TPO Roofing Systems</h3>
-          <p>Single-ply membrane roofing for flat and low-slope commercial buildings. Energy-efficient, UV-resistant, with a 20–30 year lifespan.</p>
-        </div>
-
-        <!-- EPDM -->
-        <div class="commercial-service-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1zM7 8h10M7 12h10M7 16h4"/></svg>
-          </div>
-          <h3>EPDM Roofing</h3>
-          <p>Durable rubber membrane roofing with excellent weather resistance — built for large commercial footprints.</p>
-        </div>
-
-        <!-- Metal -->
-        <div class="commercial-service-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h12a1 1 0 001-1V10"/></svg>
-          </div>
-          <h3>Metal Roofing</h3>
-          <p>Standing seam and commercial metal systems. 50+ year lifespan with minimal maintenance requirements.</p>
-        </div>
-
-        <!-- Building Envelope -->
-        <div class="commercial-service-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2"/></svg>
-          </div>
-          <h3>Building Envelope Assessment</h3>
-          <p>Complete thermal and visual assessment of your building's exterior shell. Identify energy loss, moisture intrusion, and insulation failures.</p>
-        </div>
-
-        <!-- Commercial Siding -->
-        <div class="commercial-service-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 3h16v18H4zM4 9h16M4 15h16M9 3v18"/></svg>
-          </div>
-          <h3>Commercial Siding</h3>
-          <p>Large-scale fiber cement, metal panel, and composite siding solutions for commercial properties.</p>
-        </div>
-
-        <!-- Emergency -->
-        <div class="commercial-service-card">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <h3>Emergency Commercial Repair</h3>
-          <p>24/7 emergency response for commercial roof leaks, storm damage, and structural issues. Rapid deployment to protect your business.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION 4: ROOFING SYSTEMS DETAIL ============ -->
-  <section class="commercial-section commercial-section--alt" id="systems">
-    <div class="commercial-section-inner">
-      <div class="commercial-section-label">ROOFING SYSTEMS</div>
-      <h2 class="commercial-section-title">The Right System for Your Building</h2>
-      <p class="commercial-section-subtitle">Compare our three primary commercial roofing systems to find the best fit for your property's needs, budget, and long-term goals.</p>
-
-      <div class="commercial-systems-grid">
-        <!-- TPO Card -->
-        <div class="commercial-system-card">
-          <div class="system-name">TPO</div>
-          <div class="system-type">Single-Ply Membrane</div>
-          <ul class="system-specs">
-            <li>
-              <span class="spec-label">Material</span>
-              <span class="spec-value">Thermoplastic Polyolefin</span>
-            </li>
-            <li>
-              <span class="spec-label">Lifespan</span>
-              <span class="spec-value">20–30 years</span>
-            </li>
-            <li>
-              <span class="spec-label">Best For</span>
-              <span class="spec-value">Flat / Low-Slope</span>
-            </li>
-            <li>
-              <span class="spec-label">Energy Efficiency</span>
-              <span class="spec-value">High</span>
-            </li>
-            <li>
-              <span class="spec-label">Maintenance</span>
-              <span class="spec-value">Low</span>
-            </li>
-            <li>
-              <span class="spec-label">Warranty</span>
-              <span class="spec-value">Up to 30 years</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- EPDM Card -->
-        <div class="commercial-system-card">
-          <div class="system-name">EPDM</div>
-          <div class="system-type">Rubber Membrane</div>
-          <ul class="system-specs">
-            <li>
-              <span class="spec-label">Material</span>
-              <span class="spec-value">Ethylene Propylene Diene</span>
-            </li>
-            <li>
-              <span class="spec-label">Lifespan</span>
-              <span class="spec-value">25–30 years</span>
-            </li>
-            <li>
-              <span class="spec-label">Best For</span>
-              <span class="spec-value">Large Footprint</span>
-            </li>
-            <li>
-              <span class="spec-label">Energy Efficiency</span>
-              <span class="spec-value">Moderate</span>
-            </li>
-            <li>
-              <span class="spec-label">Maintenance</span>
-              <span class="spec-value">Low</span>
-            </li>
-            <li>
-              <span class="spec-label">Warranty</span>
-              <span class="spec-value">Up to 30 years</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Metal Card -->
-        <div class="commercial-system-card">
-          <div class="system-name">Metal</div>
-          <div class="system-type">Standing Seam</div>
-          <ul class="system-specs">
-            <li>
-              <span class="spec-label">Material</span>
-              <span class="spec-value">Steel / Aluminum</span>
-            </li>
-            <li>
-              <span class="spec-label">Lifespan</span>
-              <span class="spec-value">50+ years</span>
-            </li>
-            <li>
-              <span class="spec-label">Best For</span>
-              <span class="spec-value">Steep / Any Slope</span>
-            </li>
-            <li>
-              <span class="spec-label">Energy Efficiency</span>
-              <span class="spec-value">High</span>
-            </li>
-            <li>
-              <span class="spec-label">Maintenance</span>
-              <span class="spec-value">Minimal</span>
-            </li>
-            <li>
-              <span class="spec-label">Warranty</span>
-              <span class="spec-value">Up to 50 years</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION 5: THERMAL IMAGING ============ -->
-  <section class="commercial-section" id="thermal">
-    <div class="commercial-section-inner">
-      <div class="commercial-section-label">DIAGNOSTICS</div>
-      <h2 class="commercial-section-title">Thermal Imaging for Commercial Properties</h2>
-
-      <div class="commercial-thermal-layout">
-        <div>
-          <p class="commercial-thermal-desc">Our commercial thermal imaging service reveals what the naked eye can't see. Using advanced infrared cameras, we map your building's thermal signature to identify energy waste, hidden moisture, and insulation deficiencies — saving you thousands in utility costs and preventing catastrophic failures before they happen.</p>
-
-          <div class="commercial-thermal-benefits">
-            <div class="commercial-thermal-benefit">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 6v6l4 2"/></svg>
-              </div>
-              <div>
-                <h4>Energy Loss Detection</h4>
-                <p>Find HVAC inefficiencies and insulation gaps costing you thousands annually. Our reports pinpoint exact locations and estimated savings.</p>
-              </div>
-            </div>
-            <div class="commercial-thermal-benefit">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>
-              </div>
-              <div>
-                <h4>Moisture Mapping</h4>
-                <p>Locate hidden leaks and moisture intrusion before they cause structural damage, mold growth, or costly interior repairs.</p>
-              </div>
-            </div>
-            <div class="commercial-thermal-benefit">
-              <div class="benefit-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 017 7h2M15 7h2a5 5 0 010 10h-2M8 12h8"/></svg>
-              </div>
-              <div>
-                <h4>Preventive Maintenance</h4>
-                <p>Data-driven maintenance schedules that extend your roof's life and prevent emergency repairs — saving budget over the long term.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Thermal Scan Visualization -->
-        <div class="commercial-thermal-viz">
-          <div class="commercial-thermal-viz-header">
-            <div class="commercial-thermal-viz-title">Thermal Scan — Commercial Roof</div>
-            <div class="commercial-thermal-viz-live">Live Scan</div>
-          </div>
-
-          <div class="commercial-thermal-grid">
-            <!-- Row 1 -->
-            <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div>
-            <!-- Row 2 -->
-            <div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
-            <!-- Row 3 -->
-            <div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-hot"></div><div class="cell cell-hot"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div>
-            <!-- Row 4 -->
-            <div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-hot"></div><div class="cell cell-warm"></div><div class="cell cell-warm"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div>
-            <!-- Row 5 -->
-            <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-hot"></div><div class="cell cell-warm"></div>
-            <!-- Row 6 -->
-            <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div>
-            <!-- Row 7 -->
-            <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-warm"></div><div class="cell cell-normal"></div>
-            <!-- Row 8 -->
-            <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-cool"></div>
-          </div>
-
-          <div class="commercial-thermal-legend">
-            <div class="commercial-thermal-legend-item">
-              <div class="commercial-thermal-legend-swatch" style="background:#1E3A5F;"></div>
-              Cool
-            </div>
-            <div class="commercial-thermal-legend-item">
-              <div class="commercial-thermal-legend-swatch" style="background:#2563EB;"></div>
-              Normal
-            </div>
-            <div class="commercial-thermal-legend-item">
-              <div class="commercial-thermal-legend-swatch" style="background:#3B82F6;"></div>
-              Mild
-            </div>
-            <div class="commercial-thermal-legend-item">
-              <div class="commercial-thermal-legend-swatch" style="background:#D97706;"></div>
-              Elevated
-            </div>
-            <div class="commercial-thermal-legend-item">
-              <div class="commercial-thermal-legend-swatch" style="background:#C41E3A;"></div>
-              Alert
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION 6: INSTANT QUOTE — ROOFLE ============ -->
-  <section class="commercial-section commercial-section--alt" id="quote">
-    <div class="commercial-section-inner commercial-quote-section">
-      <div class="commercial-section-label">INSTANT QUOTE</div>
-      <h2 class="commercial-section-title">Get Your Commercial Roof Quote</h2>
-      <p class="commercial-section-subtitle" style="margin-left:auto;margin-right:auto;">Enter your business address for an instant estimate powered by satellite measurements.</p>
-
-      <div class="commercial-quote-widget">
-        <div id="roof-quote-pro-embedded" style="min-height: 600px; border-radius: 12px; overflow: hidden;"></div>
-        <script src="https://app.roofle.com/roof-quote-pro-embedded-widget.js?id=cMr4cvpf6XSSloUXlD27j" async></script>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION 7: INDUSTRIES SERVED ============ -->
   <section class="commercial-section">
     <div class="commercial-section-inner">
-      <div class="commercial-section-label">INDUSTRIES</div>
-      <h2 class="commercial-section-title">Built for Every Business</h2>
-      <p class="commercial-section-subtitle">We serve a wide range of commercial property types across the Twin Cities metro, delivering tailored solutions for each industry's unique requirements.</p>
-
-      <div class="commercial-industries-grid">
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
-          </div>
-          <h3>Retail & Shopping Centers</h3>
-          <p>High-traffic properties requiring durable, weather-tight exteriors.</p>
+      <div class="commercial-section-label reveal">COMMERCIAL SERVICES</div>
+      <h2 class="commercial-section-title reveal">Full-Service Commercial Exteriors</h2>
+      <p class="commercial-section-subtitle reveal">Our team handles the full commercial exterior — roofing systems (flat, low-slope, and pitched), siding and cladding, gutters, insulation, and windows. Every project starts with an AI-powered drone inspection and thermal imaging assessment so you know exactly what you're dealing with before any work begins.</p>
+      <div class="commercial-services-grid">
+        <!-- Roofing -->
+        <div class="commercial-service-card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M3 21V9l9-7 9 7v12"/><path d="M9 21V12h6v9"/></svg></div>
+          <h3>Commercial Roofing</h3>
+          <p>Flat roofing, TPO, EPDM, modified bitumen, metal roofing systems. Full replacements, repairs, and storm damage restoration. We document everything before and after — which matters when you're filing an insurance claim.</p>
         </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8zM5 19a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM18.5 19a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/></svg>
-          </div>
-          <h3>Warehouses & Distribution</h3>
-          <p>Large-footprint flat roofs built to withstand heavy loads and extreme weather.</p>
+        <!-- Siding -->
+        <div class="commercial-service-card reveal reveal-delay-1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></div>
+          <h3>Commercial Siding</h3>
+          <p>Commercial siding replacement and repair for metal panels, fiber cement, vinyl, and composite systems. We match materials to your building's performance requirements, not just aesthetics.</p>
         </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 6h1M14 6h1M9 10h1M14 10h1M9 14h1M14 14h1M9 18h6"/></svg>
-          </div>
-          <h3>Office Buildings</h3>
-          <p>Professional-grade exteriors that maintain tenant comfort and building value.</p>
+        <!-- Gutters -->
+        <div class="commercial-service-card reveal reveal-delay-2">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+          <h3>Commercial Gutters</h3>
+          <p>Commercial gutter installation, replacement, and repair. Proper drainage protects your foundation, landscaping, and exterior walls. We size systems for your roof area and local precipitation load.</p>
         </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 10H5zM5 12h14v6a4 4 0 01-4 4H9a4 4 0 01-4-4z"/></svg>
-          </div>
-          <h3>Churches & Houses of Worship</h3>
-          <p>Respectful, expert care for sacred structures with complex roof lines.</p>
+        <!-- Insulation -->
+        <div class="commercial-service-card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg></div>
+          <h3>Commercial Insulation</h3>
+          <p>Energy loss through a poorly insulated commercial roof drives up operating costs year-round. Our thermal imaging inspection identifies exactly where heat is escaping — and we fix it.</p>
         </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-          </div>
-          <h3>Schools & Education</h3>
-          <p>Safe, code-compliant installations scheduled around academic calendars.</p>
+        <!-- Building Envelope -->
+        <div class="commercial-service-card reveal reveal-delay-1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Building Envelope Assessment</h3>
+          <p>Complete thermal and visual assessment of your building's exterior shell to identify energy loss, moisture intrusion, and insulation failures. Written report with findings before we ask you to sign anything.</p>
         </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <h3>Healthcare Facilities</h3>
-          <p>Sterile-environment-safe work with zero disruption to patient care.</p>
-        </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1M5 8H4a4 4 0 000 8h1M6 8h12v9a4 4 0 01-4 4h-4a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3M18 1v3"/></svg>
-          </div>
-          <h3>Restaurants & Hospitality</h3>
-          <p>Fast-turnaround exterior work that keeps your doors open and guests comfortable.</p>
-        </div>
-
-        <div class="commercial-industry-card">
-          <div class="industry-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C41E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M5 20V8l5-4 5 4v12M15 20V4h4v16M9 12h2M9 16h2"/></svg>
-          </div>
-          <h3>Industrial & Manufacturing</h3>
-          <p>Heavy-duty solutions for demanding environments and oversized footprints.</p>
+        <!-- Storm Damage -->
+        <div class="commercial-service-card reveal reveal-delay-2">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"/><polyline points="13 11 9 17 15 17 11 23"/></svg></div>
+          <h3>Storm Damage & Insurance</h3>
+          <p>We document damage thoroughly, provide detailed estimates, and communicate directly with your insurance adjuster. Getting the full value of your claim depends on proper documentation — that's part of what we do.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION 8: OUR PROCESS ============ -->
+  <!-- ============ SECTION 4: DRONE & THERMAL IMAGING ============ -->
   <section class="commercial-section commercial-section--alt">
     <div class="commercial-section-inner">
-      <div class="commercial-section-label">OUR PROCESS</div>
-      <h2 class="commercial-section-title">How We Work</h2>
-      <p class="commercial-section-subtitle">A proven four-step process designed to minimize disruption while maximizing the quality and longevity of your commercial exterior.</p>
-
-      <div class="commercial-process-grid">
-        <div class="commercial-process-step">
-          <div class="step-number">01</div>
-          <h3>Assess</h3>
-          <p>Full thermal and drone inspection of your commercial property. We identify every issue — visible and hidden.</p>
+      <div class="commercial-thermal-layout">
+        <div>
+          <div class="commercial-section-label reveal">AI-POWERED INSPECTIONS</div>
+          <h2 class="commercial-section-title reveal">We Fly Your Building Before We Touch It</h2>
+          <p class="commercial-thermal-desc reveal">Before we touch your building, we fly it. Our drone captures high-resolution imagery of every square foot of your roof surface — including areas that are unsafe or impractical to walk. AI analysis identifies damage patterns, membrane issues, flashing gaps, and ponding zones that a standard visual inspection would miss.</p>
+          <p class="commercial-thermal-desc reveal">Thermal imaging goes further. It detects moisture intrusion and heat loss beneath the surface — problems that look fine from above but are quietly driving up your energy bills and eroding your building envelope.</p>
+          <p class="commercial-thermal-desc reveal" style="color:var(--gray-300);font-weight:600;">You get a written report with findings, photos, and a clear scope of work before we ask you to sign anything.</p>
+          <div class="commercial-thermal-benefits reveal">
+            <div class="commercial-thermal-benefit">
+              <div class="benefit-icon">🌡</div>
+              <div><h4>Moisture Detection</h4><p>Thermal imaging identifies moisture trapped beneath roof membranes — invisible to the naked eye but quietly destroying your building.</p></div>
+            </div>
+            <div class="commercial-thermal-benefit">
+              <div class="benefit-icon">🔋</div>
+              <div><h4>Heat Loss Mapping</h4><p>See exactly where your building is losing energy. Insulation gaps and thermal bridges show up instantly on our imaging scans.</p></div>
+            </div>
+            <div class="commercial-thermal-benefit">
+              <div class="benefit-icon">📋</div>
+              <div><h4>Written Report</h4><p>High-resolution photos, thermal maps, and a prioritized scope of work — delivered before any commitment from you.</p></div>
+            </div>
+          </div>
         </div>
-        <div class="commercial-process-step">
-          <div class="step-number">02</div>
-          <h3>Diagnose</h3>
-          <p>Detailed report with findings, high-resolution photos, thermal data, and prioritized recommendations.</p>
+        <div class="commercial-thermal-viz reveal">
+          <div class="commercial-thermal-viz-header">
+            <div class="commercial-thermal-viz-title">Thermal Scan — Building Roof</div>
+            <div class="commercial-thermal-viz-live">Scanning</div>
+          </div>
+          <div class="commercial-thermal-grid">
+            <!-- Row 1 --> <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 2 --> <div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-warm"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 3 --> <div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-warm"></div><div class="cell cell-hot"></div><div class="cell cell-hot"></div><div class="cell cell-warm"></div><div class="cell cell-mild"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 4 --> <div class="cell cell-normal"></div><div class="cell cell-warm"></div><div class="cell cell-hot"></div><div class="cell cell-hot"></div><div class="cell cell-warm"></div><div class="cell cell-warm"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 5 --> <div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-warm"></div><div class="cell cell-warm"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 6 --> <div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-mild"></div><div class="cell cell-mild"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 7 --> <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-normal"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+            <!-- Row 8 --> <div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div><div class="cell cell-cool"></div>
+          </div>
+          <div class="commercial-thermal-legend">
+            <div class="commercial-thermal-legend-item"><div class="commercial-thermal-legend-swatch" style="background:#1E3A5F"></div> Normal</div>
+            <div class="commercial-thermal-legend-item"><div class="commercial-thermal-legend-swatch" style="background:#2563EB"></div> Cool</div>
+            <div class="commercial-thermal-legend-item"><div class="commercial-thermal-legend-swatch" style="background:#D97706"></div> Warm</div>
+            <div class="commercial-thermal-legend-item"><div class="commercial-thermal-legend-swatch" style="background:#C41E3A"></div> Heat Loss</div>
+          </div>
         </div>
-        <div class="commercial-process-step">
-          <div class="step-number">03</div>
-          <h3>Quote</h3>
-          <p>Transparent pricing with material options, project timeline, warranty details, and financing if needed.</p>
-        </div>
-        <div class="commercial-process-step">
-          <div class="step-number">04</div>
-          <h3>Execute</h3>
-          <p>Professional installation by certified crews with minimal disruption to your daily business operations.</p>
-        </div>
-      </div>
-
-      <div class="commercial-process-promise">
-        <strong>Our Promise:</strong> Minimal disruption to your business operations — from first inspection to final cleanup.
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION 9: FAQ ============ -->
-  <section class="commercial-section" id="faq">
+  <!-- ============ SECTION 5: WHO WE SERVE ============ -->
+  <section class="commercial-section">
     <div class="commercial-section-inner">
-      <div class="commercial-section-label">FAQ</div>
-      <h2 class="commercial-section-title">Frequently Asked Questions</h2>
-      <p class="commercial-section-subtitle" style="margin-bottom:40px;">Answers to common questions about our commercial roofing and exterior services.</p>
+      <div class="commercial-section-label reveal">WHO WE SERVE</div>
+      <h2 class="commercial-section-title reveal">Built for Owners Who Do It Right</h2>
+      <p class="commercial-section-subtitle reveal">We work with commercial property owners and managers who want straight answers and professional results.</p>
+      <div class="commercial-services-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="commercial-service-card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3h-8l-2 4h12z"/></svg></div>
+          <h3>Property Management Companies</h3>
+          <p>Overseeing commercial office and retail buildings? We handle the exterior so you can focus on your tenants.</p>
+        </div>
+        <div class="commercial-service-card reveal reveal-delay-1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21V14h6v7"/></svg></div>
+          <h3>Multifamily & HOA Boards</h3>
+          <p>Multifamily building owners and HOA boards who need a contractor that coordinates work around occupied units to minimize tenant disruption.</p>
+        </div>
+        <div class="commercial-service-card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Real Estate Investors</h3>
+          <p>Managing income-producing properties? Protect your investment with documented inspections and professional exterior maintenance.</p>
+        </div>
+        <div class="commercial-service-card reveal reveal-delay-1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 21V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v16"/><path d="M12 11h4"/><path d="M12 7h4"/></svg></div>
+          <h3>Owner-Occupied Buildings</h3>
+          <p>Business owners who own their building and need a contractor they can trust. No subcontracting of core work — our crew is our crew.</p>
+        </div>
+      </div>
+      <p class="commercial-process-promise reveal" style="margin-top:48px;">We are not the cheapest option in the metro. We are the right option for owners who understand that <strong>the cost of doing it right once is less than the cost of doing it twice.</strong></p>
+    </div>
+  </section>
 
+  <!-- ============ SECTION 6: WHY HOYT ============ -->
+  <section class="commercial-section commercial-section--alt">
+    <div class="commercial-section-inner">
+      <div class="commercial-section-label reveal">WHY HOYT EXTERIORS</div>
+      <h2 class="commercial-section-title reveal">Two Generations. One Standard.</h2>
+      <p class="commercial-section-subtitle reveal">We are a two-generation family business. When you call us, you talk to the people doing the work — not a call center. We have been working in the Minneapolis-St. Paul suburbs for years, and our reputation here matters to us.</p>
+      <div class="commercial-services-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="commercial-service-card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h3>AI-Powered Inspections</h3>
+          <p>Drone inspections and thermal imaging on every project — so you see the full picture before any work begins.</p>
+        </div>
+        <div class="commercial-service-card reveal reveal-delay-1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <h3>Written Scope & Pricing</h3>
+          <p>Itemized pricing before work begins. No surprises, no change orders you didn't approve.</p>
+        </div>
+        <div class="commercial-service-card reveal reveal-delay-2">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <h3>No Subcontracting</h3>
+          <p>Our crew is our crew. No random subs showing up to your building. We own the quality of every installation.</p>
+        </div>
+        <div class="commercial-service-card reveal">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"/><polyline points="13 11 9 17 15 17 11 23"/></svg></div>
+          <h3>Storm Damage Documentation</h3>
+          <p>Insurance claim coordination with detailed before-and-after documentation that adjusters need.</p>
+        </div>
+        <div class="commercial-service-card reveal reveal-delay-1">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>GAF-Certified Installation</h3>
+          <p>Master Elite certified — top 1% of roofing contractors nationwide. Manufacturer-backed warranty options.</p>
+        </div>
+        <div class="commercial-service-card reveal reveal-delay-2">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Post-Project Documentation</h3>
+          <p>Complete project records for your files and insurance. Every detail documented for future reference.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 7: SERVICE AREA ============ -->
+  <section class="commercial-section" style="padding-top:60px;padding-bottom:60px;">
+    <div class="commercial-section-inner" style="text-align:center;">
+      <p class="commercial-section-label reveal">SERVICE AREA</p>
+      <p class="reveal" style="font-size:1rem;color:var(--gray-400);line-height:1.8;max-width:700px;margin:0 auto;">We work with commercial property owners, building managers, and HOA boards across the Minneapolis-St. Paul metro.<br><span style="color:var(--gray-300);font-weight:600;">Apple Valley · Eagan · Burnsville · Bloomington · Eden Prairie · Lakeville · Savage · Prior Lake · Farmington · Hastings · Rosemount</span></p>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 8: FAQ ============ -->
+  <section class="commercial-section commercial-section--alt">
+    <div class="commercial-section-inner">
+      <div class="commercial-section-label reveal" style="text-align:center;">FAQ</div>
+      <h2 class="commercial-section-title reveal" style="text-align:center;">Frequently Asked Questions</h2>
       <div class="commercial-faq-list">
         <!-- FAQ 1 -->
         <div class="commercial-faq-item">
           <button class="commercial-faq-question" aria-expanded="false">
-            <span>What commercial roofing systems do you install?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
+            What commercial exterior services does Hoyt Exteriors provide in Minneapolis?
+            <span class="commercial-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              We install three primary commercial roofing systems: TPO (Thermoplastic Polyolefin) for flat and low-slope roofs, EPDM rubber membrane roofing for large-footprint buildings, and standing seam metal roofing for any slope. Each system is selected based on your building's architecture, usage, budget, and long-term performance goals. We're certified by GAF (Master Elite — top 1% of contractors) and CertainTeed, so every installation meets the highest manufacturer standards.
-            </div>
-          </div>
+          <div class="commercial-faq-answer"><div class="commercial-faq-answer-inner">We provide commercial roofing (flat, low-slope, and pitched), exterior siding, gutters, insulation, and window installation for commercial buildings across the Minneapolis-St. Paul metro. Every project starts with an AI-powered drone and thermal imaging inspection.</div></div>
         </div>
-
         <!-- FAQ 2 -->
         <div class="commercial-faq-item">
           <button class="commercial-faq-question" aria-expanded="false">
-            <span>How long does a commercial roof replacement take?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
+            How does Hoyt Exteriors use drones and AI for commercial inspections?
+            <span class="commercial-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Timeline depends on the size and complexity of your building. A typical commercial roof replacement for a 10,000–20,000 sq ft building takes 1–3 weeks. Larger projects, such as warehouse or multi-building campuses, may take 4–8 weeks. We provide a detailed project timeline during the quoting phase, and our crews work efficiently to complete the project on schedule while maintaining safety and quality standards.
-            </div>
-          </div>
+          <div class="commercial-faq-answer"><div class="commercial-faq-answer-inner">We fly drones over your building to capture high-resolution imagery of every roof surface. Combined with thermal imaging, our AI-assisted analysis identifies moisture intrusion, heat loss, membrane damage, and flashing issues that standard visual inspections miss. You receive a written report before any work begins.</div></div>
         </div>
-
         <!-- FAQ 3 -->
         <div class="commercial-faq-item">
           <button class="commercial-faq-question" aria-expanded="false">
-            <span>Can you work around our business hours to minimize disruption?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
+            Does Hoyt Exteriors work on multifamily buildings?
+            <span class="commercial-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Absolutely. We understand that your business can't shut down for a roofing project. We routinely schedule work during off-hours, weekends, and phased sections to keep your operations running smoothly. For noise-sensitive environments like healthcare facilities and offices, we coordinate with your team to schedule the loudest work during low-traffic periods. Minimizing disruption is a core part of our commercial project planning.
-            </div>
-          </div>
+          <div class="commercial-faq-answer"><div class="commercial-faq-answer-inner">Yes. Multifamily exterior restoration is a core part of what we do — roofing, siding, gutters, and insulation for apartment complexes, townhomes, condos, and HOA communities. We coordinate work around occupied units to minimize tenant disruption.</div></div>
         </div>
-
         <!-- FAQ 4 -->
         <div class="commercial-faq-item">
           <button class="commercial-faq-question" aria-expanded="false">
-            <span>What does a building envelope assessment include?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
+            How do I get a commercial exterior estimate in Minneapolis?
+            <span class="commercial-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Our building envelope assessment is a comprehensive evaluation of your entire exterior shell — roof, walls, windows, doors, and foundation interface. It includes a drone-based aerial inspection, infrared thermal imaging to detect moisture and insulation deficiencies, visual inspection of all flashing, caulking, and penetration points, and a detailed report with prioritized recommendations. You receive high-resolution photos, thermal maps, and cost estimates for any remediation needed.
-            </div>
-          </div>
+          <div class="commercial-faq-answer"><div class="commercial-faq-answer-inner">Call us at 651-212-4965 or fill out the form below. We'll schedule a drone inspection and provide a written assessment with itemized pricing — no runaround, no pressure.</div></div>
         </div>
-
         <!-- FAQ 5 -->
         <div class="commercial-faq-item">
           <button class="commercial-faq-question" aria-expanded="false">
-            <span>How much does commercial thermal imaging cost?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
+            Does Hoyt Exteriors handle storm damage and insurance claims?
+            <span class="commercial-faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
           </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Commercial thermal imaging typically ranges from $500–$2,500 depending on building size and scope. Small retail or office buildings start around $500, while large warehouses or multi-building campuses may be $1,500–$2,500. The investment pays for itself many times over — a single undetected moisture issue can cost $50,000+ in structural repairs. We also offer thermal imaging as part of maintenance contracts at a reduced rate. Contact us for a specific quote based on your property.
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ 6 -->
-        <div class="commercial-faq-item">
-          <button class="commercial-faq-question" aria-expanded="false">
-            <span>Do you handle commercial insurance claims?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
-          </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Yes. We have extensive experience navigating commercial insurance claims for storm damage, hail, wind, and water intrusion. Our process includes thorough damage documentation with drone photography, thermal imaging, and detailed written reports that insurance adjusters need. We work directly with your insurance company, attend adjuster meetings, and provide supplemental documentation when needed. Our thermal imaging and drone data often uncovers damage that visual inspections miss, which can significantly increase approved claim amounts.
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ 7 -->
-        <div class="commercial-faq-item">
-          <button class="commercial-faq-question" aria-expanded="false">
-            <span>What warranties are available for commercial roofing?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
-          </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Warranty options depend on the roofing system. TPO systems offer manufacturer warranties up to 30 years covering both materials and labor. EPDM systems also carry warranties up to 30 years. Metal roofing systems can be warranted for up to 50 years. In addition to manufacturer warranties, Hoyt Exteriors provides a 3-year workmanship warranty on all installations. As a GAF Master Elite contractor, we can also offer enhanced warranty options not available through standard installers.
-            </div>
-          </div>
-        </div>
-
-        <!-- FAQ 8 -->
-        <div class="commercial-faq-item">
-          <button class="commercial-faq-question" aria-expanded="false">
-            <span>Do you offer maintenance contracts for commercial properties?</span>
-            <span class="commercial-faq-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span>
-          </button>
-          <div class="commercial-faq-answer">
-            <div class="commercial-faq-answer-inner">
-              Yes, we offer annual and semi-annual maintenance contracts for commercial properties. Our maintenance programs include scheduled inspections (visual and thermal), gutter cleaning, minor repairs, sealant and flashing checks, and detailed condition reports. Regular maintenance extends your roof's lifespan by 5–10 years on average and helps you budget predictably instead of facing unexpected emergency repairs. We tailor each contract to your building's specific needs and can bundle multiple properties for volume pricing.
-            </div>
-          </div>
+          <div class="commercial-faq-answer"><div class="commercial-faq-answer-inner">Yes. We document damage thoroughly, provide detailed estimates, and communicate directly with your insurance adjuster. Getting the full value of your claim depends on proper documentation — that's part of what we do.</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SECTION 10: CONTACT / FORM ============ -->
-  <section class="commercial-section commercial-section--alt" id="contact">
+  <!-- ============ SECTION 9: CTA + CONTACT FORM ============ -->
+  <section class="commercial-section" id="contact">
     <div class="commercial-section-inner">
       <div class="commercial-contact-layout">
-        <!-- Left: Contact Info -->
         <div class="commercial-contact-info">
-          <div class="commercial-section-label">GET STARTED</div>
-          <h2 class="commercial-section-title" style="margin-bottom:12px;">Protect Your Commercial Property</h2>
-          <p style="font-family:'Inter',sans-serif;font-size:0.95rem;line-height:1.7;color:#888;margin-bottom:40px;">Get in touch for a comprehensive commercial assessment. We respond to every inquiry within 48 hours.</p>
-
-          <div class="commercial-contact-detail">
-            <div class="detail-icon">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            </div>
-            <div>
-              <div class="detail-label">Phone</div>
-              <div class="detail-value"><a href="tel:6512124965">(651) 212-4965</a></div>
-            </div>
+          <div class="commercial-section-label reveal">FREE ASSESSMENT</div>
+          <h2 class="commercial-section-title reveal" style="margin-bottom:12px;">Ready for a Free Commercial Assessment?</h2>
+          <p class="commercial-section-subtitle reveal">Minnesota weather is not going to let up. If your building is due for an inspection or you've got storm damage to address, let's talk.</p>
+          <div class="commercial-contact-detail reveal">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="detail-label">Phone</div><div class="detail-value"><a href="tel:6512124965">(651) 212-4965</a></div></div>
           </div>
-
-          <div class="commercial-contact-detail">
-            <div class="detail-icon">
-              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
-            </div>
-            <div>
-              <div class="detail-label">Email</div>
-              <div class="detail-value"><a href="mailto:info@hoytexteriors.com">info@hoytexteriors.com</a></div>
-            </div>
+          <div class="commercial-contact-detail reveal">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="detail-label">Email</div><div class="detail-value"><a href="mailto:info@hoytexteriors.com">info@hoytexteriors.com</a></div></div>
           </div>
-
-          <div class="commercial-contact-detail">
-            <div class="detail-icon">
-              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <div class="detail-label">Address</div>
-              <div class="detail-value">15112 Galaxie Ave, Apple Valley, MN 55124</div>
-            </div>
+          <div class="commercial-contact-detail reveal">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="detail-label">Office</div><div class="detail-value"><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></div></div>
           </div>
-
-          <div class="commercial-contact-detail">
-            <div class="detail-icon">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </div>
-            <div>
-              <div class="detail-label">Response Time</div>
-              <div class="detail-value">Within 48 hours</div>
-            </div>
+          <div class="commercial-contact-detail reveal">
+            <div class="detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="detail-label">Hours</div><div class="detail-value">Monday – Friday, 7 AM – 6 PM</div></div>
           </div>
         </div>
-
-        <!-- Right: Form -->
-        <div class="commercial-form-card">
+        <div class="commercial-form-card reveal">
           <h3 class="commercial-form-title">Request Commercial Assessment</h3>
-
-          <form id="commercial-form" data-source="website-commercial">
+          <form id="commercial-form" data-source="commercial-page">
             <div class="commercial-form-row">
               <div class="commercial-form-group">
-                <label for="contact-name">Contact Name <span class="required">*</span></label>
-                <input type="text" id="contact-name" name="contact" required placeholder="Your full name">
+                <label>First Name <span class="required">*</span></label>
+                <input type="text" name="firstName" required placeholder="First name">
               </div>
               <div class="commercial-form-group">
-                <label for="company-name">Company / Business Name <span class="required">*</span></label>
-                <input type="text" id="company-name" name="company" required placeholder="Your business">
+                <label>Last Name <span class="required">*</span></label>
+                <input type="text" name="lastName" required placeholder="Last name">
               </div>
             </div>
-
             <div class="commercial-form-row">
               <div class="commercial-form-group">
-                <label for="contact-email">Email <span class="required">*</span></label>
-                <input type="email" id="contact-email" name="email" required placeholder="email@company.com">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" name="email" required placeholder="you@company.com">
               </div>
               <div class="commercial-form-group">
-                <label for="contact-phone">Phone <span class="required">*</span></label>
-                <input type="tel" id="contact-phone" name="phone" required placeholder="(555) 123-4567">
+                <label>Phone <span class="required">*</span></label>
+                <input type="tel" name="phone" required placeholder="(651) 555-0000">
               </div>
             </div>
-
             <div class="commercial-form-group">
-              <label for="property-address">Property Address <span class="required">*</span></label>
-              <input type="text" id="property-address" name="address" required placeholder="Full property address">
-            </div>
-
-            <div class="commercial-form-row">
-              <div class="commercial-form-group">
-                <label for="building-type">Building Type <span class="required">*</span></label>
-                <select id="building-type" name="buildingType" required>
-                  <option value="" disabled selected>Select building type</option>
-                  <option value="Retail">Retail</option>
-                  <option value="Warehouse">Warehouse</option>
-                  <option value="Office">Office</option>
-                  <option value="Church">Church</option>
-                  <option value="School">School</option>
-                  <option value="Healthcare">Healthcare</option>
-                  <option value="Restaurant">Restaurant</option>
-                  <option value="Industrial">Industrial</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div class="commercial-form-group">
-                <label for="square-footage">Square Footage (approx)</label>
-                <input type="text" id="square-footage" name="squareFootage" placeholder="e.g. 15,000 sq ft">
-              </div>
-            </div>
-
-            <div class="commercial-form-group">
-              <label for="service-needed">Service Needed <span class="required">*</span></label>
-              <select id="service-needed" name="service" required>
-                <option value="" disabled selected>Select a service</option>
-                <option value="TPO Roofing">TPO Roofing</option>
-                <option value="EPDM Roofing">EPDM Roofing</option>
-                <option value="Metal Roofing">Metal Roofing</option>
-                <option value="Building Envelope Assessment">Building Envelope Assessment</option>
-                <option value="Commercial Siding">Commercial Siding</option>
-                <option value="Emergency Repair">Emergency Repair</option>
-                <option value="Other">Other</option>
+              <label>Building Type</label>
+              <select name="buildingType">
+                <option value="">Select building type...</option>
+                <option value="office">Office Building</option>
+                <option value="retail">Retail / Shopping Center</option>
+                <option value="warehouse">Warehouse / Distribution</option>
+                <option value="multifamily">Multifamily / Apartment</option>
+                <option value="industrial">Industrial / Manufacturing</option>
+                <option value="church">Church / House of Worship</option>
+                <option value="school">School / Education</option>
+                <option value="healthcare">Healthcare Facility</option>
+                <option value="other">Other</option>
               </select>
             </div>
-
             <div class="commercial-form-group">
-              <label for="project-description">Describe Your Project <span class="required">*</span></label>
-              <textarea id="project-description" name="description" required placeholder="Tell us about your project — current issues, timeline, budget considerations..."></textarea>
+              <label>Building Address</label>
+              <input type="text" name="address" placeholder="Street address, city, state">
             </div>
-
-            <div class="commercial-form-consent">
-              <input type="checkbox" id="sms-consent" name="smsConsent">
-              <label for="sms-consent">I agree to receive SMS/text messages from Hoyt Exteriors regarding my project. Message & data rates may apply. Reply STOP to unsubscribe at any time.</label>
+            <div class="commercial-form-group">
+              <label>Tell Us About Your Project</label>
+              <textarea name="message" rows="4" placeholder="Roof age, known issues, timeline, etc."></textarea>
             </div>
-
-            <button type="submit" class="commercial-form-submit">REQUEST ASSESSMENT →</button>
+            <button type="submit" class="commercial-form-submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Submit Assessment Request
+            </button>
+            <div class="form-success" hidden style="text-align:center;padding:24px;color:#4ade80;font-weight:600;">Thank you. We'll be in touch within one business day.</div>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="commercial-footer">
-    <div class="commercial-footer-inner">
-      <div class="commercial-footer-grid">
-        <div class="commercial-footer-brand">
-          <div class="footer-logo">HOYT EXTERIORS</div>
-          <div class="footer-est">EST. 2000 · APPLE VALLEY, MN</div>
-          <p>Commercial-grade exterior solutions for Minnesota businesses. GAF Master Elite certified. 25+ years of trusted performance.</p>
-        </div>
+  </main>
 
-        <div class="commercial-footer-col">
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="../" class="nav-logo" aria-label="Hoyt Exteriors">
+            <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+              <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+              <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            </svg>
+            <div class="nav-logo-text">
+              <span class="wordmark">Hoyt Exteriors</span>
+              <span class="sub">Est. 2000 · Apple Valley, MN</span>
+            </div>
+          </a>
+          <p>Minnesota's most technologically advanced exterior contractor. Premium roofing, siding, decking, and storm restoration powered by AI and drone technology.</p>
+        </div>
+        <div>
+          <h4>Divisions</h4>
+          <ul>
+            <li><a href="./">Commercial</a></li>
+            <li><a href="../multifamily/">Multifamily & HOA</a></li>
+            <li><a href="../residential/">Residential</a></li>
+          </ul>
+        </div>
+        <div>
           <h4>Services</h4>
           <ul>
             <li><a href="../roofing/">Roofing</a></li>
@@ -2098,114 +1779,48 @@
             <li><a href="../insulation/">Insulation</a></li>
           </ul>
         </div>
-
-        <div class="commercial-footer-col">
-          <h4>Divisions</h4>
-          <ul>
-            <li><a href="./">Commercial</a></li>
-            <li><a href="../multifamily/">Multifamily</a></li>
-            <li><a href="../residential/">Residential</a></li>
-          </ul>
-        </div>
-
-        <div class="commercial-footer-col">
+        <div>
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:6512124965">(651) 212-4965</a></li>
             <li><a href="mailto:info@hoytexteriors.com">info@hoytexteriors.com</a></li>
-            <li><a href="https://maps.google.com/?q=15112+Galaxie+Ave+Apple+Valley+MN" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
+            <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
           </ul>
           <div style="display:flex;gap:12px;margin-top:12px;">
-            <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-            <a href="http://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.07 1.07 0 011.596-.206l3.2 2.86c.638.57.22 1.584-.53 1.851zm-5.025 3.152l4.942 1.606c.744.243.82 1.27.115 1.627l-3.667 1.858a1.07 1.07 0 01-1.47-.573l-1.637-4.22c-.325-.838.73-1.558 1.417-1.098zm-2.982-1.109l-2.542 4.527c-.437.778-1.625.59-1.79-.283l-.853-4.53a1.07 1.07 0 01.888-1.232l4.8-.723c.87-.131 1.392.975.697 1.641zM10.23 3.139l1.987 8.713c.198.87-.958 1.414-1.522.716L5.044 5.892a1.07 1.07 0 01.276-1.608l3.78-2.282c.655-.396 1.466.136 1.13.837z"/></svg></a>
+            <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="http://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.07 1.07 0 011.596-.206l3.2 2.86c.638.57.22 1.584-.53 1.851zm-5.025 3.152l4.942 1.606c.744.243.82 1.27.115 1.627l-3.667 1.858a1.07 1.07 0 01-1.47-.573l-1.637-4.22c-.325-.838.73-1.558 1.417-1.098zm-2.982-1.109l-2.542 4.527c-.437.778-1.625.59-1.79-.283l-.853-4.53a1.07 1.07 0 01.888-1.232l4.8-.723c.87-.131 1.392.975.697 1.641zM10.23 3.139l1.987 8.713c.198.87-.958 1.414-1.522.716L5.044 5.892a1.07 1.07 0 01.276-1.608l3.78-2.282c.655-.396 1.466.136 1.13.837z"/></svg>
+            </a>
           </div>
         </div>
       </div>
-
-      <div class="commercial-footer-bottom">
-        <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved. MN Licensed &amp; Insured.</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved. MN Licensed & Insured.</p>
         <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
       </div>
     </div>
   </footer>
 
-  <!-- Shared JS -->
-  <script src="../app.js"></script>
-
-  <!-- Page-Specific: FAQ Accordion -->
+  <script src="../app.js" defer></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // FAQ Accordion
-      document.querySelectorAll('.commercial-faq-question').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var item = this.closest('.commercial-faq-item');
-          var answer = item.querySelector('.commercial-faq-answer');
-          var isOpen = item.classList.contains('active');
-
-          // Close all
-          document.querySelectorAll('.commercial-faq-item').forEach(function(el) {
-            el.classList.remove('active');
-            el.querySelector('.commercial-faq-question').setAttribute('aria-expanded', 'false');
-            el.querySelector('.commercial-faq-answer').style.maxHeight = null;
-          });
-
-          // Open clicked (if was closed)
-          if (!isOpen) {
-            item.classList.add('active');
-            btn.setAttribute('aria-expanded', 'true');
-            answer.style.maxHeight = answer.scrollHeight + 'px';
+    // Commercial FAQ Accordion
+    document.querySelectorAll('.commercial-faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.commercial-faq-item');
+        const answer = item.querySelector('.commercial-faq-answer');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.commercial-faq-item.active').forEach(other => {
+          if (other !== item) {
+            other.classList.remove('active');
+            other.querySelector('.commercial-faq-answer').style.maxHeight = '0';
           }
         });
+        item.classList.toggle('active');
+        answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
       });
-
-      // Form Submission
-      var form = document.getElementById('commercial-form');
-      if (form) {
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var formData = new FormData(form);
-          var data = {};
-          formData.forEach(function(value, key) { data[key] = value; });
-          data.source = form.getAttribute('data-source');
-          data.smsConsent = document.getElementById('sms-consent').checked;
-
-          var submitBtn = form.querySelector('.commercial-form-submit');
-          var originalText = submitBtn.textContent;
-          submitBtn.textContent = 'Sending...';
-          submitBtn.disabled = true;
-
-          fetch('http://159.203.114.9:3001/leads', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          })
-          .then(function(res) {
-            if (res.ok) {
-              submitBtn.textContent = '✓ Assessment Requested!';
-              submitBtn.style.background = '#16a34a';
-              form.reset();
-              setTimeout(function() {
-                submitBtn.textContent = originalText;
-                submitBtn.style.background = '';
-                submitBtn.disabled = false;
-              }, 4000);
-            } else {
-              throw new Error('Server error');
-            }
-          })
-          .catch(function() {
-            submitBtn.textContent = 'Error — Please Call Us';
-            submitBtn.style.background = '#9B1830';
-            setTimeout(function() {
-              submitBtn.textContent = originalText;
-              submitBtn.style.background = '';
-              submitBtn.disabled = false;
-            }, 4000);
-          });
-        });
-      }
     });
   </script>
-
 </body>
 </html>
