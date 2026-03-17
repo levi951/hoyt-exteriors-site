@@ -1,0 +1,218 @@
+/* ==========================================================================
+   HOYT EXTERIORS — Shared JavaScript
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ===== DIVISION MEMORY =====
+  // Remember which division a visitor picks so they skip the hub next time
+  // Uses cookies for cross-session persistence
+  const DIVISION_KEY = 'hoyt_division';
+  const path = window.location.pathname;
+
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + days * 86400000);
+    document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+  }
+
+  // Detect current division from URL and save it (90 days)
+  if (path.includes('/commercial')) {
+    setCookie(DIVISION_KEY, 'commercial', 90);
+  } else if (path.includes('/multifamily')) {
+    setCookie(DIVISION_KEY, 'multifamily', 90);
+  } else if (path.includes('/residential')) {
+    setCookie(DIVISION_KEY, 'residential', 90);
+  }
+
+  // On landing page only: redirect to saved division
+  // Only runs on the real domain (not preview/proxy URLs)
+  // Skip redirect if ?hub or #hub is in URL (escape hatch to see the hub page)
+  const hostname = window.location.hostname;
+  const isRealDomain = hostname === 'hoytexteriors.com' || hostname === 'www.hoytexteriors.com';
+  const isLanding = path === '/' || path.endsWith('/index.html');
+  const isSubpage = path.includes('/commercial') || path.includes('/multifamily') || path.includes('/residential');
+  if (isRealDomain && isLanding && !isSubpage && !location.search.includes('hub') && !location.hash.includes('hub')) {
+    const saved = getCookie(DIVISION_KEY);
+    if (saved) {
+      const map = { commercial: './commercial/', multifamily: './multifamily/', residential: './residential/' };
+      if (map[saved]) {
+        window.location.replace(map[saved]);
+        return; // stop executing rest of DOMContentLoaded
+      }
+    }
+  }
+  // ===== SCROLL REVEAL =====
+  const reveals = document.querySelectorAll('.reveal');
+  if (reveals.length) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  // ===== MOBILE NAV =====
+  const hamburger = document.querySelector('.hamburger');
+  const drawer = document.querySelector('.mobile-drawer');
+  const overlay = document.querySelector('.mobile-drawer-overlay');
+  
+  function toggleNav() {
+    hamburger?.classList.toggle('active');
+    drawer?.classList.toggle('open');
+    overlay?.classList.toggle('open');
+    document.body.style.overflow = drawer?.classList.contains('open') ? 'hidden' : '';
+  }
+  hamburger?.addEventListener('click', toggleNav);
+  overlay?.addEventListener('click', toggleNav);
+  drawer?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (drawer.classList.contains('open')) toggleNav();
+    });
+  });
+
+  // ===== FAQ ACCORDION =====
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isActive = item.classList.contains('active');
+      
+      // Close all others
+      document.querySelectorAll('.faq-item.active').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          other.querySelector('.faq-answer').style.maxHeight = '0';
+        }
+      });
+      
+      // Toggle current
+      item.classList.toggle('active');
+      answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
+    });
+  });
+
+  // ===== FORM SUBMISSION =====
+  // Attach to ALL forms on the page (contactForm, quoteForm, estimate-form, commercial-form)
+  const allForms = document.querySelectorAll('#contactForm, #quoteForm, #estimate-form, #commercial-form, [data-source]');
+  allForms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const successDiv = form.closest('section')?.querySelector('.form-success') || 
+                         document.getElementById('formSuccess') ||
+                         document.getElementById('form-success');
+      const source = form.dataset.source || 'website';
+      
+      // Clear previous errors
+      form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+      
+      // Validate required fields
+      let valid = true;
+      form.querySelectorAll('[required]').forEach(field => {
+        if (!field.value.trim()) {
+          field.closest('.form-group')?.classList.add('error');
+          valid = false;
+        }
+      });
+      
+      // Email validation
+      const emailField = form.querySelector('[type="email"]');
+      if (emailField && emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+        emailField.closest('.form-group')?.classList.add('error');
+        valid = false;
+      }
+      
+      // Phone validation
+      const phoneField = form.querySelector('[type="tel"]');
+      if (phoneField && phoneField.value && !/^\d{10,}$/.test(phoneField.value.replace(/\D/g, ''))) {
+        phoneField.closest('.form-group')?.classList.add('error');
+        valid = false;
+      }
+      
+      if (!valid) return;
+      
+      // Gather form data
+      const data = {};
+      new FormData(form).forEach((value, key) => { data[key] = value; });
+      data.source = source;
+      
+      // Submit
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'SENDING...';
+      submitBtn.disabled = true;
+      
+      // Try HTTPS first, fall back to HTTP for Jane's Lead API
+      const LEAD_URLS = [
+        'https://159.203.114.9:3001/leads',
+        'http://159.203.114.9:3001/leads'
+      ];
+      
+      let submitted = false;
+      for (const url of LEAD_URLS) {
+        try {
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (res.ok) {
+            submitted = true;
+            break;
+          }
+        } catch (err) {
+          // Try next URL
+          continue;
+        }
+      }
+      
+      if (submitted) {
+        form.style.display = 'none';
+        if (successDiv) {
+          successDiv.removeAttribute('hidden');
+          successDiv.classList.add('show');
+        }
+      } else {
+        // Fallback: send via mailto as last resort so leads are never lost
+        const emailBody = Object.entries(data).map(([k,v]) => `${k}: ${v}`).join('%0A');
+        window.location.href = `mailto:info@hoytexteriors.com?subject=New Lead from Website (${source})&body=${emailBody}`;
+        submitBtn.textContent = 'SENT VIA EMAIL';
+        submitBtn.disabled = false;
+      }
+    });
+  });
+
+  // ===== SMOOTH SCROLL =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const id = this.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        const navH = document.querySelector('.nav')?.offsetHeight || 72;
+        const y = target.getBoundingClientRect().top + window.pageYOffset - navH - 20;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // ===== NAV SCROLL EFFECT =====
+  const nav = document.querySelector('.nav');
+  if (nav) {
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset > 50;
+      nav.style.background = scrolled ? 'rgba(10,10,10,0.98)' : 'rgba(10,10,10,0.92)';
+    }, { passive: true });
+  }
+});
