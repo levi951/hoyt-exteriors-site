@@ -326,6 +326,17 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
               <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..."></textarea>
             </div>
 
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;">
+              <input type="checkbox" id="smsConsent" name="smsConsent" value="yes"
+                style="margin-top:3px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:var(--red);">
+              <label for="smsConsent" style="font-size:0.72rem;color:var(--gray-400);line-height:1.5;cursor:pointer;">
+                By checking this box, you agree to receive SMS text messages from Hoyt Exteriors regarding your inquiry,
+                project updates, and appointment confirmations. Message frequency varies. Message &amp; data rates may apply.
+                Reply <strong style="color:var(--gray-300);">STOP</strong> to unsubscribe at any time.
+                This consent is not required to obtain services.
+              </label>
+            </div>
+
             <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
               Submit Request
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
