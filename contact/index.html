@@ -289,20 +289,9 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
                 <span class="error-msg">Valid email is required</span>
               </div>
               <div class="form-group">
-                <label for="phone">Phone <span class="required">*</span></label>
-                <input type="tel" id="phone" name="phone" required placeholder="(651) 555-1234">
-                <span class="error-msg">Phone number is required</span>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="company">Company / HOA Name <span style="color:var(--gray-400);font-weight:400;">(optional)</span></label>
-                <input type="text" id="company" name="company" placeholder="ABC Property Management">
-              </div>
-              <div class="form-group">
-                <label for="address">Property Address <span style="color:var(--gray-400);font-weight:400;">(optional)</span></label>
-                <input type="text" id="address" name="address" placeholder="123 Main St, Minneapolis MN">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+                <span class="error-msg">Enter a valid phone number</span>
               </div>
             </div>
 
@@ -515,90 +504,6 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 
 <script src="../app.js" defer></script>
 <script>
-// ── Contact Form → n8n Webhook Interceptor ───────────────────────────────
-// Maps form field names to PM Lead API schema, routes through n8n.
-// Inline (non-deferred) so it registers before app.js can compete.
-(function () {
-  document.addEventListener('DOMContentLoaded', function () {
-    var form       = document.getElementById('contactForm');
-    var successDiv = document.getElementById('formSuccess');
-    if (!form) return;
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation(); // block app.js from double-handling
-
-      var firstName  = (document.getElementById('firstName')?.value  || '').trim();
-      var lastName   = (document.getElementById('lastName')?.value   || '').trim();
-      var email      = (document.getElementById('email')?.value      || '').trim();
-      var phone      = (document.getElementById('phone')?.value      || '').trim();
-      var company    = (document.getElementById('company')?.value    || '').trim();
-      var address    = (document.getElementById('address')?.value    || '').trim();
-      var message    = (document.getElementById('message')?.value    || '').trim();
-      var smsConsent = !!(document.getElementById('smsConsent')?.checked);
-
-      // Collect checked service checkboxes → comma-joined string
-      var checked  = document.querySelectorAll('input[name="services"]:checked');
-      var services = Array.from(checked).map(function (cb) { return cb.value; }).join(', ');
-
-      // Payload matching PM Lead API (http://159.203.114.9:3001/leads) schema
-      var payload = {
-        contact:     (firstName + ' ' + lastName).trim() || 'Unknown',
-        email:       email,
-        phone:       phone,
-        company:     company   || 'Residential Inquiry',
-        address:     address   || '',
-        service:     services  || 'General Inquiry',
-        description: message   || '',
-        smsConsent:  smsConsent,
-        source:      form.dataset.source || 'contact-page'
-      };
-
-      // Loading state — clone children so we can restore them safely
-      var btn       = form.querySelector('button[type="submit"]');
-      var origNodes = btn ? Array.from(btn.childNodes).map(function (n) { return n.cloneNode(true); }) : [];
-      if (btn) { btn.disabled = true; btn.textContent = 'Sending\u2026'; }
-
-      fetch('https://n8n.hoytexteriors.com/webhook/contact-form', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload)
-      })
-      .then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        form.style.display = 'none';
-        if (successDiv) successDiv.hidden = false;
-      })
-      .catch(function (err) {
-        console.warn('n8n webhook failed, trying direct API:', err);
-        // Fallback: PM Lead API directly
-        return fetch('http://159.203.114.9:3001/leads', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload)
-        }).then(function () {
-          form.style.display = 'none';
-          if (successDiv) successDiv.hidden = false;
-        }).catch(function (err2) {
-          console.error('Both submission targets failed:', err2);
-          form.style.display = 'none';
-          if (successDiv) successDiv.hidden = false;
-        });
-      })
-      .finally(function () {
-        if (btn) {
-          btn.disabled = false;
-          if (btn.replaceChildren) {
-            btn.replaceChildren.apply(btn, origNodes);
-          } else {
-            origNodes.forEach(function (n) { btn.appendChild(n); });
-          }
-        }
-      });
-    });
-  });
-}());
-
 // Services dropdown hover
 document.addEventListener('DOMContentLoaded', () => {
   const wrap = document.querySelector('.nav-dropdown-wrap');
