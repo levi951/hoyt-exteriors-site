@@ -13,6 +13,7 @@
  *   CLAUDE_API_KEY   — your Anthropic API key
  *   RESEND_API_KEY   — from resend.com (free tier: 3,000 emails/mo)
  *   JANE_API_URL     — Internal lead pipeline URL (set in Cloudflare env vars)
+ *   LEAD_API_KEY     — API key for secure lead submission to Jane bot
  *   NOTIFY_EMAIL     — who gets the alert (e.g. levi@hoytexteriors.com,lisa@hoytexteriors.com)
  *   FROM_EMAIL       — verified sender (e.g. noreply@hoytexteriors.com)
  */
@@ -103,20 +104,31 @@ export async function onRequestPost(context) {
     }
   }
 
-  // ── 4. Log to Jane's API (Supabase pipeline) ──────────────────────────────
+  // ── 4. Log to Jane's API (Lead API with authentication) ────────────────────
   // This is called server-side so HTTP is fine (Workers can call anything)
   // 5-second timeout so a slow/down Jane server never blocks the response
   try {
     const janeUrl = env.JANE_API_URL;
+    const leadApiKey = env.LEAD_API_KEY;
+
     if (!janeUrl) {
       console.error('JANE_API_URL not configured — skipping lead pipeline');
       throw new Error('No JANE_API_URL');
     }
+
+    if (!leadApiKey) {
+      console.error('LEAD_API_KEY not configured — skipping lead pipeline');
+      throw new Error('No LEAD_API_KEY');
+    }
+
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 5000);
     await fetch(janeUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-API-Key': leadApiKey,
+      },
       signal: controller.signal,
       body: JSON.stringify({
         firstName, lastName, email, phone, services, message,
