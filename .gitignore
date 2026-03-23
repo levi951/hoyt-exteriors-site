@@ -1,1 +1,21 @@
 BUILD-SPEC.md
+
+# Secrets & credentials
+.env
+.env.*
+*.key
+*.pem
+credentials*
+setup-resend-domain.js
+
+# Cloudflare
+.wrangler/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

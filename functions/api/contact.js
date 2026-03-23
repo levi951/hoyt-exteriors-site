@@ -1,6 +1,6 @@
 /**
- * Hoyt Exteriors â Contact Form Handler
- * Cloudflare Pages Function â /api/contact
+ * Hoyt Exteriors — Contact Form Handler
+ * Cloudflare Pages Function → /api/contact
  *
  * Flow:
  *   1. Validate form data
@@ -9,25 +9,25 @@
  *   4. Send personalized auto-reply to customer via Resend
  *   5. Log lead to Jane's API (Supabase pipeline)
  *
- * Env vars required in Cloudflare Pages â Settings â Environment Variables:
- *   CLAUDE_API_KEY   â your Anthropic API key
- *   RESEND_API_KEY   â from resend.com (free tier: 3,000 emails/mo)
- *   JANE_API_URL     â http://159.203.114.9:3001/leads (internal, called server-side)
- *   NOTIFY_EMAIL     â who gets the alert (e.g. levi@hoytexteriors.com,lisa@hoytexteriors.com)
- *   FROM_EMAIL       â verified sender (e.g. noreply@hoytexteriors.com)
+ * Env vars required in Cloudflare Pages → Settings → Environment Variables:
+ *   CLAUDE_API_KEY   — your Anthropic API key
+ *   RESEND_API_KEY   — from resend.com (free tier: 3,000 emails/mo)
+ *   JANE_API_URL     — Internal lead pipeline URL (set in Cloudflare env vars)
+ *   NOTIFY_EMAIL     — who gets the alert (e.g. levi@hoytexteriors.com,lisa@hoytexteriors.com)
+ *   FROM_EMAIL       — verified sender (e.g. noreply@hoytexteriors.com)
  */
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  // ââ CORS headers ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── CORS headers ──────────────────────────────────────────────────────────
   const corsHeaders = {
     'Access-Control-Allow-Origin': 'https://www.hoytexteriors.com',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
 
-  // ââ Parse body ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Parse body ────────────────────────────────────────────────────────────
   let body;
   try {
     body = await request.json();
@@ -50,7 +50,7 @@ export async function onRequestPost(context) {
     ? body.services.join(', ')
     : body.services || 'Not specified';
 
-  // ââ Basic validation ââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+  // ── Basic validation ──────────────────────────────────────────────────────
   if (!firstName.trim() || !email.trim()) {
     return json({ ok: false, error: 'Missing required fields' }, 422, corsHeaders);
   }
@@ -61,7 +61,7 @@ export async function onRequestPost(context) {
   const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
   const timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' });
 
-  // ââ 1. Claude AI lead analysis ââââââââââââââââââââââââââââââââââââââââââââ
+  // ── 1. Claude AI lead analysis ────────────────────────────────────────────
   let aiAnalysis = null;
   try {
     aiAnalysis = await analyzeLeadWithClaude(env.CLAUDE_API_KEY, {
@@ -71,31 +71,31 @@ export async function onRequestPost(context) {
     console.error('Claude analysis failed (non-fatal):', err.message);
   }
 
-  // ââ 2. Send alert email to Levi/Lisa âââââââââââââââââââââââââââââââââââââ
+  // ── 2. Send alert email to Levi/Lisa ─────────────────────────────────────
+  // Send one email per address so a single unverified address doesn't block all alerts
   const notifyAddresses = (env.NOTIFY_EMAIL || 'levi@hoytexteriors.com')
     .split(',')
-    .map(e => e.trim());
+    .map(e => e.trim())
+    .filter(Boolean);
 
-  try {
-    await sendEmail(env.RESEND_API_KEY, {
-      from: env.FROM_EMAIL || 'leads@hoytexteriors.com',
-      to: notifyAddresses,
-      subject: `ð´ New Lead: ${fullName} â ${services}`,
-      html: buildAlertEmail({ fullName, email, phone, services, message, source, smsConsent, timestamp, aiAnalysis }),
-    });
-  } catch (err) {
-    console.error('Alert email failed:', err.message);
-    // Don't abort â still try to send auto-reply and log
-  }
+  const alertHtml = buildAlertEmail({ fullName, email, phone, services, message, source, smsConsent, timestamp, aiAnalysis });
+  await Promise.allSettled(notifyAddresses.map(addr =>
+    sendEmail(env.RESEND_API_KEY, {
+      from: env.FROM_EMAIL || 'onboarding@resend.dev',
+      to: [addr],
+      subject: `🔴 New Lead: ${fullName} — ${services}`,
+      html: alertHtml,
+    }).catch(err => console.error(`Alert to ${addr} failed:`, err.message))
+  ));
 
-  // ââ 3. Send auto-reply to customer ââââââââââââââââââââââââââââââââââââââââ
+  // ── 3. Send auto-reply to customer ────────────────────────────────────────
   if (email) {
     try {
       const autoReplyText = aiAnalysis?.autoReply || buildDefaultAutoReply(fullName, services);
       await sendEmail(env.RESEND_API_KEY, {
         from: env.FROM_EMAIL || 'leads@hoytexteriors.com',
         to: [email],
-        subject: `We got your message, ${firstName} â Hoyt Exteriors`,
+        subject: `We got your message, ${firstName} — Hoyt Exteriors`,
         html: buildAutoReplyEmail(firstName, autoReplyText),
       });
     } catch (err) {
@@ -103,13 +103,21 @@ export async function onRequestPost(context) {
     }
   }
 
-  // ââ 4. Log to Jane's API (Supabase pipeline) ââââââââââââââââââââââââââââââ
+  // ── 4. Log to Jane's API (Supabase pipeline) ──────────────────────────────
   // This is called server-side so HTTP is fine (Workers can call anything)
+  // 5-second timeout so a slow/down Jane server never blocks the response
   try {
-    const janeUrl = env.JANE_API_URL || 'http://159.203.114.9:3001/leads';
+    const janeUrl = env.JANE_API_URL;
+    if (!janeUrl) {
+      console.error('JANE_API_URL not configured — skipping lead pipeline');
+      throw new Error('No JANE_API_URL');
+    }
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
     await fetch(janeUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
       body: JSON.stringify({
         firstName, lastName, email, phone, services, message,
         source, smsConsent,
@@ -117,6 +125,7 @@ export async function onRequestPost(context) {
         aiSummary:  aiAnalysis?.summary  || '',
       }),
     });
+    clearTimeout(timeout);
   } catch (err) {
     console.error('Jane API log failed (non-fatal):', err.message);
   }
@@ -137,9 +146,9 @@ export async function onRequestOptions() {
 }
 
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════════════════════════════════════
 // Claude AI lead analysis
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════════════════════════════════════
 
 async function analyzeLeadWithClaude(apiKey, lead) {
   if (!apiKey) throw new Error('No CLAUDE_API_KEY configured');
@@ -188,9 +197,9 @@ Priority guidance: high = commercial/multifamily or large residential project or
 }
 
 
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════════════════════════════════════
 // Email helpers (Resend API)
-// âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════════════════════════════════════
 
 async function sendEmail(apiKey, { from, to, subject, html }) {
   if (!apiKey) throw new Error('No RESEND_API_KEY configured');
@@ -251,7 +260,7 @@ function buildAlertEmail({ fullName, email, phone, services, message, source, sm
     <div class="label">Source</div>
     <div class="value">${source}</div>
     <div class="label">SMS Consent</div>
-    <div class="value">${smsConsent === 'yes' ? 'â Yes â OK to text' : 'â No'}</div>
+    <div class="value">${smsConsent === 'yes' ? '✅ Yes — OK to text' : '❌ No'}</div>
     ${message ? `<div class="label">Their Message</div><div class="value" style="color:#ccc;font-style:italic;">"${message}"</div>` : ''}
   </div>
 
@@ -259,18 +268,18 @@ function buildAlertEmail({ fullName, email, phone, services, message, source, sm
   <div class="ai-box">
     <div class="ai-title">AI Analysis</div>
     <div class="label">Summary</div>
-    <div class="value" style="color:#ccc;">${aiAnalysis.summary || 'â'}</div>
+    <div class="value" style="color:#ccc;">${aiAnalysis.summary || '—'}</div>
     <div class="label">Priority Reason</div>
-    <div class="value" style="color:#ccc;">${aiAnalysis.priorityReason || 'â'}</div>
+    <div class="value" style="color:#ccc;">${aiAnalysis.priorityReason || '—'}</div>
     <div class="label">Suggested Next Step</div>
-    <div class="value" style="color:#C41E3A;font-weight:600;">${aiAnalysis.suggestedNextStep || 'â'}</div>
+    <div class="value" style="color:#C41E3A;font-weight:600;">${aiAnalysis.suggestedNextStep || '—'}</div>
   </div>
   ` : ''}
 
   <a class="cta" href="mailto:${email}?subject=Re: Your Hoyt Exteriors Inquiry">Reply to ${firstName(fullName)}</a>
   ${phone ? `&nbsp;&nbsp;<a class="cta" style="background:#111;border:1px solid #333;" href="tel:${phone.replace(/\D/g,'')}">Call ${firstName(fullName)}</a>` : ''}
 
-  <div class="footer">Hoyt Exteriors Â· Apple Valley, MN Â· (651) 212-4965</div>
+  <div class="footer">Hoyt Exteriors · Apple Valley, MN · (651) 212-4965</div>
 </div>
 </body>
 </html>`;
@@ -291,17 +300,17 @@ function buildAutoReplyEmail(first, bodyText) {
 <div class="wrap">
   <div class="header">
     <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:20px;color:#fff;">HOYT EXTERIORS</span>
-    <div style="color:#888;font-size:12px;margin-top:4px;">Est. 2000 Â· Apple Valley, MN</div>
+    <div style="color:#888;font-size:12px;margin-top:4px;">Est. 2000 · Apple Valley, MN</div>
   </div>
   <div class="body">
     <p style="font-size:17px;font-weight:600;margin:0 0 16px;">Hey ${first},</p>
     <p style="color:#333;line-height:1.7;margin:0 0 16px;">${bodyText}</p>
-    <p style="color:#333;line-height:1.7;margin:0 0 24px;">In the meantime, if anything is urgent â give us a call directly at <a href="tel:6512124965">(651) 212-4965</a>.</p>
+    <p style="color:#333;line-height:1.7;margin:0 0 24px;">In the meantime, if anything is urgent — give us a call directly at <a href="tel:6512124965">(651) 212-4965</a>.</p>
     <p style="color:#333;margin:0;">The Hoyt Exteriors Team</p>
   </div>
   <div class="footer">
-    Hoyt Exteriors Inc. Â· 15112 Galaxie Ave, Apple Valley, MN 55124<br>
-    <a href="https://www.hoytexteriors.com">hoytexteriors.com</a> Â· (651) 212-4965
+    Hoyt Exteriors Inc. · 15112 Galaxie Ave, Apple Valley, MN 55124<br>
+    <a href="https://www.hoytexteriors.com">hoytexteriors.com</a> · (651) 212-4965
   </div>
 </div>
 </body>

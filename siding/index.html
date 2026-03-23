@@ -947,7 +947,7 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
           const btn=document.getElementById('hfSubmit');
           if(!name||!email||!phone||!address){errEl.textContent='Please fill in all fields.';errEl.style.display='block';return;}
           btn.disabled=true;btn.textContent='Submitting...';errEl.style.display='none';
-          fetch('http://159.203.114.9:3001/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,phone,address,source:'siding-hover-scan'})})
+          fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({firstName:name,email,phone,address,source:'siding-hover-scan'})})
           .then(r=>{if(!r.ok)throw new Error('fail');return r.json();})
           .then(()=>{
             document.getElementById('hoverFormFields').style.display='none';

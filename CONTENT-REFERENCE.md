@@ -155,7 +155,7 @@
 - Focus: warehouses, retail, office buildings, churches, schools
 
 ## FORM SUBMISSION
-- Jane's Lead API: POST http://159.203.114.9:3001/leads
+- Jane's Lead API: POST to JANE_API_URL (configured in Cloudflare env vars — do NOT hardcode)
 - Fields: contact, company, email, phone, address, service, description, budget, timeline, preferredContact
 - Source tag per page: "website-residential", "website-commercial", "website-multifamily"
 - SMS consent checkbox required (A2P compliance)
