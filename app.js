@@ -1,4 +1,4 @@
-// v2026.03.23-panel
+// v2026.03.23-panel-audit
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ─────────────────────────────────────────────────
@@ -385,8 +385,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (!valid) return;
 
+      // Build payload — collect multi-value fields (services checkboxes) as array
       const data = {};
-      new FormData(form).forEach((value, key) => { data[key] = value; });
+      const fd = new FormData(form);
+      fd.forEach((value, key) => {
+        if (key === 'services') {
+          if (!Array.isArray(data.services)) data.services = [];
+          data.services.push(value);
+        } else {
+          data[key] = value;
+        }
+      });
       data.source = source;
 
       const originalText = submitBtn.textContent;
