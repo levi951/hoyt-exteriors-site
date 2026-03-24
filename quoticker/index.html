@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quoticker — Instant Exterior Estimate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #C41E3A;
+      --black:  #0A0A0A;
+      --black2: #111111;
+      --white:  #FFFFFF;
+      --g300:   #B8B8B8;
+      --g400:   #888888;
+      --g600:   #444444;
+      --good:   #4CAF50;
+      --better: #FF9800;
+      --best:   #C41E3A;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      background: var(--black2);
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--red); }
+    .logo-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--g400);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-left: 10px;
+    }
+    .powered-by {
+      font-size: 11px;
+      color: var(--g400);
+    }
+    .powered-by strong { color: var(--g300); }
+
+    /* ── MAIN LAYOUT ── */
+    .app-shell {
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* ── HOUSE PANEL ── */
+    .house-panel {
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+      background: #080808;
+    }
+    .house-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.85;
+      display: block;
+    }
+    /* overlay layers */
+    .overlay-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, background-color 0.5s ease;
+      opacity: 0;
+    }
+    #roof-overlay {
+      top: 0; bottom: 52%; left: 0; right: 0;
+      mix-blend-mode: multiply;
+    }
+    #siding-overlay {
+      top: 48%; bottom: 0; left: 0; right: 0;
+      mix-blend-mode: color;
+    }
+    /* roof tiers */
+    #roof-overlay.tier-0 { opacity: 0.18; background: #8B7355; }
+    #roof-overlay.tier-1 { opacity: 0.24; background: #6B8EC2; }
+    #roof-overlay.tier-2 { opacity: 0.30; background: #2C2C2C; }
+    /* siding tiers */
+    #siding-overlay.tier-0 { opacity: 0.15; background: #D4C5A9; }
+    #siding-overlay.tier-1 { opacity: 0.22; background: #7BA7BC; }
+    #siding-overlay.tier-2 { opacity: 0.28; background: #5B7B5B; }
+
+    /* live badge */
+    .live-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(10,10,10,0.82);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 10px 14px;
+      backdrop-filter: blur(8px);
+    }
+    .live-badge-title {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--g400);
+      margin-bottom: 6px;
+    }
+    .badge-rows { display: flex; flex-direction: column; gap: 3px; }
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--g300);
+    }
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .badge-dot.good   { background: var(--good); }
+    .badge-dot.better { background: var(--better); }
+    .badge-dot.best   { background: var(--best); }
+    .badge-dot.none   { background: #444; }
+    .badge-label { font-weight: 600; }
+    .badge-tier  { color: var(--g400); font-size: 11px; }
+
+    /* ── QUOTE PANEL ── */
+    .quote-panel {
+      background: var(--black2);
+      border-left: 1px solid #1e1e1e;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* total bar */
+    .total-bar {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid #1e1e1e;
+      background: #0d0d0d;
+    }
+    .total-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--g400);
+      margin-bottom: 8px;
+    }
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .price-dollar {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--g300);
+      margin-bottom: 4px;
+    }
+    .price-display {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: var(--white);
+      letter-spacing: -2px;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    .price-display.pumping { color: var(--red); }
+    .price-note {
+      font-size: 11px;
+      color: var(--g600);
+      margin-top: 6px;
+    }
+
+    /* grade meter */
+    .grade-bar-wrap {
+      margin-top: 14px;
+    }
+    .grade-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--g600);
+      margin-bottom: 5px;
+    }
+    .grade-track {
+      height: 5px;
+      background: #222;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .grade-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--good), var(--better), var(--best));
+      border-radius: 3px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      width: 16%;
+    }
+
+    /* categories */
+    .categories { padding: 16px 28px; flex: 1; overflow-y: auto; }
+    .cat-block {
+      margin-bottom: 20px;
+      background: #161616;
+      border: 1px solid #222;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .cat-block.active { border-color: #444; }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px 12px;
+    }
+    .cat-left { display: flex; align-items: center; gap: 10px; }
+    .cat-icon { font-size: 18px; }
+    .cat-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .cat-price {
+      font-size: 15px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      color: var(--g300);
+      letter-spacing: -0.5px;
+    }
+    .cat-price.pumping { color: var(--red); }
+
+    /* tier picker */
+    .tier-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid #1e1e1e;
+    }
+    .tier-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 0.15s;
+      position: relative;
+    }
+    .tier-btn:not(:last-child) { border-right: 1px solid #1e1e1e; }
+    .tier-btn:hover { background: #1e1e1e; }
+    .tier-btn.selected-good   { background: rgba(76,175,80,0.12); }
+    .tier-btn.selected-better { background: rgba(255,152,0,0.12); }
+    .tier-btn.selected-best   { background: rgba(196,30,58,0.12); }
+
+    .tier-btn-name {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .tier-btn.selected-good   .tier-btn-name { color: var(--good); }
+    .tier-btn.selected-better .tier-btn-name { color: var(--better); }
+    .tier-btn.selected-best   .tier-btn-name { color: var(--best); }
+    .tier-btn:not([class*="selected"]) .tier-btn-name { color: var(--g600); }
+
+    .tier-btn-sub {
+      display: block;
+      font-size: 10px;
+      color: var(--g400);
+      line-height: 1.3;
+    }
+    .tier-btn.selected-good   .tier-btn-sub,
+    .tier-btn.selected-better .tier-btn-sub,
+    .tier-btn.selected-best   .tier-btn-sub { color: var(--g300); }
+
+    .tier-selected-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 1px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .tier-btn.selected-good   .tier-selected-bar { background: var(--good);   opacity: 1; }
+    .tier-btn.selected-better .tier-selected-bar { background: var(--better); opacity: 1; }
+    .tier-btn.selected-best   .tier-selected-bar { background: var(--best);   opacity: 1; }
+
+    /* CTA */
+    .cta-wrap {
+      padding: 20px 28px 28px;
+      border-top: 1px solid #1e1e1e;
+    }
+    .cta-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .cta-btn:hover { background: #a01830; transform: translateY(-1px); }
+    .cta-btn:active { transform: translateY(0); }
+    .cta-note {
+      text-align: center;
+      font-size: 11px;
+      color: var(--g600);
+      margin-top: 10px;
+    }
+
+    /* mobile */
+    @media (max-width: 860px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .house-panel { height: 260px; position: relative; top: 0; }
+      .quote-panel { border-left: none; border-top: 1px solid #1e1e1e; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:baseline;gap:0">
+    <div class="logo">Quo<span>ticker</span></div>
+    <div class="logo-sub">by Hoyt Exteriors</div>
+  </div>
+  <div class="powered-by">Instant exterior estimates · <strong>(651) 212-4965</strong></div>
+</header>
+
+<div class="app-shell">
+
+  <!-- HOUSE PANEL -->
+  <div class="house-panel">
+    <img class="house-img"
+      src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=85&fit=crop"
+      alt="Home exterior preview">
+    <div class="overlay-layer" id="roof-overlay"></div>
+    <div class="overlay-layer" id="siding-overlay"></div>
+
+    <!-- Live badge -->
+    <div class="live-badge">
+      <div class="live-badge-title">Your Build</div>
+      <div class="badge-rows">
+        <div class="badge-row" id="badge-roofing">
+          <div class="badge-dot none" id="dot-roofing"></div>
+          <span class="badge-label">Roofing</span>
+          <span class="badge-tier" id="badge-tier-roofing">—</span>
+        </div>
+        <div class="badge-row" id="badge-siding">
+          <div class="badge-dot none" id="dot-siding"></div>
+          <span class="badge-label">Siding</span>
+          <span class="badge-tier" id="badge-tier-siding">—</span>
+        </div>
+        <div class="badge-row" id="badge-gutters">
+          <div class="badge-dot none" id="dot-gutters"></div>
+          <span class="badge-label">Gutters</span>
+          <span class="badge-tier" id="badge-tier-gutters">—</span>
+        </div>
+        <div class="badge-row" id="badge-windows">
+          <div class="badge-dot none" id="dot-windows"></div>
+          <span class="badge-label">Windows</span>
+          <span class="badge-tier" id="badge-tier-windows">—</span>
+        </div>
+        <div class="badge-row" id="badge-insulation">
+          <div class="badge-dot none" id="dot-insulation"></div>
+          <span class="badge-label">Insulation</span>
+          <span class="badge-tier" id="badge-tier-insulation">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE PANEL -->
+  <div class="quote-panel">
+
+    <!-- Total bar -->
+    <div class="total-bar">
+      <div class="total-label">Estimated Total</div>
+      <div class="price-row">
+        <div class="price-dollar">$</div>
+        <div class="price-display" id="priceDisplay">0</div>
+      </div>
+      <div class="price-note">Select materials below · No commitment · Get exact quote from Hoyt</div>
+      <div class="grade-bar-wrap">
+        <div class="grade-labels">
+          <span>Good</span><span>Better</span><span>Best</span>
+        </div>
+        <div class="grade-track">
+          <div class="grade-fill" id="gradeFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+
+      <!-- ROOFING -->
+      <div class="cat-block" id="block-roofing">
+        <div class="cat-header">
+          <div class="cat-left">
+            <span class="cat-icon">🏠</span>
+            <span class="cat-name">Roofing</span>
+          </div>
+          <span class="cat-price" id="price-roofing">—</span>
+        </div>
+        <div class="tier-picker">
+          <button class="tier-btn" data-cat="roofing" data-tier="0">
+            <span class="tier-btn-name">Good</span>
+            <span class="tier-btn-sub">20-yr 3-tab</span>
+            <span class="tier-btn-sub">$8,500</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="roofing" data-tier="1">
+            <span class="tier-btn-name">Better</span>
+            <span class="tier-btn-sub">30-yr arch</span>
+            <span class="tier-btn-sub">$14,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="roofing" data-tier="2">
+            <span class="tier-btn-name">Best</span>
+            <span class="tier-btn-sub">50-yr premium</span>
+            <span class="tier-btn-sub">$22,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- SIDING -->
+      <div class="cat-block" id="block-siding">
+        <div class="cat-header">
+          <div class="cat-left">
+            <span class="cat-icon">🏗️</span>
+            <span class="cat-name">Siding</span>
+          </div>
+          <span class="cat-price" id="price-siding">—</span>
+        </div>
+        <div class="tier-picker">
+          <button class="tier-btn" data-cat="siding" data-tier="0">
+            <span class="tier-btn-name">Good</span>
+            <span class="tier-btn-sub">Vinyl basic</span>
+            <span class="tier-btn-sub">$12,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="siding" data-tier="1">
+            <span class="tier-btn-name">Better</span>
+            <span class="tier-btn-sub">LP SmartSide</span>
+            <span class="tier-btn-sub">$22,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="siding" data-tier="2">
+            <span class="tier-btn-name">Best</span>
+            <span class="tier-btn-sub">James Hardie</span>
+            <span class="tier-btn-sub">$35,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- GUTTERS -->
+      <div class="cat-block" id="block-gutters">
+        <div class="cat-header">
+          <div class="cat-left">
+            <span class="cat-icon">🌧️</span>
+            <span class="cat-name">Gutters</span>
+          </div>
+          <span class="cat-price" id="price-gutters">—</span>
+        </div>
+        <div class="tier-picker">
+          <button class="tier-btn" data-cat="gutters" data-tier="0">
+            <span class="tier-btn-name">Good</span>
+            <span class="tier-btn-sub">5" aluminum</span>
+            <span class="tier-btn-sub">$1,800</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="gutters" data-tier="1">
+            <span class="tier-btn-name">Better</span>
+            <span class="tier-btn-sub">6" seamless</span>
+            <span class="tier-btn-sub">$3,200</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="gutters" data-tier="2">
+            <span class="tier-btn-name">Best</span>
+            <span class="tier-btn-sub">+ LeafGuard</span>
+            <span class="tier-btn-sub">$5,500</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- WINDOWS -->
+      <div class="cat-block" id="block-windows">
+        <div class="cat-header">
+          <div class="cat-left">
+            <span class="cat-icon">🪟</span>
+            <span class="cat-name">Windows</span>
+          </div>
+          <span class="cat-price" id="price-windows">—</span>
+        </div>
+        <div class="tier-picker">
+          <button class="tier-btn" data-cat="windows" data-tier="0">
+            <span class="tier-btn-name">Good</span>
+            <span class="tier-btn-sub">Double pane</span>
+            <span class="tier-btn-sub">$6,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="windows" data-tier="1">
+            <span class="tier-btn-name">Better</span>
+            <span class="tier-btn-sub">Triple low-E</span>
+            <span class="tier-btn-sub">$11,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="windows" data-tier="2">
+            <span class="tier-btn-name">Best</span>
+            <span class="tier-btn-sub">Argon premium</span>
+            <span class="tier-btn-sub">$18,000</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- INSULATION -->
+      <div class="cat-block" id="block-insulation">
+        <div class="cat-header">
+          <div class="cat-left">
+            <span class="cat-icon">🧱</span>
+            <span class="cat-name">Insulation</span>
+          </div>
+          <span class="cat-price" id="price-insulation">—</span>
+        </div>
+        <div class="tier-picker">
+          <button class="tier-btn" data-cat="insulation" data-tier="0">
+            <span class="tier-btn-name">Good</span>
+            <span class="tier-btn-sub">R-13 batt</span>
+            <span class="tier-btn-sub">$2,500</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="insulation" data-tier="1">
+            <span class="tier-btn-name">Better</span>
+            <span class="tier-btn-sub">R-19 batt</span>
+            <span class="tier-btn-sub">$4,500</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+          <button class="tier-btn" data-cat="insulation" data-tier="2">
+            <span class="tier-btn-name">Best</span>
+            <span class="tier-btn-sub">Spray foam</span>
+            <span class="tier-btn-sub">$7,500</span>
+            <div class="tier-selected-bar"></div>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /categories -->
+
+    <!-- CTA -->
+    <div class="cta-wrap">
+      <button class="cta-btn" id="ctaBtn">Get My Exact Quote →</button>
+      <div class="cta-note">No obligation · Apple Valley, MN · Hoyt Exteriors Est. 2000</div>
+    </div>
+
+  </div><!-- /quote-panel -->
+</div><!-- /app-shell -->
+
+<script>
+  // ── DATA ──
+  const PRICES = {
+    roofing:    [8500,  14000, 22000],
+    siding:     [12000, 22000, 35000],
+    gutters:    [1800,  3200,  5500],
+    windows:    [6000,  11000, 18000],
+    insulation: [2500,  4500,  7500],
+  };
+  const TIER_NAMES = ['Good', 'Better', 'Best'];
+  const TIER_CLASSES = ['good', 'better', 'best'];
+  const CATS = ['roofing', 'siding', 'gutters', 'windows', 'insulation'];
+
+  // selected tier per category (-1 = none)
+  const selected = { roofing: -1, siding: -1, gutters: -1, windows: -1, insulation: -1 };
+
+  // ── PRICE ANIMATION ──
+  let displayedPrice = 0;
+  let animHandle = null;
+
+  function fmtDollar(n) {
+    return Math.round(n).toLocaleString('en-US');
+  }
+
+  function pumpTo(target) {
+    if (animHandle) cancelAnimationFrame(animHandle);
+    const from = displayedPrice;
+    const diff = Math.abs(target - from);
+    const duration = Math.min(900, Math.max(200, diff / 25));
+    const startT = performance.now();
+    const el = document.getElementById('priceDisplay');
+    el.classList.add('pumping');
+    function step(now) {
+      const progress = Math.min((now - startT) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      displayedPrice = from + (target - from) * eased;
+      el.textContent = fmtDollar(displayedPrice);
+      if (progress < 1) {
+        animHandle = requestAnimationFrame(step);
+      } else {
+        displayedPrice = target;
+        el.textContent = fmtDollar(target);
+        el.classList.remove('pumping');
+      }
+    }
+    animHandle = requestAnimationFrame(step);
+  }
+
+  // ── TOTAL CALC ──
+  function getTotal() {
+    let total = 0;
+    for (const cat of CATS) {
+      const t = selected[cat];
+      if (t >= 0) total += PRICES[cat][t];
+    }
+    return total;
+  }
+
+  function getGradePct() {
+    let sum = 0, count = 0;
+    for (const cat of CATS) {
+      const t = selected[cat];
+      if (t >= 0) { sum += t; count++; }
+    }
+    if (count === 0) return 0;
+    const avg = sum / count; // 0=good, 1=better, 2=best
+    // map 0→8%, 1→50%, 2→92%
+    return 8 + avg * 42;
+  }
+
+  // ── UPDATE UI ──
+  function updateAll() {
+    const total = getTotal();
+    pumpTo(total);
+
+    // grade fill
+    document.getElementById('gradeFill').style.width = getGradePct() + '%';
+
+    for (const cat of CATS) {
+      const t = selected[cat];
+
+      // cat price label
+      const priceEl = document.getElementById('price-' + cat);
+      priceEl.textContent = t >= 0 ? '$' + PRICES[cat][t].toLocaleString('en-US') : '—';
+      priceEl.className = 'cat-price' + (t >= 0 ? ' pumping' : '');
+      setTimeout(() => { priceEl.className = 'cat-price'; }, 600);
+
+      // block active state
+      const blockEl = document.getElementById('block-' + cat);
+      if (t >= 0) {
+        blockEl.classList.add('active');
+      } else {
+        blockEl.classList.remove('active');
+      }
+
+      // tier buttons
+      const btns = document.querySelectorAll('[data-cat="' + cat + '"]');
+      btns.forEach(function(btn) {
+        const btnTier = parseInt(btn.getAttribute('data-tier'), 10);
+        btn.className = 'tier-btn';
+        if (btnTier === t) {
+          btn.classList.add('selected-' + TIER_CLASSES[btnTier]);
+        }
+      });
+
+      // badge dot + tier label
+      const dot = document.getElementById('dot-' + cat);
+      const badgeTier = document.getElementById('badge-tier-' + cat);
+      dot.className = 'badge-dot';
+      if (t >= 0) {
+        dot.classList.add(TIER_CLASSES[t]);
+        badgeTier.textContent = TIER_NAMES[t];
+      } else {
+        dot.classList.add('none');
+        badgeTier.textContent = '—';
+      }
+    }
+
+    // house overlays (only roofing + siding get visual overlays)
+    const roofOv = document.getElementById('roof-overlay');
+    const sidingOv = document.getElementById('siding-overlay');
+    roofOv.className = 'overlay-layer' + (selected.roofing >= 0 ? ' tier-' + selected.roofing : '');
+    sidingOv.className = 'overlay-layer' + (selected.siding >= 0 ? ' tier-' + selected.siding : '');
+  }
+
+  // ── CLICK HANDLER ──
+  document.querySelectorAll('.tier-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const cat  = btn.getAttribute('data-cat');
+      const tier = parseInt(btn.getAttribute('data-tier'), 10);
+      // toggle off if already selected
+      if (selected[cat] === tier) {
+        selected[cat] = -1;
+      } else {
+        selected[cat] = tier;
+      }
+      updateAll();
+    });
+  });
+
+  // ── CTA BUTTON ──
+  document.getElementById('ctaBtn').addEventListener('click', function() {
+    const lines = [];
+    for (const cat of CATS) {
+      const t = selected[cat];
+      if (t >= 0) {
+        const capCat = cat.charAt(0).toUpperCase() + cat.slice(1);
+        lines.push(capCat + ': ' + TIER_NAMES[t] + ' ($' + PRICES[cat][t].toLocaleString('en-US') + ')');
+      }
+    }
+    const total = getTotal();
+    if (total === 0) {
+      alert('Select at least one material to get your estimate!');
+      return;
+    }
+    const summary = lines.join('\n');
+    const msg = 'Your Quotick estimate:\n\n' + summary + '\n\nEstimated Total: $' + total.toLocaleString('en-US') + '\n\nCall Hoyt Exteriors at (651) 212-4965 or visit hoytexteriors.com to get your exact quote.';
+    alert(msg);
+  });
+
+  // ── INIT ──
+  updateAll();
+</script>
+</body>
+</html>
