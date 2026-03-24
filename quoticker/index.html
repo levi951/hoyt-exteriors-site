@@ -3,763 +3,1186 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quoticker — Instant Exterior Estimate</title>
+  <title>Quoticker — Exterior Configurator</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --red:    #C41E3A;
-      --black:  #0A0A0A;
-      --black2: #111111;
-      --white:  #FFFFFF;
-      --g300:   #B8B8B8;
-      --g400:   #888888;
-      --g600:   #444444;
-      --good:   #4CAF50;
-      --better: #FF9800;
-      --best:   #C41E3A;
+      --red:   #C41E3A;
+      --black: #0A0A0A;
+      --b2:    #111111;
+      --white: #FFFFFF;
+      --g300:  #B8B8B8;
+      --g400:  #888888;
+      --g600:  #444444;
+      --g700:  #2A2A2A;
     }
-
-    html, body {
-      height: 100%;
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-    }
+    html, body { height: 100%; background: var(--black); color: var(--white); font-family: 'Inter', sans-serif; overflow: hidden; }
 
     /* ── HEADER ── */
     header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      height: 64px;
-      background: var(--black2);
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 54px; flex-shrink: 0;
+      background: var(--b2); border-bottom: 1px solid #1a1a1a;
+      position: relative; z-index: 10;
     }
-    .logo {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: -0.5px;
-    }
-    .logo span { color: var(--red); }
-    .logo-sub {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--g400);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-left: 10px;
-    }
-    .powered-by {
-      font-size: 11px;
-      color: var(--g400);
-    }
-    .powered-by strong { color: var(--g300); }
+    .logo-wrap { display: flex; align-items: baseline; gap: 0; }
+    .logo { font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 800; letter-spacing: -0.5px; }
+    .logo-red { color: var(--red); }
+    .logo-badge { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--g400); margin-left: 10px; }
 
-    /* ── MAIN LAYOUT ── */
-    .app-shell {
-      display: grid;
-      grid-template-columns: 1fr 460px;
-      min-height: calc(100vh - 64px);
+    /* total ticker in header */
+    .hdr-total {
+      display: flex; align-items: baseline; gap: 4px;
+    }
+    .hdr-total-lbl { font-size: 11px; color: var(--g400); margin-right: 4px; }
+    .hdr-dollar { font-size: 16px; font-weight: 700; color: var(--g300); }
+    .hdr-price {
+      font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 900;
+      font-variant-numeric: tabular-nums; letter-spacing: -1.5px; color: var(--white);
+    }
+    .hdr-price.ticking { color: var(--red); }
+    .hdr-right { font-size: 11px; color: var(--g400); }
+    .hdr-right strong { color: var(--g300); }
+
+    /* ── SHELL ── */
+    .shell {
+      display: flex; flex-direction: column;
+      height: calc(100vh - 54px);
     }
 
     /* ── HOUSE PANEL ── */
     .house-panel {
-      position: sticky;
-      top: 64px;
-      height: calc(100vh - 64px);
-      overflow: hidden;
-      background: #080808;
+      position: relative; flex: 1; overflow: hidden; background: #050505;
+      min-height: 0;
     }
     .house-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      opacity: 0.85;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 32%;
       display: block;
     }
-    /* overlay layers */
-    .overlay-layer {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease, background-color 0.5s ease;
+
+    /* OVERLAYS */
+    .ov {
+      position: absolute; pointer-events: none;
+      transition: opacity 0.55s ease, background-color 0.45s ease, clip-path 0.65s cubic-bezier(0.4,0,0.2,1);
       opacity: 0;
     }
-    #roof-overlay {
-      top: 0; bottom: 52%; left: 0; right: 0;
+    /* Roof — polygon tracing the actual roofline */
+    #ov-roof {
+      inset: 0;
+      clip-path: polygon(0% 52%, 20% 44%, 50% 8%, 80% 44%, 100% 52%);
       mix-blend-mode: multiply;
     }
-    #siding-overlay {
-      top: 48%; bottom: 0; left: 0; right: 0;
+    #ov-roof.t0 { opacity: 0.20; background: #9E9080; }
+    #ov-roof.t1 { opacity: 0.28; background: #3C3C3C; }
+    #ov-roof.t2 { opacity: 0.34; background: #1E1E30; }
+    #ov-roof.t3 { opacity: 0.30; background: #506880; }
+
+    /* Siding — walls, with coverage progression */
+    #ov-siding {
+      top: 24%; bottom: 48%; left: 0; right: 0;
       mix-blend-mode: color;
+      transition: opacity 0.5s ease, background-color 0.4s ease, clip-path 0.7s cubic-bezier(0.4,0,0.2,1);
     }
-    /* roof tiers */
-    #roof-overlay.tier-0 { opacity: 0.18; background: #8B7355; }
-    #roof-overlay.tier-1 { opacity: 0.24; background: #6B8EC2; }
-    #roof-overlay.tier-2 { opacity: 0.30; background: #2C2C2C; }
-    /* siding tiers */
-    #siding-overlay.tier-0 { opacity: 0.15; background: #D4C5A9; }
-    #siding-overlay.tier-1 { opacity: 0.22; background: #7BA7BC; }
-    #siding-overlay.tier-2 { opacity: 0.28; background: #5B7B5B; }
+    #ov-siding.cov-front { clip-path: inset(0% 22% 0% 22%); }
+    #ov-siding.cov-full  { clip-path: inset(0% 0% 0% 0%); }
+    #ov-siding.t0 { opacity: 0.28; background: #CBBB9A; }
+    #ov-siding.t1 { opacity: 0.28; background: #CBBB9A; }
+    #ov-siding.t2 { opacity: 0.34; background: #8B6E4A; }
+    #ov-siding.t3 { opacity: 0.36; background: #5A7888; }
 
-    /* live badge */
-    .live-badge {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(10,10,10,0.82);
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 10px 14px;
-      backdrop-filter: blur(8px);
+    /* Fascia — thin eave strip */
+    #ov-fascia {
+      top: 42%; height: 6%; left: 0; right: 0;
+      mix-blend-mode: overlay;
     }
-    .live-badge-title {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--g400);
-      margin-bottom: 6px;
-    }
-    .badge-rows { display: flex; flex-direction: column; gap: 3px; }
-    .badge-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--g300);
-    }
-    .badge-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .badge-dot.good   { background: var(--good); }
-    .badge-dot.better { background: var(--better); }
-    .badge-dot.best   { background: var(--best); }
-    .badge-dot.none   { background: #444; }
-    .badge-label { font-weight: 600; }
-    .badge-tier  { color: var(--g400); font-size: 11px; }
+    #ov-fascia.t0 { opacity: 0.30; background: #BBBBBB; }
+    #ov-fascia.t1 { opacity: 0.40; background: #DDDDDD; }
+    #ov-fascia.t2 { opacity: 0.50; background: #F5F5F5; }
 
-    /* ── QUOTE PANEL ── */
-    .quote-panel {
-      background: var(--black2);
-      border-left: 1px solid #1e1e1e;
-      display: flex;
-      flex-direction: column;
+    /* Gable accent — triangle over the peak */
+    #ov-accent {
+      inset: 0;
+      clip-path: polygon(50% 9%, 64% 43%, 36% 43%);
+      mix-blend-mode: multiply;
+    }
+    #ov-accent.t1 { opacity: 0.55; background: #7B5E38; }
+    #ov-accent.t2 { opacity: 0.60; background: #5E4428; }
+    #ov-accent.t3 { opacity: 0.65; background: #3E2810; }
+
+    /* ── FLOATING BADGES ON HOUSE ── */
+    .h-badge {
+      position: absolute; z-index: 5;
+      background: rgba(6,6,6,0.92);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 10px 14px 10px;
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      cursor: grab;
+      transition: border-color 0.25s, transform 0.18s, box-shadow 0.25s;
+      min-width: 148px;
+      user-select: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.55);
+    }
+    .h-badge:hover {
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+    }
+    .h-badge.active {
+      border-color: rgba(196,30,58,0.65);
+      box-shadow: 0 0 0 1px rgba(196,30,58,0.25), 0 8px 36px rgba(196,30,58,0.18), 0 4px 20px rgba(0,0,0,0.7);
+    }
+    .h-badge.dragging {
+      cursor: grabbing;
+      transform: scale(1.04);
+      z-index: 50;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.85), 0 0 0 1px rgba(196,30,58,0.4);
+      transition: box-shadow 0.1s, transform 0.1s;
     }
 
-    /* total bar */
-    .total-bar {
-      padding: 28px 28px 20px;
-      border-bottom: 1px solid #1e1e1e;
-      background: #0d0d0d;
+    .hb-name {
+      font-size: 9px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--g400); margin-bottom: 4px;
     }
-    .total-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--g400);
-      margin-bottom: 8px;
-    }
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-    .price-dollar {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--g300);
-      margin-bottom: 4px;
-    }
-    .price-display {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 52px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-      color: var(--white);
-      letter-spacing: -2px;
+    .hb-price {
+      font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900;
+      font-variant-numeric: tabular-nums; color: var(--white); letter-spacing: -0.8px;
       line-height: 1;
-      transition: color 0.15s;
     }
-    .price-display.pumping { color: var(--red); }
-    .price-note {
-      font-size: 11px;
-      color: var(--g600);
-      margin-top: 6px;
-    }
+    .hb-price.ticking { color: var(--red); }
 
-    /* grade meter */
-    .grade-bar-wrap {
-      margin-top: 14px;
+    /* ── BADGE MINI SLIDER ── */
+    .hb-slider-wrap {
+      position: relative; height: 22px;
+      display: flex; align-items: center;
+      margin: 7px 0 4px;
     }
-    .grade-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--g600);
-      margin-bottom: 5px;
+    .hb-fill-track {
+      position: absolute; left: 0; right: 0; height: 3px;
+      border-radius: 2px; background: rgba(255,255,255,0.08);
+      pointer-events: none; overflow: hidden;
     }
-    .grade-track {
-      height: 5px;
-      background: #222;
-      border-radius: 3px;
-      overflow: hidden;
+    .hb-fill-bar {
+      height: 100%; width: 0%; border-radius: 2px;
+      background: linear-gradient(90deg, #C41E3A, #ff3558);
+      pointer-events: none; transition: width 0.05s;
     }
-    .grade-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--good), var(--better), var(--best));
-      border-radius: 3px;
-      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-      width: 16%;
+    .hb-slider {
+      -webkit-appearance: none; appearance: none;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      background: transparent; cursor: pointer; z-index: 2; margin: 0;
     }
-
-    /* categories */
-    .categories { padding: 16px 28px; flex: 1; overflow-y: auto; }
-    .cat-block {
-      margin-bottom: 20px;
-      background: #161616;
-      border: 1px solid #222;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: border-color 0.2s;
-    }
-    .cat-block.active { border-color: #444; }
-
-    .cat-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px 12px;
-    }
-    .cat-left { display: flex; align-items: center; gap: 10px; }
-    .cat-icon { font-size: 18px; }
-    .cat-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--white);
-    }
-    .cat-price {
-      font-size: 15px;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-      color: var(--g300);
-      letter-spacing: -0.5px;
-    }
-    .cat-price.pumping { color: var(--red); }
-
-    /* tier picker */
-    .tier-picker {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid #1e1e1e;
-    }
-    .tier-btn {
-      background: none;
-      border: none;
+    .hb-slider:focus { outline: none; }
+    .hb-slider::-webkit-slider-runnable-track { background: transparent; height: 3px; }
+    .hb-slider::-moz-range-track { background: transparent; height: 3px; }
+    .hb-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ff4060, var(--red));
+      border: 2px solid rgba(255,255,255,0.9);
       cursor: pointer;
-      padding: 10px 8px;
-      text-align: center;
+      box-shadow: 0 0 8px rgba(196,30,58,0.7), 0 1px 4px rgba(0,0,0,0.5);
+    }
+    .hb-slider::-moz-range-thumb {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--red); border: 2px solid rgba(255,255,255,0.9); cursor: pointer;
+    }
+
+    .hb-mat { font-size: 10px; color: var(--g400); font-weight: 600; letter-spacing: 0.3px; }
+
+    /* connector dot on badge */
+    .hb-dot {
+      position: absolute; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--red);
+      bottom: -3px; left: 50%; transform: translateX(-50%);
+      opacity: 0; transition: opacity 0.2s;
+      box-shadow: 0 0 6px rgba(196,30,58,0.8);
+    }
+    .h-badge.active .hb-dot { opacity: 1; }
+
+    /* badge positions (% of house panel) */
+    #hb-roof    { top: 6%;  left: 43%; }
+    #hb-siding  { top: 38%; left: 4%;  }
+    #hb-fascia  { top: 40%; right: 4%; }
+    #hb-windows { top: 32%; left: 40%; }
+    #hb-accents { top: 10%; left: 60%; }
+
+    /* ── CONTROLS STRIP ── */
+    .controls-strip {
+      display: flex; flex-shrink: 0;
+      background: var(--b2); border-top: 1px solid #1a1a1a;
+      height: 130px;
+    }
+
+    .ctrl-block {
+      flex: 1; padding: 12px 16px 10px;
+      border-right: 1px solid #1a1a1a;
+      display: flex; flex-direction: column;
+      cursor: pointer;
       transition: background 0.15s;
       position: relative;
     }
-    .tier-btn:not(:last-child) { border-right: 1px solid #1e1e1e; }
-    .tier-btn:hover { background: #1e1e1e; }
-    .tier-btn.selected-good   { background: rgba(76,175,80,0.12); }
-    .tier-btn.selected-better { background: rgba(255,152,0,0.12); }
-    .tier-btn.selected-best   { background: rgba(196,30,58,0.12); }
+    .ctrl-block:last-child { border-right: none; }
+    .ctrl-block:hover { background: #161616; }
+    .ctrl-block.active { background: #161616; border-top: 2px solid var(--red); margin-top: -1px; box-shadow: inset 0 1px 0 rgba(196,30,58,0.15); }
 
-    .tier-btn-name {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 3px;
+    .cb-top {
+      display: flex; align-items: baseline;
+      justify-content: space-between; margin-bottom: 8px;
     }
-    .tier-btn.selected-good   .tier-btn-name { color: var(--good); }
-    .tier-btn.selected-better .tier-btn-name { color: var(--better); }
-    .tier-btn.selected-best   .tier-btn-name { color: var(--best); }
-    .tier-btn:not([class*="selected"]) .tier-btn-name { color: var(--g600); }
+    .cb-name { font-size: 11px; font-weight: 700; color: var(--g300); }
+    .cb-price {
+      font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800;
+      font-variant-numeric: tabular-nums; color: var(--white); letter-spacing: -0.5px;
+    }
+    .cb-price.ticking { color: var(--red); }
 
-    .tier-btn-sub {
-      display: block;
-      font-size: 10px;
-      color: var(--g400);
-      line-height: 1.3;
-    }
-    .tier-btn.selected-good   .tier-btn-sub,
-    .tier-btn.selected-better .tier-btn-sub,
-    .tier-btn.selected-best   .tier-btn-sub { color: var(--g300); }
+    /* slider */
+    .sl-wrap { position: relative; height: 32px; display: flex; align-items: center; margin-bottom: 6px; }
+    .sl-track { position: absolute; left: 0; right: 0; height: 5px; border-radius: 3px; background: #1e1e1e; pointer-events: none; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
+    .sl-fill  { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #9a1628, var(--red), #ff3558); pointer-events: none; max-width: 100%; transition: width 0.04s; }
 
-    .tier-selected-bar {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      border-radius: 1px;
-      opacity: 0;
-      transition: opacity 0.2s;
+    /* bottom strip range — scoped so hb-slider (badge) uses its own rules above */
+    .ctrl-block input[type=range] {
+      -webkit-appearance: none; appearance: none;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      background: transparent; cursor: pointer; z-index: 2; margin: 0;
     }
-    .tier-btn.selected-good   .tier-selected-bar { background: var(--good);   opacity: 1; }
-    .tier-btn.selected-better .tier-selected-bar { background: var(--better); opacity: 1; }
-    .tier-btn.selected-best   .tier-selected-bar { background: var(--best);   opacity: 1; }
-
-    /* CTA */
-    .cta-wrap {
-      padding: 20px 28px 28px;
-      border-top: 1px solid #1e1e1e;
-    }
-    .cta-btn {
-      width: 100%;
-      padding: 16px;
-      background: var(--red);
-      color: var(--white);
-      border: none;
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
+    .ctrl-block input[type=range]:focus { outline: none; }
+    .ctrl-block input[type=range]::-webkit-slider-runnable-track { background: transparent; height: 5px; }
+    .ctrl-block input[type=range]::-moz-range-track { background: transparent; height: 5px; }
+    .ctrl-block input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: radial-gradient(circle at 36% 36%, #ffffff, #e0e0e0);
+      border: 2.5px solid var(--red);
       cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 0 0px rgba(196,30,58,0.0);
+      transition: box-shadow 0.15s;
+    }
+    .ctrl-block input[type=range]:focus::-webkit-slider-thumb,
+    .ctrl-block input[type=range]:active::-webkit-slider-thumb {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 0 5px rgba(196,30,58,0.22);
+    }
+    .ctrl-block input[type=range]::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: #fff; border: 2.5px solid var(--red); cursor: pointer;
+    }
+
+    .cb-mat { font-size: 10px; font-weight: 600; color: var(--g600); }
+    .cb-mat.pop { animation: matpop 0.5s ease; }
+    @keyframes matpop { 0%,100% { color: var(--g600); } 40% { color: var(--red); } }
+
+    /* CTA strip */
+    .cta-strip {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px; background: #0d0d0d; border-top: 1px solid #1a1a1a;
+      flex-shrink: 0;
+    }
+    .cta-note { font-size: 11px; color: var(--g600); }
+    .cta-btn {
+      padding: 10px 28px; background: var(--red); color: var(--white);
+      border: none; border-radius: 8px; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 800; cursor: pointer;
       transition: background 0.15s, transform 0.1s;
     }
-    .cta-btn:hover { background: #a01830; transform: translateY(-1px); }
+    .cta-btn:hover { background: #a0182e; transform: translateY(-1px); }
     .cta-btn:active { transform: translateY(0); }
-    .cta-note {
-      text-align: center;
-      font-size: 11px;
-      color: var(--g600);
-      margin-top: 10px;
+
+    @media (max-width: 700px) {
+      .controls-strip { flex-wrap: wrap; height: auto; }
+      .ctrl-block { flex: 1 1 33%; min-width: 0; border-bottom: 1px solid #1a1a1a; }
+      #hb-siding, #hb-fascia, #hb-windows, #hb-accents { display: none; }
     }
 
-    /* mobile */
-    @media (max-width: 860px) {
-      .app-shell { grid-template-columns: 1fr; }
-      .house-panel { height: 260px; position: relative; top: 0; }
-      .quote-panel { border-left: none; border-top: 1px solid #1e1e1e; }
+    /* ── HOVER LOAD BUTTON ── */
+    .hover-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 6px;
+      background: transparent; border: 1px solid #333;
+      color: var(--g300); font-size: 12px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
+    .hover-btn:hover { border-color: var(--red); color: var(--white); background: rgba(196,30,58,0.08); }
+    .hover-btn .hbtn-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--g600); flex-shrink: 0; transition: background 0.2s;
+    }
+    .hover-btn.connected .hbtn-dot { background: #22c55e; }
+    .hover-btn.loading .hbtn-dot { background: var(--red); animation: pulse 0.8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── JOB PICKER MODAL ── */
+    .job-modal-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+      align-items: flex-start; justify-content: center; padding-top: 80px;
+    }
+    .job-modal-backdrop.open { display: flex; }
+    .job-modal {
+      background: #111; border: 1px solid #222; border-radius: 12px;
+      width: 480px; max-width: 90vw; overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.8);
+    }
+    .jm-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid #1e1e1e;
+    }
+    .jm-title { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .jm-live-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+      background: rgba(196,30,58,0.18); color: var(--red);
+      border: 1px solid rgba(196,30,58,0.3); border-radius: 4px;
+      padding: 2px 6px; display: inline-flex; align-items: center; gap: 4px;
+    }
+    .jm-live-badge::before { content: '●'; font-size: 7px; animation: livepulse 1.5s ease infinite; }
+    @keyframes livepulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .jm-close { background: none; border: none; color: var(--g400); cursor: pointer; font-size: 18px; line-height: 1; padding: 2px 6px; }
+    .jm-close:hover { color: var(--white); }
+    .jm-body { max-height: 380px; overflow-y: auto; }
+    .jm-status { padding: 20px; text-align: center; color: var(--g400); font-size: 13px; }
+    .job-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 20px; cursor: pointer; border-bottom: 1px solid #1a1a1a;
+      transition: background 0.12s;
+    }
+    .job-row:last-child { border-bottom: none; }
+    .job-row:hover { background: #1a1a1a; }
+    .job-thumb {
+      width: 60px; height: 45px; border-radius: 6px; object-fit: cover;
+      flex-shrink: 0; background: #222;
+    }
+    .job-thumb-placeholder {
+      width: 60px; height: 45px; border-radius: 6px; background: #222;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      color: var(--g600); font-size: 18px;
+    }
+    .job-info { flex: 1; min-width: 0; }
+    .job-name { font-size: 13px; font-weight: 600; color: var(--white); }
+    .job-addr { font-size: 11px; color: var(--g400); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .job-date { font-size: 10px; color: var(--g600); margin-top: 2px; }
+    .job-loaded-badge {
+      display: none; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+      background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4);
+      color: #22c55e; font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      padding: 4px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .job-loaded-badge.show { display: block; }
+
+    /* ── PIN GATE ───────────────────────────────────────────── */
+    #pinGate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--black);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 20px;
+    }
+    #pinGate.unlocked { display: none; }
+    .pg-logo { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: -1px; }
+    .pg-logo span { color: var(--red); }
+    .pg-sub { font-size: 12px; color: var(--g400); letter-spacing: 1.5px; text-transform: uppercase; margin-top: -10px; }
+    .pg-label { font-size: 11px; color: var(--g400); letter-spacing: 1px; text-transform: uppercase; }
+    .pg-input-wrap { position: relative; }
+    #pinInput {
+      background: #1a1a1a; border: 1.5px solid #333; border-radius: 10px;
+      color: var(--white); font-family: 'Montserrat', sans-serif;
+      font-size: 28px; font-weight: 800; letter-spacing: 10px;
+      text-align: center; width: 200px; padding: 14px 20px;
+      outline: none; -webkit-text-security: disc;
+    }
+    #pinInput:focus { border-color: var(--red); }
+    #pinInput.shake {
+      animation: pgShake 0.4s ease;
+      border-color: var(--red);
+    }
+    @keyframes pgShake {
+      0%,100% { transform: translateX(0); }
+      20%      { transform: translateX(-8px); }
+      40%      { transform: translateX(8px); }
+      60%      { transform: translateX(-6px); }
+      80%      { transform: translateX(6px); }
+    }
+    .pg-hint { font-size: 11px; color: #444; margin-top: -8px; }
+    #pinError { font-size: 12px; color: var(--red); min-height: 16px; letter-spacing: 0.5px; }
   </style>
 </head>
 <body>
 
-<header>
-  <div style="display:flex;align-items:baseline;gap:0">
-    <div class="logo">Quo<span>ticker</span></div>
-    <div class="logo-sub">by Hoyt Exteriors</div>
+<!-- PIN GATE -->
+<div id="pinGate">
+  <div class="pg-logo">Quo<span>ticker</span></div>
+  <div class="pg-sub">by Hoyt Exteriors · Internal Use Only</div>
+  <div class="pg-label">Enter PIN to continue</div>
+  <div class="pg-input-wrap">
+    <input type="password" id="pinInput" maxlength="8" inputmode="numeric" placeholder="••••" autocomplete="off" />
   </div>
-  <div class="powered-by">Instant exterior estimates · <strong>(651) 212-4965</strong></div>
-</header>
-
-<div class="app-shell">
-
-  <!-- HOUSE PANEL -->
-  <div class="house-panel">
-    <img class="house-img"
-      src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1400&q=85&fit=crop"
-      alt="Home exterior preview">
-    <div class="overlay-layer" id="roof-overlay"></div>
-    <div class="overlay-layer" id="siding-overlay"></div>
-
-    <!-- Live badge -->
-    <div class="live-badge">
-      <div class="live-badge-title">Your Build</div>
-      <div class="badge-rows">
-        <div class="badge-row" id="badge-roofing">
-          <div class="badge-dot none" id="dot-roofing"></div>
-          <span class="badge-label">Roofing</span>
-          <span class="badge-tier" id="badge-tier-roofing">—</span>
-        </div>
-        <div class="badge-row" id="badge-siding">
-          <div class="badge-dot none" id="dot-siding"></div>
-          <span class="badge-label">Siding</span>
-          <span class="badge-tier" id="badge-tier-siding">—</span>
-        </div>
-        <div class="badge-row" id="badge-gutters">
-          <div class="badge-dot none" id="dot-gutters"></div>
-          <span class="badge-label">Gutters</span>
-          <span class="badge-tier" id="badge-tier-gutters">—</span>
-        </div>
-        <div class="badge-row" id="badge-windows">
-          <div class="badge-dot none" id="dot-windows"></div>
-          <span class="badge-label">Windows</span>
-          <span class="badge-tier" id="badge-tier-windows">—</span>
-        </div>
-        <div class="badge-row" id="badge-insulation">
-          <div class="badge-dot none" id="dot-insulation"></div>
-          <span class="badge-label">Insulation</span>
-          <span class="badge-tier" id="badge-tier-insulation">—</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- QUOTE PANEL -->
-  <div class="quote-panel">
-
-    <!-- Total bar -->
-    <div class="total-bar">
-      <div class="total-label">Estimated Total</div>
-      <div class="price-row">
-        <div class="price-dollar">$</div>
-        <div class="price-display" id="priceDisplay">0</div>
-      </div>
-      <div class="price-note">Select materials below · No commitment · Get exact quote from Hoyt</div>
-      <div class="grade-bar-wrap">
-        <div class="grade-labels">
-          <span>Good</span><span>Better</span><span>Best</span>
-        </div>
-        <div class="grade-track">
-          <div class="grade-fill" id="gradeFill"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Categories -->
-    <div class="categories">
-
-      <!-- ROOFING -->
-      <div class="cat-block" id="block-roofing">
-        <div class="cat-header">
-          <div class="cat-left">
-            <span class="cat-icon">🏠</span>
-            <span class="cat-name">Roofing</span>
-          </div>
-          <span class="cat-price" id="price-roofing">—</span>
-        </div>
-        <div class="tier-picker">
-          <button class="tier-btn" data-cat="roofing" data-tier="0">
-            <span class="tier-btn-name">Good</span>
-            <span class="tier-btn-sub">20-yr 3-tab</span>
-            <span class="tier-btn-sub">$8,500</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="roofing" data-tier="1">
-            <span class="tier-btn-name">Better</span>
-            <span class="tier-btn-sub">30-yr arch</span>
-            <span class="tier-btn-sub">$14,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="roofing" data-tier="2">
-            <span class="tier-btn-name">Best</span>
-            <span class="tier-btn-sub">50-yr premium</span>
-            <span class="tier-btn-sub">$22,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-        </div>
-      </div>
-
-      <!-- SIDING -->
-      <div class="cat-block" id="block-siding">
-        <div class="cat-header">
-          <div class="cat-left">
-            <span class="cat-icon">🏗️</span>
-            <span class="cat-name">Siding</span>
-          </div>
-          <span class="cat-price" id="price-siding">—</span>
-        </div>
-        <div class="tier-picker">
-          <button class="tier-btn" data-cat="siding" data-tier="0">
-            <span class="tier-btn-name">Good</span>
-            <span class="tier-btn-sub">Vinyl basic</span>
-            <span class="tier-btn-sub">$12,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="siding" data-tier="1">
-            <span class="tier-btn-name">Better</span>
-            <span class="tier-btn-sub">LP SmartSide</span>
-            <span class="tier-btn-sub">$22,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="siding" data-tier="2">
-            <span class="tier-btn-name">Best</span>
-            <span class="tier-btn-sub">James Hardie</span>
-            <span class="tier-btn-sub">$35,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-        </div>
-      </div>
-
-      <!-- GUTTERS -->
-      <div class="cat-block" id="block-gutters">
-        <div class="cat-header">
-          <div class="cat-left">
-            <span class="cat-icon">🌧️</span>
-            <span class="cat-name">Gutters</span>
-          </div>
-          <span class="cat-price" id="price-gutters">—</span>
-        </div>
-        <div class="tier-picker">
-          <button class="tier-btn" data-cat="gutters" data-tier="0">
-            <span class="tier-btn-name">Good</span>
-            <span class="tier-btn-sub">5" aluminum</span>
-            <span class="tier-btn-sub">$1,800</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="gutters" data-tier="1">
-            <span class="tier-btn-name">Better</span>
-            <span class="tier-btn-sub">6" seamless</span>
-            <span class="tier-btn-sub">$3,200</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="gutters" data-tier="2">
-            <span class="tier-btn-name">Best</span>
-            <span class="tier-btn-sub">+ LeafGuard</span>
-            <span class="tier-btn-sub">$5,500</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-        </div>
-      </div>
-
-      <!-- WINDOWS -->
-      <div class="cat-block" id="block-windows">
-        <div class="cat-header">
-          <div class="cat-left">
-            <span class="cat-icon">🪟</span>
-            <span class="cat-name">Windows</span>
-          </div>
-          <span class="cat-price" id="price-windows">—</span>
-        </div>
-        <div class="tier-picker">
-          <button class="tier-btn" data-cat="windows" data-tier="0">
-            <span class="tier-btn-name">Good</span>
-            <span class="tier-btn-sub">Double pane</span>
-            <span class="tier-btn-sub">$6,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="windows" data-tier="1">
-            <span class="tier-btn-name">Better</span>
-            <span class="tier-btn-sub">Triple low-E</span>
-            <span class="tier-btn-sub">$11,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="windows" data-tier="2">
-            <span class="tier-btn-name">Best</span>
-            <span class="tier-btn-sub">Argon premium</span>
-            <span class="tier-btn-sub">$18,000</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-        </div>
-      </div>
-
-      <!-- INSULATION -->
-      <div class="cat-block" id="block-insulation">
-        <div class="cat-header">
-          <div class="cat-left">
-            <span class="cat-icon">🧱</span>
-            <span class="cat-name">Insulation</span>
-          </div>
-          <span class="cat-price" id="price-insulation">—</span>
-        </div>
-        <div class="tier-picker">
-          <button class="tier-btn" data-cat="insulation" data-tier="0">
-            <span class="tier-btn-name">Good</span>
-            <span class="tier-btn-sub">R-13 batt</span>
-            <span class="tier-btn-sub">$2,500</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="insulation" data-tier="1">
-            <span class="tier-btn-name">Better</span>
-            <span class="tier-btn-sub">R-19 batt</span>
-            <span class="tier-btn-sub">$4,500</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-          <button class="tier-btn" data-cat="insulation" data-tier="2">
-            <span class="tier-btn-name">Best</span>
-            <span class="tier-btn-sub">Spray foam</span>
-            <span class="tier-btn-sub">$7,500</span>
-            <div class="tier-selected-bar"></div>
-          </button>
-        </div>
-      </div>
-
-    </div><!-- /categories -->
-
-    <!-- CTA -->
-    <div class="cta-wrap">
-      <button class="cta-btn" id="ctaBtn">Get My Exact Quote →</button>
-      <div class="cta-note">No obligation · Apple Valley, MN · Hoyt Exteriors Est. 2000</div>
-    </div>
-
-  </div><!-- /quote-panel -->
-</div><!-- /app-shell -->
+  <div id="pinError"></div>
+  <div class="pg-hint">Hoyt Exteriors confidential · Not for distribution</div>
+</div>
 
 <script>
-  // ── DATA ──
-  const PRICES = {
-    roofing:    [8500,  14000, 22000],
-    siding:     [12000, 22000, 35000],
-    gutters:    [1800,  3200,  5500],
-    windows:    [6000,  11000, 18000],
-    insulation: [2500,  4500,  7500],
-  };
-  const TIER_NAMES = ['Good', 'Better', 'Best'];
-  const TIER_CLASSES = ['good', 'better', 'best'];
-  const CATS = ['roofing', 'siding', 'gutters', 'windows', 'insulation'];
+(function() {
+  // SHA-256 hash of the PIN — change PIN by updating this hash
+  // Current PIN: 4965  |  To change: run `echo -n YOURPIN | sha256sum`
+  var PIN_HASH = 'bdc1cc5988510c331dcc68eb086cc701f97685339f0c69e73419395b2cbbfe38';
+  var SESSION_KEY = 'qtk_unlocked';
 
-  // selected tier per category (-1 = none)
-  const selected = { roofing: -1, siding: -1, gutters: -1, windows: -1, insulation: -1 };
-
-  // ── PRICE ANIMATION ──
-  let displayedPrice = 0;
-  let animHandle = null;
-
-  function fmtDollar(n) {
-    return Math.round(n).toLocaleString('en-US');
-  }
-
-  function pumpTo(target) {
-    if (animHandle) cancelAnimationFrame(animHandle);
-    const from = displayedPrice;
-    const diff = Math.abs(target - from);
-    const duration = Math.min(900, Math.max(200, diff / 25));
-    const startT = performance.now();
-    const el = document.getElementById('priceDisplay');
-    el.classList.add('pumping');
-    function step(now) {
-      const progress = Math.min((now - startT) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      displayedPrice = from + (target - from) * eased;
-      el.textContent = fmtDollar(displayedPrice);
-      if (progress < 1) {
-        animHandle = requestAnimationFrame(step);
-      } else {
-        displayedPrice = target;
-        el.textContent = fmtDollar(target);
-        el.classList.remove('pumping');
-      }
-    }
-    animHandle = requestAnimationFrame(step);
-  }
-
-  // ── TOTAL CALC ──
-  function getTotal() {
-    let total = 0;
-    for (const cat of CATS) {
-      const t = selected[cat];
-      if (t >= 0) total += PRICES[cat][t];
-    }
-    return total;
-  }
-
-  function getGradePct() {
-    let sum = 0, count = 0;
-    for (const cat of CATS) {
-      const t = selected[cat];
-      if (t >= 0) { sum += t; count++; }
-    }
-    if (count === 0) return 0;
-    const avg = sum / count; // 0=good, 1=better, 2=best
-    // map 0→8%, 1→50%, 2→92%
-    return 8 + avg * 42;
-  }
-
-  // ── UPDATE UI ──
-  function updateAll() {
-    const total = getTotal();
-    pumpTo(total);
-
-    // grade fill
-    document.getElementById('gradeFill').style.width = getGradePct() + '%';
-
-    for (const cat of CATS) {
-      const t = selected[cat];
-
-      // cat price label
-      const priceEl = document.getElementById('price-' + cat);
-      priceEl.textContent = t >= 0 ? '$' + PRICES[cat][t].toLocaleString('en-US') : '—';
-      priceEl.className = 'cat-price' + (t >= 0 ? ' pumping' : '');
-      setTimeout(() => { priceEl.className = 'cat-price'; }, 600);
-
-      // block active state
-      const blockEl = document.getElementById('block-' + cat);
-      if (t >= 0) {
-        blockEl.classList.add('active');
-      } else {
-        blockEl.classList.remove('active');
-      }
-
-      // tier buttons
-      const btns = document.querySelectorAll('[data-cat="' + cat + '"]');
-      btns.forEach(function(btn) {
-        const btnTier = parseInt(btn.getAttribute('data-tier'), 10);
-        btn.className = 'tier-btn';
-        if (btnTier === t) {
-          btn.classList.add('selected-' + TIER_CLASSES[btnTier]);
-        }
-      });
-
-      // badge dot + tier label
-      const dot = document.getElementById('dot-' + cat);
-      const badgeTier = document.getElementById('badge-tier-' + cat);
-      dot.className = 'badge-dot';
-      if (t >= 0) {
-        dot.classList.add(TIER_CLASSES[t]);
-        badgeTier.textContent = TIER_NAMES[t];
-      } else {
-        dot.classList.add('none');
-        badgeTier.textContent = '—';
-      }
-    }
-
-    // house overlays (only roofing + siding get visual overlays)
-    const roofOv = document.getElementById('roof-overlay');
-    const sidingOv = document.getElementById('siding-overlay');
-    roofOv.className = 'overlay-layer' + (selected.roofing >= 0 ? ' tier-' + selected.roofing : '');
-    sidingOv.className = 'overlay-layer' + (selected.siding >= 0 ? ' tier-' + selected.siding : '');
-  }
-
-  // ── CLICK HANDLER ──
-  document.querySelectorAll('.tier-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      const cat  = btn.getAttribute('data-cat');
-      const tier = parseInt(btn.getAttribute('data-tier'), 10);
-      // toggle off if already selected
-      if (selected[cat] === tier) {
-        selected[cat] = -1;
-      } else {
-        selected[cat] = tier;
-      }
-      updateAll();
+  function sha256(str) {
+    var buf = new TextEncoder().encode(str);
+    return crypto.subtle.digest('SHA-256', buf).then(function(h) {
+      return Array.from(new Uint8Array(h)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
     });
+  }
+
+  function unlock() {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    document.getElementById('pinGate').classList.add('unlocked');
+  }
+
+  // Already unlocked this session?
+  if (sessionStorage.getItem(SESSION_KEY) === '1') { unlock(); return; }
+
+  var inp = document.getElementById('pinInput');
+  var err = document.getElementById('pinError');
+
+  inp.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') tryPin();
   });
 
-  // ── CTA BUTTON ──
-  document.getElementById('ctaBtn').addEventListener('click', function() {
-    const lines = [];
-    for (const cat of CATS) {
-      const t = selected[cat];
-      if (t >= 0) {
-        const capCat = cat.charAt(0).toUpperCase() + cat.slice(1);
-        lines.push(capCat + ': ' + TIER_NAMES[t] + ' ($' + PRICES[cat][t].toLocaleString('en-US') + ')');
+  inp.addEventListener('input', function() {
+    // Auto-submit when 4+ digits entered (adjust for longer PINs)
+    if (inp.value.length >= 4) tryPin();
+  });
+
+  function tryPin() {
+    var val = inp.value.trim();
+    if (!val) return;
+    sha256(val).then(function(hash) {
+      if (hash === PIN_HASH) {
+        unlock();
+      } else {
+        err.textContent = 'Incorrect PIN';
+        inp.classList.add('shake');
+        inp.value = '';
+        setTimeout(function() {
+          inp.classList.remove('shake');
+          err.textContent = '';
+        }, 600);
+        inp.focus();
+      }
+    });
+  }
+
+  // Focus input on load
+  document.addEventListener('DOMContentLoaded', function() { inp.focus(); });
+})();
+</script>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-wrap">
+    <div class="logo">Quo<span class="logo-red">ticker</span></div>
+    <span class="logo-badge">by Hoyt Exteriors</span>
+  </div>
+  <div class="hdr-total">
+    <span class="hdr-total-lbl">Total</span>
+    <span class="hdr-dollar">$</span>
+    <span class="hdr-price" id="hdrPrice">0</span>
+  </div>
+  <div class="hdr-right" style="display:flex;align-items:center;gap:12px;">
+    <button class="hover-btn" id="hoverLoadBtn" onclick="openJobModal()">
+      <span class="hbtn-dot"></span>
+      Load Hover Job
+    </button>
+    <span style="font-size:11px;color:var(--g400);">Instant estimate &middot; <strong style="color:var(--g300)">(651) 212-4965</strong></span>
+  </div>
+</header>
+
+<!-- JOB PICKER MODAL -->
+<div class="job-modal-backdrop" id="jobModal">
+  <div class="job-modal">
+    <div class="jm-header">
+      <span class="jm-title">Load a Hover Job</span>
+      <button class="jm-close" onclick="closeJobModal()">&#x2715;</button>
+    </div>
+    <div class="jm-body" id="jmBody">
+      <div class="jm-status" id="jmStatus">Fetching jobs from Hover...</div>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- HOUSE -->
+  <div class="house-panel" id="housePanel">
+    <img class="house-img"
+      src="https://images.unsplash.com/photo-1761061079517-2ff8192b2f02?w=1400&q=85&fit=crop"
+      alt="Home exterior preview">
+
+    <!-- Overlay layers -->
+    <div class="ov" id="ov-roof"></div>
+    <div class="ov" id="ov-siding"></div>
+    <div class="ov" id="ov-fascia"></div>
+    <div class="ov" id="ov-accent"></div>
+
+    <!-- Hover job loaded badge -->
+    <div class="job-loaded-badge" id="jobLoadedBadge">&#x2713; HOVER JOB LOADED</div>
+
+    <!-- Floating badges -->
+    <div class="h-badge" id="hb-roof" data-cat="roof">
+      <div class="hb-name">&#127968; Roof</div>
+      <div class="hb-price" id="hbp-roof">$6,000</div>
+      <div class="hb-slider-wrap">
+        <div class="hb-fill-track"><div class="hb-fill-bar" id="hbfill-roof"></div></div>
+        <input type="range" class="hb-slider" id="hbs-roof" min="6000" max="28000" value="6000" step="200">
+      </div>
+      <div class="hb-mat" id="hbm-roof">3-Tab Asphalt</div>
+      <div class="hb-dot"></div>
+    </div>
+    <div class="h-badge" id="hb-siding" data-cat="siding">
+      <div class="hb-name">&#127959; Siding</div>
+      <div class="hb-price" id="hbp-siding">$8,000</div>
+      <div class="hb-slider-wrap">
+        <div class="hb-fill-track"><div class="hb-fill-bar" id="hbfill-siding"></div></div>
+        <input type="range" class="hb-slider" id="hbs-siding" min="8000" max="44000" value="8000" step="200">
+      </div>
+      <div class="hb-mat" id="hbm-siding">Vinyl — Front</div>
+      <div class="hb-dot"></div>
+    </div>
+    <div class="h-badge" id="hb-fascia" data-cat="fascia">
+      <div class="hb-name">&#128208; Fascia</div>
+      <div class="hb-price" id="hbp-fascia">$1,500</div>
+      <div class="hb-slider-wrap">
+        <div class="hb-fill-track"><div class="hb-fill-bar" id="hbfill-fascia"></div></div>
+        <input type="range" class="hb-slider" id="hbs-fascia" min="1500" max="9000" value="1500" step="100">
+      </div>
+      <div class="hb-mat" id="hbm-fascia">Aluminum Wrap</div>
+      <div class="hb-dot"></div>
+    </div>
+    <div class="h-badge" id="hb-windows" data-cat="windows">
+      <div class="hb-name">&#129695; Windows</div>
+      <div class="hb-price" id="hbp-windows">$4,000</div>
+      <div class="hb-slider-wrap">
+        <div class="hb-fill-track"><div class="hb-fill-bar" id="hbfill-windows"></div></div>
+        <input type="range" class="hb-slider" id="hbs-windows" min="4000" max="22000" value="4000" step="200">
+      </div>
+      <div class="hb-mat" id="hbm-windows">Double Pane</div>
+      <div class="hb-dot"></div>
+    </div>
+    <div class="h-badge" id="hb-accents" data-cat="accents">
+      <div class="hb-name">&#10022; Accents</div>
+      <div class="hb-price" id="hbp-accents">$0</div>
+      <div class="hb-slider-wrap">
+        <div class="hb-fill-track"><div class="hb-fill-bar" id="hbfill-accents"></div></div>
+        <input type="range" class="hb-slider" id="hbs-accents" min="0" max="14000" value="0" step="100">
+      </div>
+      <div class="hb-mat" id="hbm-accents">None</div>
+      <div class="hb-dot"></div>
+    </div>
+  </div>
+
+  <!-- CONTROLS STRIP -->
+  <div class="controls-strip">
+
+    <div class="ctrl-block" id="cb-roof" data-cat="roof">
+      <div class="cb-top">
+        <span class="cb-name">Roof</span>
+        <span class="cb-price" id="cbp-roof">$6,000</span>
+      </div>
+      <div class="sl-wrap">
+        <div class="sl-track"><div class="sl-fill" id="fill-roof"></div></div>
+        <input type="range" id="sl-roof" min="6000" max="28000" value="6000" step="200">
+      </div>
+      <div class="cb-mat" id="cbm-roof">3-Tab Asphalt</div>
+    </div>
+
+    <div class="ctrl-block" id="cb-siding" data-cat="siding">
+      <div class="cb-top">
+        <span class="cb-name">Siding</span>
+        <span class="cb-price" id="cbp-siding">$8,000</span>
+      </div>
+      <div class="sl-wrap">
+        <div class="sl-track"><div class="sl-fill" id="fill-siding"></div></div>
+        <input type="range" id="sl-siding" min="8000" max="44000" value="8000" step="200">
+      </div>
+      <div class="cb-mat" id="cbm-siding">Vinyl — Front of House</div>
+    </div>
+
+    <div class="ctrl-block" id="cb-fascia" data-cat="fascia">
+      <div class="cb-top">
+        <span class="cb-name">Fascia &amp; Soffit</span>
+        <span class="cb-price" id="cbp-fascia">$1,500</span>
+      </div>
+      <div class="sl-wrap">
+        <div class="sl-track"><div class="sl-fill" id="fill-fascia"></div></div>
+        <input type="range" id="sl-fascia" min="1500" max="9000" value="1500" step="100">
+      </div>
+      <div class="cb-mat" id="cbm-fascia">Aluminum Wrap</div>
+    </div>
+
+    <div class="ctrl-block" id="cb-windows" data-cat="windows">
+      <div class="cb-top">
+        <span class="cb-name">Windows</span>
+        <span class="cb-price" id="cbp-windows">$4,000</span>
+      </div>
+      <div class="sl-wrap">
+        <div class="sl-track"><div class="sl-fill" id="fill-windows"></div></div>
+        <input type="range" id="sl-windows" min="4000" max="22000" value="4000" step="200">
+      </div>
+      <div class="cb-mat" id="cbm-windows">Double Pane</div>
+    </div>
+
+    <div class="ctrl-block" id="cb-accents" data-cat="accents">
+      <div class="cb-top">
+        <span class="cb-name">Accents</span>
+        <span class="cb-price" id="cbp-accents">$0</span>
+      </div>
+      <div class="sl-wrap">
+        <div class="sl-track"><div class="sl-fill" id="fill-accents"></div></div>
+        <input type="range" id="sl-accents" min="0" max="14000" value="0" step="100">
+      </div>
+      <div class="cb-mat" id="cbm-accents">No Accents</div>
+    </div>
+
+  </div><!-- /controls-strip -->
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <div class="cta-note">No obligation &middot; Apple Valley, MN &middot; Est. 2000 &middot; Licensed &amp; Insured</div>
+    <button class="cta-btn" id="ctaBtn">Get My Exact Quote &rarr;</button>
+  </div>
+
+</div><!-- /shell -->
+
+<script>
+  // ── CATEGORY CONFIG ──────────────────────────────────────
+  var CATS = [
+    {
+      id: 'roof', min: 6000, max: 28000,
+      bps: [
+        { at: 6000,  label: '3-Tab Asphalt',         tier: 't0', cov: null },
+        { at: 10000, label: '30-yr Architectural',   tier: 't1', cov: null },
+        { at: 18000, label: 'Premium Architectural', tier: 't2', cov: null },
+        { at: 24000, label: 'Metal / Standing Seam', tier: 't3', cov: null }
+      ]
+    },
+    {
+      id: 'siding', min: 8000, max: 44000,
+      bps: [
+        { at: 8000,  label: 'Vinyl \u2014 Front of House', tier: 't0', cov: 'cov-front' },
+        { at: 14000, label: 'Vinyl \u2014 Full House',     tier: 't1', cov: 'cov-full'  },
+        { at: 22000, label: 'LP SmartSide',               tier: 't2', cov: 'cov-full'  },
+        { at: 34000, label: 'James Hardie',               tier: 't3', cov: 'cov-full'  }
+      ]
+    },
+    {
+      id: 'fascia', min: 1500, max: 9000,
+      bps: [
+        { at: 1500, label: 'Aluminum Wrap',         tier: 't0', cov: null },
+        { at: 3500, label: 'Seamless Aluminum',     tier: 't1', cov: null },
+        { at: 7000, label: 'Premium Vented Soffit', tier: 't2', cov: null }
+      ]
+    },
+    {
+      id: 'windows', min: 4000, max: 22000,
+      bps: [
+        { at: 4000,  label: 'Double Pane',       tier: null, cov: null },
+        { at: 8000,  label: 'Double Pane Low-E', tier: null, cov: null },
+        { at: 14000, label: 'Triple Pane',       tier: null, cov: null },
+        { at: 19000, label: 'Argon Premium',     tier: null, cov: null }
+      ]
+    },
+    {
+      id: 'accents', min: 0, max: 14000,
+      bps: [
+        { at: 0,     label: 'No Accents',             tier: null, cov: null },
+        { at: 3000,  label: 'Gable Shakes',           tier: 't1', cov: null },
+        { at: 6000,  label: 'Shakes + Stone Accents', tier: 't2', cov: null },
+        { at: 10000, label: 'Full Accent Package',    tier: 't3', cov: null }
+      ]
+    }
+  ];
+
+  // ── STATE ────────────────────────────────────────────────
+  var state = {};
+  var activecat = null;
+  CATS.forEach(function(c) { state[c.id] = c.min; });
+
+  // ── GAS PUMP ANIMATIONS (one per target element) ─────────
+  var rafMap = {};     // catId -> raf handle
+  var dispMap = {};    // catId -> currently displayed value
+  CATS.forEach(function(c) { dispMap[c.id] = c.min; });
+  var hdrDisplayed = 0;
+  var hdrRaf = null;
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+
+  function animateTo(key, target, elId, duration) {
+    if (rafMap[key]) cancelAnimationFrame(rafMap[key]);
+    var from = dispMap[key];
+    var span = Math.abs(target - from);
+    var dur  = duration || Math.min(600, Math.max(100, span / 35));
+    var t0   = performance.now();
+    var el   = document.getElementById(elId);
+    if (el) el.classList.add('ticking');
+    function step(now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      dispMap[key] = from + (target - from) * e;
+      if (el) el.textContent = '$' + fmt(dispMap[key]);
+      if (p < 1) { rafMap[key] = requestAnimationFrame(step); }
+      else {
+        dispMap[key] = target;
+        if (el) { el.textContent = '$' + fmt(target); el.classList.remove('ticking'); }
       }
     }
-    const total = getTotal();
-    if (total === 0) {
-      alert('Select at least one material to get your estimate!');
+    rafMap[key] = requestAnimationFrame(step);
+  }
+
+  function animateHdr(target) {
+    if (hdrRaf) cancelAnimationFrame(hdrRaf);
+    var from = hdrDisplayed;
+    var span = Math.abs(target - from);
+    var dur  = Math.min(700, Math.max(120, span / 30));
+    var t0   = performance.now();
+    var el   = document.getElementById('hdrPrice');
+    el.classList.add('ticking');
+    function step(now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      hdrDisplayed = from + (target - from) * e;
+      el.textContent = fmt(hdrDisplayed);
+      if (p < 1) { hdrRaf = requestAnimationFrame(step); }
+      else { hdrDisplayed = target; el.textContent = fmt(target); el.classList.remove('ticking'); }
+    }
+    hdrRaf = requestAnimationFrame(step);
+  }
+
+  // ── BREAKPOINT LOOKUP ────────────────────────────────────
+  function getBP(cat, val) {
+    var active = cat.bps[0];
+    for (var i = 0; i < cat.bps.length; i++) {
+      if (val >= cat.bps[i].at) active = cat.bps[i];
+      else break;
+    }
+    return active;
+  }
+
+  // ── UPDATE ONE CATEGORY ──────────────────────────────────
+  function updateCat(catId, val) {
+    var cat = null;
+    for (var i = 0; i < CATS.length; i++) { if (CATS[i].id === catId) { cat = CATS[i]; break; } }
+    if (!cat) return;
+    state[catId] = val;
+
+    // fill bar + sync both sliders
+    var pct = (cat.max === cat.min) ? 0 : (val - cat.min) / (cat.max - cat.min) * 100;
+    var fillEl = document.getElementById('fill-' + catId);
+    if (fillEl) fillEl.style.width = pct + '%';
+
+    // sync badge fill bar
+    var hbFill = document.getElementById('hbfill-' + catId);
+    if (hbFill) hbFill.style.width = pct + '%';
+
+    // sync bottom slider position (in case triggered from badge slider)
+    var sl = document.getElementById('sl-' + catId);
+    if (sl && parseInt(sl.value, 10) !== val) sl.value = val;
+
+    // sync badge slider position (in case triggered from bottom slider)
+    var hbs = document.getElementById('hbs-' + catId);
+    if (hbs && parseInt(hbs.value, 10) !== val) hbs.value = val;
+
+    // breakpoint
+    var bp = getBP(cat, val);
+
+    // label animations — controls
+    var cbmEl = document.getElementById('cbm-' + catId);
+    if (cbmEl) {
+      var prev = cbmEl.textContent;
+      cbmEl.textContent = bp.label;
+      if (bp.label !== prev) {
+        cbmEl.classList.remove('pop'); void cbmEl.offsetWidth; cbmEl.classList.add('pop');
+      }
+    }
+
+    // control price
+    var cbpEl = document.getElementById('cbp-' + catId);
+    if (cbpEl) { cbpEl.textContent = '$' + fmt(val); }
+
+    // badge price animation
+    animateTo(catId, val, 'hbp-' + catId, 0);
+
+    // badge material label
+    var hbmEl = document.getElementById('hbm-' + catId);
+    if (hbmEl) {
+      var lbText = (catId === 'accents' && val === 0) ? 'None' : bp.label;
+      hbmEl.textContent = lbText;
+    }
+
+    // overlay
+    var ovEl = document.getElementById('ov-' + catId);
+    if (ovEl) {
+      var keep = Array.from(ovEl.classList).filter(function(c) { return c === 'ov'; });
+      ovEl.className = keep.join(' ');
+      if (bp.tier) ovEl.classList.add(bp.tier);
+      if (bp.cov)  ovEl.classList.add(bp.cov);
+    }
+
+    // header total
+    var total = 0;
+    CATS.forEach(function(c) { total += state[c.id]; });
+    animateHdr(total);
+  }
+
+  // ── ACTIVE STATE (badge + ctrl highlight) ────────────────
+  function setActive(catId) {
+    CATS.forEach(function(c) {
+      var cb = document.getElementById('cb-' + c.id);
+      var hb = document.getElementById('hb-' + c.id);
+      if (c.id === catId) {
+        if (cb) cb.classList.add('active');
+        if (hb) hb.classList.add('active');
+      } else {
+        if (cb) cb.classList.remove('active');
+        if (hb) hb.classList.remove('active');
+      }
+    });
+    activecat = catId;
+  }
+
+  // ── WIRE SLIDERS ─────────────────────────────────────────
+  CATS.forEach(function(cat) {
+    var sl  = document.getElementById('sl-' + cat.id);
+    var hbs = document.getElementById('hbs-' + cat.id);
+    var cb  = document.getElementById('cb-' + cat.id);
+
+    // bottom slider
+    sl.addEventListener('input', function() {
+      updateCat(cat.id, parseInt(sl.value, 10));
+    });
+    sl.addEventListener('focus', function() { setActive(cat.id); });
+    sl.addEventListener('mousedown', function() { setActive(cat.id); });
+
+    // badge mini slider
+    if (hbs) {
+      hbs.addEventListener('input', function(e) {
+        e.stopPropagation(); // don't bubble to badge click handler
+        updateCat(cat.id, parseInt(hbs.value, 10));
+        setActive(cat.id);
+      });
+      hbs.addEventListener('mousedown', function(e) {
+        e.stopPropagation();
+        setActive(cat.id);
+      });
+      hbs.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+        setActive(cat.id);
+      });
+    }
+
+    if (cb) {
+      cb.addEventListener('click', function() {
+        setActive(cat.id);
+        sl.focus();
+      });
+    }
+
+    // badge click → activate (but not if clicking the mini slider)
+    var hb = document.getElementById('hb-' + cat.id);
+    if (hb) {
+      hb.addEventListener('click', function(e) {
+        if (e.target === hbs) return; // slider handles itself
+        setActive(cat.id);
+      });
+    }
+
+    // init
+    updateCat(cat.id, cat.min);
+  });
+
+  // ── CTA ──────────────────────────────────────────────────
+  document.getElementById('ctaBtn').addEventListener('click', function() {
+    var total = 0;
+    var lines = [];
+    var names = { roof: 'Roof', siding: 'Siding', fascia: 'Fascia & Soffit', windows: 'Windows', accents: 'Accents' };
+    CATS.forEach(function(cat) {
+      var v = state[cat.id];
+      total += v;
+      if (v > 0) {
+        var bp = getBP(cat, v);
+        lines.push(names[cat.id] + ': ' + bp.label + '  \u2014  $' + fmt(v));
+      }
+    });
+    alert('Your Quoticker Estimate\n\n' + lines.join('\n') + '\n\nEstimated Total: $' + fmt(total) + '\n\nCall Hoyt Exteriors at (651) 212-4965\nor visit hoytexteriors.com');
+  });
+
+  // ── HOVER JOB INTEGRATION ────────────────────────────────────────────────
+  var WEBHOOK_BASE = 'http://164.92.95.204:3003';
+
+  function openJobModal() {
+    document.getElementById('jobModal').classList.add('open');
+    clearJobList();
+    showJobStatus('Fetching live jobs from Hover\u2026');
+    fetchJobs();
+  }
+
+  function closeJobModal() {
+    document.getElementById('jobModal').classList.remove('open');
+  }
+
+  document.getElementById('jobModal').addEventListener('click', function(e) {
+    if (e.target === this) closeJobModal();
+  });
+
+  function clearJobList() {
+    var body = document.getElementById('jmBody');
+    while (body.firstChild) body.removeChild(body.firstChild);
+  }
+
+  function showJobStatus(msg) {
+    clearJobList();
+    var body = document.getElementById('jmBody');
+    var d = document.createElement('div');
+    d.className = 'jm-status';
+    d.textContent = msg;
+    body.appendChild(d);
+  }
+
+  function fetchJobs() {
+    var btn = document.getElementById('hoverLoadBtn');
+    btn.classList.add('loading');
+    // Try live Hover API first; fall back to cached Zapier jobs
+    fetch(WEBHOOK_BASE + '/hover/jobs?per_page=50')
+      .then(function(r) {
+        if (!r.ok) throw new Error('hover-api-failed');
+        return r.json();
+      })
+      .then(function(data) {
+        btn.classList.remove('loading');
+        // /hover/jobs returns { jobs: [...] }
+        var jobs = data.jobs || data;
+        renderJobList(jobs, 'live');
+      })
+      .catch(function() {
+        // Fall back to cached jobs (Zapier-populated)
+        fetch(WEBHOOK_BASE + '/quoticker/jobs')
+          .then(function(r) { return r.json(); })
+          .then(function(jobs) {
+            btn.classList.remove('loading');
+            renderJobList(jobs, 'cached');
+          })
+          .catch(function() {
+            btn.classList.remove('loading');
+            clearJobList();
+            var body = document.getElementById('jmBody');
+            var d = document.createElement('div');
+            d.className = 'jm-status';
+            var line1 = document.createTextNode('\u26a0 Could not reach server.');
+            var br = document.createElement('br');
+            var line2 = document.createElement('span');
+            line2.style.cssText = 'font-size:11px;color:#555';
+            line2.textContent = 'Make sure Quoticker server is running on Wraybot (port 3003)';
+            d.appendChild(line1);
+            d.appendChild(br);
+            d.appendChild(line2);
+            body.appendChild(d);
+          });
+      });
+  }
+
+  function renderJobList(jobs, source) {
+    // Update modal title with live/cached indicator
+    var titleEl = document.querySelector('.jm-title');
+    // Remove any existing badge
+    var oldBadge = titleEl.querySelector('.jm-live-badge');
+    if (oldBadge) titleEl.removeChild(oldBadge);
+    if (source === 'live') {
+      var badge = document.createElement('span');
+      badge.className = 'jm-live-badge';
+      badge.textContent = 'LIVE';
+      titleEl.appendChild(badge);
+    }
+
+    if (!jobs || jobs.length === 0) {
+      showJobStatus(source === 'cached'
+        ? 'No cached jobs yet. Complete a Hover job to load it here.'
+        : 'No completed Hover jobs found.');
       return;
     }
-    const summary = lines.join('\n');
-    const msg = 'Your Quotick estimate:\n\n' + summary + '\n\nEstimated Total: $' + total.toLocaleString('en-US') + '\n\nCall Hoyt Exteriors at (651) 212-4965 or visit hoytexteriors.com to get your exact quote.';
-    alert(msg);
-  });
+    clearJobList();
+    var body = document.getElementById('jmBody');
+    jobs.forEach(function(job) {
+      var row = document.createElement('div');
+      row.className = 'job-row';
 
-  // ── INIT ──
-  updateAll();
+      if (job.hero_image) {
+        var img = document.createElement('img');
+        img.className = 'job-thumb';
+        img.src = job.hero_image;
+        img.alt = '';
+        row.appendChild(img);
+      } else {
+        var ph = document.createElement('div');
+        ph.className = 'job-thumb-placeholder';
+        ph.textContent = '\uD83C\uDFE0';
+        row.appendChild(ph);
+      }
+
+      var info = document.createElement('div');
+      info.className = 'job-info';
+
+      var nm = document.createElement('div');
+      nm.className = 'job-name';
+      nm.textContent = job.name || 'Hover Job';
+
+      var addr = document.createElement('div');
+      addr.className = 'job-addr';
+      addr.textContent = job.address || 'No address';
+
+      var dt = document.createElement('div');
+      dt.className = 'job-date';
+      dt.textContent = job.received_at ? new Date(job.received_at).toLocaleDateString() : '';
+
+      info.appendChild(nm);
+      info.appendChild(addr);
+      info.appendChild(dt);
+      row.appendChild(info);
+
+      row.addEventListener('click', function() { loadJob(job.id); });
+      body.appendChild(row);
+    });
+  }
+
+  function loadJob(jobId) {
+    closeJobModal();
+    var btn = document.getElementById('hoverLoadBtn');
+    btn.classList.add('loading');
+    // Try live Hover API first (has real measurements), fall back to cached
+    fetch(WEBHOOK_BASE + '/hover/jobs/' + encodeURIComponent(jobId))
+      .then(function(r) {
+        if (!r.ok) throw new Error('hover-api-failed');
+        return r.json();
+      })
+      .catch(function() {
+        return fetch(WEBHOOK_BASE + '/quoticker/jobs/' + encodeURIComponent(jobId))
+          .then(function(r) { return r.json(); });
+      })
+      .then(function(job) {
+        btn.classList.remove('loading');
+        btn.classList.add('connected');
+        applyJob(job);
+      })
+      .catch(function() {
+        btn.classList.remove('loading');
+      });
+  }
+
+  function applyJob(job) {
+    // Use server-proxied image (avoids Hover session auth issues)
+    var imgEl = document.querySelector('.house-img');
+    if (job.image_url) {
+      imgEl.src = WEBHOOK_BASE + job.image_url;
+    } else if (job.hero_image) {
+      // fallback: try direct URL (works if Hover CDN, not Rails proxy)
+      var testImg = new Image();
+      testImg.onload = function() { imgEl.src = job.hero_image; };
+      testImg.onerror = function() { /* leave current image */ };
+      testImg.src = job.hero_image;
+    }
+    if (job.prices) {
+      CATS.forEach(function(cat) {
+        var target = job.prices[cat.id];
+        if (target == null) return;
+        target = Math.max(cat.min, Math.min(cat.max, Math.round(target / 500) * 500));
+        updateCat(cat.id, target);
+      });
+    }
+    var badge = document.getElementById('jobLoadedBadge');
+    badge.classList.add('show');
+    setTimeout(function() { badge.classList.remove('show'); }, 3000);
+    var btn = document.getElementById('hoverLoadBtn');
+    btn.querySelector('.hbtn-dot').style.background = '#22c55e';
+  }
+
+  // ── DRAGGABLE BADGES ─────────────────────────────────────────────────────
+  // Converts CSS % / right / bottom positioning → absolute px on first grab,
+  // then tracks pointer delta to reposition within the house panel bounds.
+  function makeDraggable(badge) {
+    var panel = document.getElementById('housePanel');
+    var dragging = false;
+    var startX, startY, origLeft, origTop;
+
+    function startDrag(cx, cy) {
+      var panelRect = panel.getBoundingClientRect();
+      var badgeRect = badge.getBoundingClientRect();
+
+      // Freeze current rendered position as px (handles %, right:, bottom: etc.)
+      origLeft = badgeRect.left - panelRect.left;
+      origTop  = badgeRect.top  - panelRect.top;
+
+      // Override CSS positioning so we can drive purely with left/top
+      badge.style.left   = origLeft + 'px';
+      badge.style.top    = origTop  + 'px';
+      badge.style.right  = 'auto';
+      badge.style.bottom = 'auto';
+
+      startX = cx;
+      startY = cy;
+      dragging = true;
+      badge.classList.add('dragging');
+    }
+
+    function moveDrag(cx, cy) {
+      if (!dragging) return;
+      var panelRect = panel.getBoundingClientRect();
+      var maxLeft = panelRect.width  - badge.offsetWidth;
+      var maxTop  = panelRect.height - badge.offsetHeight;
+      var newLeft = Math.max(0, Math.min(origLeft + (cx - startX), maxLeft));
+      var newTop  = Math.max(0, Math.min(origTop  + (cy - startY), maxTop));
+      badge.style.left = newLeft + 'px';
+      badge.style.top  = newTop  + 'px';
+    }
+
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      badge.classList.remove('dragging');
+    }
+
+    // Mouse
+    badge.addEventListener('mousedown', function(e) {
+      if (e.target.classList.contains('hb-slider')) return; // let slider handle itself
+      e.preventDefault();
+      startDrag(e.clientX, e.clientY);
+    });
+    document.addEventListener('mousemove', function(e) { moveDrag(e.clientX, e.clientY); });
+    document.addEventListener('mouseup', endDrag);
+
+    // Touch (field use on tablet/iPad)
+    badge.addEventListener('touchstart', function(e) {
+      if (e.target.classList.contains('hb-slider')) return;
+      var t = e.touches[0];
+      startDrag(t.clientX, t.clientY);
+    }, { passive: true });
+    document.addEventListener('touchmove', function(e) {
+      if (!dragging) return;
+      var t = e.touches[0];
+      moveDrag(t.clientX, t.clientY);
+    }, { passive: true });
+    document.addEventListener('touchend', endDrag);
+  }
+
+  // Wire all 5 badges
+  ['roof','siding','fascia','windows','accents'].forEach(function(id) {
+    var badge = document.getElementById('hb-' + id);
+    if (badge) makeDraggable(badge);
+  });
 </script>
 </body>
 </html>

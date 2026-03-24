@@ -8,7 +8,7 @@
 .cp-header span{font-family:var(--font-brand);font-size:1.1rem;font-weight:800;color:var(--white);letter-spacing:.02em;text-transform:uppercase;}
 .cp-close{background:transparent;border:none;color:var(--gray-400);font-size:1.2rem;cursor:pointer;padding:4px 8px;line-height:1;transition:color .2s;}
 .cp-close:hover{color:var(--white);}
-.cp-body{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;}
+.cp-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:24px;display:flex;flex-direction:column;gap:16px;}
 .cp-field{display:flex;flex-direction:column;gap:6px;}
 .cp-field label{font-size:.78rem;font-weight:600;color:var(--gray-300);text-transform:uppercase;letter-spacing:.06em;}
 .cp-field input,.cp-field select,.cp-field textarea{background:var(--black-3);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);color:var(--white);padding:11px 14px;font-size:.95rem;transition:border-color .2s;outline:none;width:100%;}
@@ -18,7 +18,7 @@
 .cp-field textarea{resize:vertical;min-height:80px;}
 .cp-field input.cp-invalid,.cp-field select.cp-invalid{border-color:var(--red);box-shadow:0 0 0 2px rgba(196,30,58,.2);}
 .cp-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.cp-consent{display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:var(--gray-400);line-height:1.5;cursor:pointer;padding-right:8px;}
+.cp-consent{display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:var(--gray-400);line-height:1.5;cursor:pointer;max-width:100%;box-sizing:border-box;}
 .cp-consent input{margin-top:2px;accent-color:var(--red);flex-shrink:0;}
 .cp-error-msg{background:rgba(196,30,58,.1);border:1px solid rgba(196,30,58,.3);border-radius:var(--radius);color:#ff6b6b;font-size:.85rem;padding:10px 14px;}
 .cp-submit{background:var(--red);color:var(--white);border:none;border-radius:var(--radius);padding:14px 24px;font-family:var(--font-brand);font-size:.85rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;width:100%;transition:background .2s,transform .1s;}

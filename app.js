@@ -278,13 +278,16 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'SENDING…';
       submitBtn.disabled = true;
 
+      const fullName = nameInp.value.trim();
+      const nameParts = fullName.split(' ');
       const payload = {
-        name: nameInp.value.trim(),
+        firstName: nameParts[0] || fullName,
+        lastName: nameParts.slice(1).join(' ') || '',
         phone: phoneInp.value.trim(),
         email: emailInp.value.trim(),
-        service: svcSel.value,
+        services: svcSel.value,
         message: msgTa.value.trim(),
-        sms_consent: consentChk.checked ? 'yes' : 'no',
+        smsConsent: consentChk.checked ? 'yes' : 'no',
         source: detectSource(),
       };
 
@@ -338,14 +341,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const autoService = detectService();
 
-  // Global click interceptor — catches all .nav-cta and href="#contact" links
+  // Global click interceptor — only intercepts href="#contact" links (not tel:, not mailto:)
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
     const href = link.getAttribute('href');
-    const isNavCta = link.classList.contains('nav-cta');
-    const isContactAnchor = href === '#contact';
-    if (isNavCta || isContactAnchor) {
+    if (href === '#contact') {
       e.preventDefault();
       openPanel(autoService);
     }
