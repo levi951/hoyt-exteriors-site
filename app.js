@@ -341,12 +341,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const autoService = detectService();
 
-  // Global click interceptor — only intercepts href="#contact" links (not tel:, not mailto:)
+  // Global click interceptor — #contact anchors + .btn-primary/.nav-cta links to contact page
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
     if (!link) return;
-    const href = link.getAttribute('href');
-    if (href === '#contact') {
+    const href = link.getAttribute('href') || '';
+    const isCta = link.classList.contains('btn-primary') || link.classList.contains('nav-cta');
+    const triggersPanel = href === '#contact' || (isCta && href.includes('contact') && !href.startsWith('mailto') && !href.startsWith('tel'));
+    if (triggersPanel) {
       e.preventDefault();
       openPanel(autoService);
     }
