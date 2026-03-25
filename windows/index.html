@@ -648,8 +648,8 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
               message:'Window assessment request via HOVER form. Address: '+a})
           }).then(function(r){if(!r.ok)throw new Error('Network');showWindowSuccess();})
           .catch(function(){
-            window.location.href='mailto:info@hoytexteriors.com?subject='+encodeURIComponent('HOVER Window Assessment Request — Windows')+'&body='+encodeURIComponent('Name: '+n+'\nEmail: '+e+'\nPhone: '+p+'\nAddress: '+a+'\n\nRequesting HOVER window assessment.');
-            showWindowSuccess();
+            er.textContent='Something went wrong — please try again or call us at (651) 212-4965.';er.style.display='block';
+            b.disabled=false;b.textContent='Request Window Assessment →';
           });
           function showWindowSuccess(){
             document.getElementById('wHoverFormFields').style.display='none';
@@ -663,7 +663,7 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
     <div class="section-sep"></div>
 
     <!-- ========== CTA ========== -->
-    <section class="cta-banner">
+    <section class="cta-banner" id="contact">
       <div class="container reveal">
         <h2>Ready for <span class="red">Better Windows</span>?</h2>
         <p class="section-subtitle center" style="margin-bottom:var(--space-xl);">Schedule a free in-home estimate. We'll assess your current windows, discuss your options, and provide transparent pricing with no pressure.</p>
@@ -717,7 +717,7 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:6512124965">(651) 212-4965</a></li>
-            <li><a href="mailto:info@hoytexteriors.com">info@hoytexteriors.com</a></li>
+            <li><a href="/contact/">info@hoytexteriors.com</a></li>
             <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
           </ul>
           <div style="display:flex;gap:12px;margin-top:12px;">

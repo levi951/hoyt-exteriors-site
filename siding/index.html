@@ -955,11 +955,8 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
             requestAnimationFrame(()=>{s.style.transition='opacity 0.5s ease';s.style.opacity='1';});
           })
           .catch(()=>{
-            const subject=encodeURIComponent('HOVER 3D Scan Request — Siding');
-            const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nPhone: '+phone+'\nAddress: '+address+'\nSource: siding-hover-scan');
-            window.location.href='mailto:info@hoytexteriors.com?subject='+subject+'&body='+body;
             btn.disabled=false;btn.textContent='Request Your Free 3D Scan →';
-            errEl.textContent='Redirecting to email — our server is temporarily unavailable.';errEl.style.display='block';
+            errEl.textContent='Something went wrong — please try again or call us at (651) 212-4965.';errEl.style.display='block';
           });
         }
         </script>
@@ -1024,7 +1021,7 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
           <h4>Contact</h4>
           <ul>
             <li><a href="tel:6512124965">(651) 212-4965</a></li>
-            <li><a href="mailto:info@hoytexteriors.com">info@hoytexteriors.com</a></li>
+            <li><a href="/contact/">info@hoytexteriors.com</a></li>
             <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
           </ul>
           <div style="display:flex;gap:12px;margin-top:12px;">

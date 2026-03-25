@@ -72,9 +72,12 @@ export async function onRequestPost(context) {
     console.error('Claude analysis failed (non-fatal):', err.message);
   }
 
-  // ── 2. Send alert email to Levi/Lisa ─────────────────────────────────────
+  // ── 2. Send alert email to Levi/Lisa (+ inspections@ for inspection sources) ──
   // Send one email per address so a single unverified address doesn't block all alerts
-  const notifyAddresses = (env.NOTIFY_EMAIL || 'levi@hoytexteriors.com')
+  const inspectionSources = ['hoa', 'commercial', 'multifamily', 'hoa-flight-release', 'drone-inspection'];
+  const isInspection = inspectionSources.some(s => (source || '').toLowerCase().includes(s));
+  const baseNotify = env.NOTIFY_EMAIL || 'levi@hoytexteriors.com';
+  const notifyAddresses = (isInspection ? `${baseNotify},inspections@hoytexteriors.com` : baseNotify)
     .split(',')
     .map(e => e.trim())
     .filter(Boolean);
