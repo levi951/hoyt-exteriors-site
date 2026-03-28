@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<style>
+/* Critical CSS - above the fold */
+:root{--red:#C41E3A;--red-dark:#9B1830;--red-light:#E02244;--red-glow:rgba(196,30,58,0.25);--black:#0A0A0A;--black-2:#111;--black-3:#1A1A1A;--white:#FFF;--gray-200:#D4D4D4;--gray-300:#B8B8B8;--gray-400:#888;--gray-500:#666;--gray-700:#333;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-brand:'Montserrat',var(--font);--space-md:16px;--space-lg:24px;--space-xl:40px;--radius-sm:2px;--radius:4px;--radius-md:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav .container{padding:0 var(--space-lg)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
+.wordmark{font-family:var(--font-brand);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
+.nav-logo .sub{font-size:0.6rem;color:var(--gray-400);display:block;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--red);color:var(--white)!important;padding:10px 20px;border-radius:4px;font-weight:700;letter-spacing:0.04em;font-size:0.8rem!important;text-transform:uppercase}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.15s}
+.reveal-delay-2{transition-delay:0.3s}
+.lane-switcher{display:flex;gap:8px;align-items:center}
+.lane-switcher a{font-size:0.75rem;padding:6px 14px;border-radius:4px;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;color:var(--gray-400);transition:all 0.2s;border:1px solid transparent}
+.lane-switcher a:hover{color:var(--white);border-color:rgba(255,255,255,0.1)}
+.lane-switcher a.active{color:var(--white);background:rgba(196,30,58,0.15);border-color:rgba(196,30,58,0.3)}
+.nav-dropdown{position:relative}
+.nav-dropdown-trigger{background:none;border:none;color:var(--gray-300);font-size:0.85rem;font-weight:500;letter-spacing:0.02em;cursor:pointer;font-family:var(--font);padding:0}
+.nav-dropdown-trigger:hover{color:var(--white)}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:var(--black-2);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px 0;min-width:160px;margin-top:12px;box-shadow:0 8px 30px rgba(0,0,0,0.5)}
+.nav-dropdown:hover .nav-dropdown-menu{display:block}
+.nav-dropdown-menu a{display:block;padding:8px 20px;font-size:0.85rem;color:var(--gray-300);transition:all 0.15s}
+.nav-dropdown-menu a:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+@media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}.lane-switcher{display:none}}
+</style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- DNS Prefetch -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+<title>Free Commercial Roof Inspection Minneapolis | Thermal Drone Survey | Hoyt Exteriors</title>
+<meta name="description" content="Free AI-powered thermal drone inspection for commercial flat roofs in Minneapolis-St. Paul. Find hidden moisture, membrane damage & energy loss before they cost you $50K+. Call 651-212-4965." />
+<meta property="og:title" content="Free Commercial Roof Inspection Minneapolis | Thermal Drone Survey | Hoyt Exteriors" />
+<meta property="og:description" content="Free AI-powered thermal drone inspection for commercial flat roofs in Minneapolis-St. Paul. Find hidden moisture, membrane damage & energy loss before they cost you $50K+." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hoytexteriors.com/commercial/scan/" />
+<link rel="canonical" href="https://hoytexteriors.com/commercial/scan/" />
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "LocalBusiness",
+      "name": "Hoyt Exteriors",
+      "description": "Free AI-powered thermal drone inspections for commercial flat roofs. Find hidden moisture intrusion, membrane damage, and energy loss in Minneapolis-St. Paul area commercial buildings.",
+      "url": "https://hoytexteriors.com/commercial/scan/",
+      "telephone": "+1-651-212-4965",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "15112 Galaxie Ave",
+        "addressLocality": "Apple Valley",
+        "addressRegion": "MN",
+        "postalCode": "55124",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 44.9778, "longitude": -93.2650 },
+        "geoRadius": "80000"
+      },
+      "priceRange": "$$$$",
+      "creator": {
+        "@type": "SoftwareApplication",
+        "name": "Perplexity Computer",
+        "url": "https://www.perplexity.ai/computer"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What types of commercial roofs do you inspect?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Flat and low-slope roofs of all types: TPO, EPDM, modified bitumen, built-up, and metal. We handle everything from 5,000 sq ft strip malls to 200,000 sq ft warehouses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the inspection take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The drone flight takes 20-30 minutes for most buildings. You receive the full AI-analyzed report within 24 hours."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the inspection really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. No catch, no obligation. We offer it because the data sells itself. Once you see what's actually happening on your roof, the conversation about maintenance becomes easy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you handle the repairs too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We're a full-service exterior contractor — 3rd generation, 25 years in Minnesota. If we find something, we can fix it. You're not just getting a report — you're getting a partner."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas do you serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We serve commercial buildings across the entire Minneapolis-St. Paul metro and beyond — including Duluth, Brainerd, St. Cloud, Rochester, and the Iron Range. If you're in Minnesota, we'll fly your building."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the HOYT Promise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's our annual maintenance program. We scan your roof, maintain it proactively, and respond fast when emergencies happen. Three tiers to fit your budget. Think of it as health insurance for your roof."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- Deferred CSS -->
+<link rel="preload" href="../../style.css?v=20260324" as="style">
+<link rel="stylesheet" href="../../style.css?v=20260324" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="../../style.css?v=20260324"></noscript>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"></noscript>
+
+<link rel="icon" type="image/png" href="../../favicon.png">
+
+<style>
+/* Commercial Scan Page Specific Styles */
+.comm-hero{position:relative;padding:160px 0 100px;background:linear-gradient(180deg,rgba(10,10,10,0.6) 0%,rgba(10,10,10,0.95) 70%,var(--black) 100%),var(--black);overflow:hidden;text-align:center}
+
+.comm-section{padding:80px 0}
+.comm-section--alt{background:var(--black-2)}
+.comm-section-title{font-family:var(--font-brand);font-weight:800;font-size:clamp(1.8rem,4vw,2.5rem);text-align:center;margin-bottom:16px;line-height:1.15}
+.comm-section-sub{color:var(--gray-300);text-align:center;max-width:720px;margin:0 auto 48px;font-size:1.05rem;line-height:1.7}
+
+.comm-btn{display:inline-block;background:var(--red);color:var(--white);padding:14px 28px;border-radius:var(--radius-sm);font-family:var(--font-brand);font-weight:700;text-decoration:none;font-size:1rem;transition:background 0.2s,transform 0.15s}
+.comm-btn:hover{background:var(--red-light);transform:translateY(-1px)}
+.comm-btn--ghost{background:transparent;border:1px solid var(--gray-400);color:var(--white)}
+.comm-btn--ghost:hover{background:rgba(255,255,255,0.05);border-color:var(--white)}
+.comm-btn--dark{background:var(--red-dark)}
+.comm-btn--dark:hover{background:var(--red)}
+
+/* Icon grid */
+.comm-icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:40px}
+.comm-icon-item{text-align:center;padding:24px}
+.comm-icon-item svg{width:48px;height:48px;margin:0 auto 16px;color:var(--red)}
+.comm-icon-item p{color:var(--gray-200);font-size:0.95rem;line-height:1.6}
+
+/* Free scan deliverables */
+.comm-deliverables{list-style:none;padding:0;font-size:1.05rem;max-width:720px;margin:30px auto;text-align:left}
+.comm-deliverables li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:flex-start;gap:12px;color:var(--gray-200)}
+.comm-deliverables li::before{content:'';display:inline-block;width:8px;height:8px;background:var(--red);border-radius:50%;margin-top:8px;flex-shrink:0}
+
+/* Cards */
+.comm-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+.comm-card{background:var(--black);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-md);padding:32px;transition:border-color 0.2s,transform 0.2s;position:relative}
+.comm-card:hover{border-color:rgba(196,30,58,0.3);transform:translateY(-2px)}
+.comm-card h3{font-family:var(--font-brand);font-size:1.15rem;color:var(--red);margin-bottom:12px}
+.comm-card p{color:var(--gray-300);line-height:1.7;font-size:0.95rem}
+.comm-card .price{font-family:var(--font-brand);font-weight:800;font-size:1.5rem;color:var(--white);margin:16px 0 8px}
+.comm-card .learn-more{display:inline-block;margin-top:16px;color:var(--red-light);text-decoration:underline;font-weight:600;font-size:0.9rem}
+.comm-card .learn-more:hover{color:var(--white)}
+.comm-card--popular{border-color:rgba(196,30,58,0.4)}
+.comm-card-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:var(--white);font-family:var(--font-brand);font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;padding:4px 16px;border-radius:20px;white-space:nowrap}
+
+/* Steps */
+.comm-steps{counter-reset:step;max-width:720px;margin:40px auto 0;padding:0;list-style:none}
+.comm-steps li{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.comm-steps li:last-child{border-bottom:none}
+.comm-step-num{counter-increment:step;font-family:var(--font-brand);font-weight:900;font-size:2rem;color:var(--red);line-height:1;min-width:44px}
+.comm-step-num::before{content:counter(step)}
+.comm-steps li div h3{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.comm-steps li div p{color:var(--gray-300);font-size:0.95rem;line-height:1.6}
+
+/* Testimonial carousel */
+.comm-testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
+.comm-testimonial{background:var(--black-2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-md);padding:32px;position:relative}
+.comm-testimonial::before{content:'\201C';font-family:Georgia,serif;font-size:4rem;color:var(--red);opacity:0.3;position:absolute;top:12px;left:20px;line-height:1}
+.comm-testimonial p{color:var(--gray-200);font-style:italic;font-size:0.95rem;line-height:1.7;position:relative;z-index:1}
+.comm-testimonial cite{display:block;margin-top:16px;color:var(--gray-400);font-size:0.85rem;font-style:normal}
+
+/* Blockquote */
+.comm-blockquote{border-left:4px solid var(--red);padding:24px 32px;margin:30px auto;max-width:720px;background:rgba(196,30,58,0.04);border-radius:0 var(--radius-md) var(--radius-md) 0}
+.comm-blockquote p{color:var(--white);font-style:italic;font-size:1.05rem;line-height:1.7}
+.comm-blockquote cite{display:block;margin-top:12px;color:var(--gray-400);font-style:normal;font-size:0.9rem}
+
+/* FAQ */
+.comm-faq{max-width:720px;margin:auto}
+.comm-faq-item{border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0;cursor:pointer}
+.comm-faq-question{display:flex;justify-content:space-between;align-items:center}
+.comm-faq-question h3{font-size:1.05rem;font-weight:600}
+.comm-faq-icon{font-size:1.4rem;color:var(--red);transition:transform 0.3s;flex-shrink:0;margin-left:16px}
+.comm-faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.comm-faq-answer p{color:var(--gray-300);line-height:1.7;padding-top:12px}
+
+/* Flight release */
+.comm-release-frame{margin:30px auto;max-width:640px;background:var(--black);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:40px;text-align:center}
+.comm-release-frame p{color:var(--gray-300);font-size:0.95rem;line-height:1.7;margin-bottom:20px}
+
+/* Cert badge in hero */
+.comm-cert{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:0.85rem;color:var(--gray-400);font-weight:600;letter-spacing:0.04em}
+.comm-cert svg{width:16px;height:16px;color:var(--red)}
+
+/* Contact form */
+.comm-form-wrap{max-width:640px;margin:40px auto 0;background:var(--black-2);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:40px}
+.comm-form-wrap h3{font-family:var(--font-brand);font-weight:800;font-size:1.3rem;text-align:center;margin-bottom:24px}
+.comm-form{display:flex;flex-direction:column;gap:16px}
+.comm-form label{font-size:0.85rem;font-weight:600;color:var(--gray-200);display:flex;flex-direction:column;gap:6px}
+.comm-form input,.comm-form select,.comm-form textarea{background:var(--black);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius);padding:12px 14px;color:var(--white);font-family:var(--font);font-size:0.95rem;transition:border-color 0.2s}
+.comm-form input:focus,.comm-form select:focus,.comm-form textarea:focus{outline:none;border-color:var(--red)}
+.comm-form select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.comm-form select option{background:var(--black);color:var(--white)}
+.comm-form textarea{min-height:80px;resize:vertical}
+.comm-form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.comm-form .consent-row{flex-direction:row;align-items:flex-start;gap:10px;font-size:0.8rem;color:var(--gray-400);line-height:1.5}
+.comm-form .consent-row input[type="checkbox"]{width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--red)}
+.comm-form-submit{background:var(--red);color:var(--white);border:none;padding:14px 28px;border-radius:var(--radius-sm);font-family:var(--font-brand);font-weight:700;font-size:1rem;cursor:pointer;transition:background 0.2s,transform 0.15s;text-transform:uppercase;letter-spacing:0.04em}
+.comm-form-submit:hover{background:var(--red-light);transform:translateY(-1px)}
+.comm-form-success{display:none;text-align:center;padding:32px;color:var(--white);font-size:1.1rem}
+
+/* Responsive */
+@media(max-width:768px){
+  .comm-hero{padding:120px 0 60px}
+  .comm-section{padding:60px 0}
+  .comm-cards{grid-template-columns:1fr}
+  .comm-icons{grid-template-columns:1fr}
+  .comm-testimonials{grid-template-columns:1fr}
+  .comm-form-row{grid-template-columns:1fr}
+  .comm-form-wrap{padding:24px}
+}
+
+/* Mobile drawer */
+.mobile-drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:998}
+.mobile-drawer{position:fixed;top:0;right:-300px;width:280px;height:100%;background:var(--black-2);z-index:999;padding:80px 24px 24px;transition:right 0.3s;overflow-y:auto;border-left:1px solid rgba(255,255,255,0.06)}
+.mobile-drawer a{display:block;padding:12px 0;color:var(--gray-300);font-size:0.95rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.mobile-drawer a:hover{color:var(--white)}
+.mobile-drawer .lane-switcher{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.mobile-drawer .lane-switcher a{padding:8px 14px;border-bottom:none}
+body.drawer-open .mobile-drawer{right:0}
+body.drawer-open .mobile-drawer-overlay{display:block}
+</style>
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="nav" id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="../../" class="nav-logo">
+          <div class="nav-logo-text">
+            <span class="wordmark">HOYT EXTERIORS</span>
+            <span class="sub">EST. 2000 &middot; APPLE VALLEY, MN</span>
+          </div>
+        </a>
+
+        <div class="lane-switcher">
+          <a href="../" class="active" aria-current="page">Commercial</a>
+          <a href="../../multifamily/">Multifamily</a>
+          <a href="../../hoa/">HOA Scan</a>
+          <a href="../../residential/">Residential</a>
+        </div>
+
+        <div class="nav-links">
+          <a href="../../about/">About</a>
+          <div class="nav-dropdown">
+            <button class="nav-dropdown-trigger">Services</button>
+            <div class="nav-dropdown-menu">
+              <a href="../../roofing/">Roofing</a>
+              <a href="../../siding/">Siding</a>
+              <a href="../../decks/">Decks</a>
+              <a href="../../windows/">Windows</a>
+              <a href="../../gutters/">Gutters</a>
+              <a href="../../insulation/">Insulation</a>
+            </div>
+          </div>
+          <a href="../../testimonials/">Testimonials</a>
+          <a href="../../contact/">Contact</a>
+          <a href="tel:6512124965">(651) 212-4965</a>
+          <a href="#signup" class="nav-cta" style="white-space:nowrap;">Free Scan</a>
+        </div>
+
+        <button class="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="mobile-drawer-overlay"></div>
+  <div class="mobile-drawer">
+    <a href="../../" style="color:var(--red);font-weight:700;">Home</a>
+    <div class="lane-switcher">
+      <a href="../" class="active" aria-current="page">Commercial</a>
+      <a href="../../multifamily/">Multifamily</a>
+      <a href="../../hoa/">HOA Scan</a>
+      <a href="../../residential/">Residential</a>
+    </div>
+    <hr style="border:none;border-top:1px solid var(--gray-700);margin:8px 0;">
+    <a href="../../about/">About</a>
+    <a href="../../roofing/">Roofing</a>
+    <a href="../../siding/">Siding</a>
+    <a href="../../decks/">Decks</a>
+    <a href="../../windows/">Windows</a>
+    <a href="../../gutters/">Gutters</a>
+    <a href="../../insulation/">Insulation</a>
+    <a href="../../testimonials/">Testimonials</a>
+    <a href="../../contact/">Contact</a>
+    <a href="tel:6512124965">(651) 212-4965</a>
+    <a href="#signup" class="nav-cta" style="margin-top:16px;display:block;text-align:center;">Free Inspection</a>
+  </div>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="comm-hero" id="hero">
+      <div class="container">
+        <div class="reveal">
+          <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:16px;">Free Commercial Roof Inspection</p>
+          <h1 style="font-family:var(--font-brand);font-weight:900;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.1;margin-bottom:24px;letter-spacing:-0.02em;">
+            Your Roof Is Talking.<br>We're The Only Ones Listening.
+          </h1>
+          <p style="font-size:1.15rem;color:var(--gray-200);max-width:680px;margin:0 auto 32px;line-height:1.7;">
+            Free thermal drone inspection for commercial flat roofs. We find moisture intrusion, membrane damage, and energy loss that visual inspections miss &mdash; before they cost you $50K+.
+          </p>
+          <a href="#signup" class="comm-btn">Get My Free Inspection</a>
+          <div class="comm-cert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            GAF Master Elite Certified
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== WHY BUILDING OWNERS ========== -->
+    <section class="comm-section comm-section--alt" id="why">
+      <div class="container">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;text-align:center;" class="reveal">Why Building Owners Choose Hoyt</p>
+        <h2 class="comm-section-title reveal">We See What's Hidden. You Keep What's Yours.</h2>
+        <div class="comm-icons reveal">
+          <div class="comm-icon-item">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M24 4v8M24 36v8M4 24h8M36 24h8"/>
+              <circle cx="24" cy="24" r="10"/>
+              <path d="M24 18v6l4 4"/>
+            </svg>
+            <h3 style="font-family:var(--font-brand);font-weight:700;font-size:1rem;margin-bottom:8px;">Find Leaks Before They Find You</h3>
+            <p>Thermal imaging catches 95% of flat roof issues. Visual inspections catch 40%.</p>
+          </div>
+          <div class="comm-icon-item">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 40V18l18-12 18 12v22"/>
+              <path d="M6 40h36"/>
+              <path d="M20 40V28h8v12"/>
+              <path d="M16 24h4M28 24h4"/>
+            </svg>
+            <h3 style="font-family:var(--font-brand);font-weight:700;font-size:1rem;margin-bottom:8px;">Protect Your Investment</h3>
+            <p>A single undetected flat roof leak can cost $50K+ in structural damage, lost inventory, and business interruption.</p>
+          </div>
+          <div class="comm-icon-item">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="6" width="36" height="36" rx="4"/>
+              <path d="M14 32l6-10 6 6 8-14"/>
+              <circle cx="34" cy="14" r="2"/>
+            </svg>
+            <h3 style="font-family:var(--font-brand);font-weight:700;font-size:1rem;margin-bottom:8px;">Data, Not Guesswork</h3>
+            <p>AI-analyzed thermal reports with cost projections &mdash; real numbers for your maintenance budget.</p>
+          </div>
+        </div>
+        <p class="reveal" style="margin-top:40px;font-size:1rem;text-align:center;color:var(--gray-300);line-height:1.7;">
+          Commercial buildings with annual thermal inspections reduce emergency repair costs by <strong style="color:var(--white);">40%</strong> and extend roof lifespan by <strong style="color:var(--white);">5&ndash;8 years</strong> (source: <a href="https://www.nrca.net/" target="_blank" rel="noopener" style="color:var(--red);text-decoration:underline;">National Roofing Contractors Association</a>).
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== FREE THERMAL INSPECTION ========== -->
+    <section class="comm-section" id="free">
+      <div class="container" style="text-align:center;">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;" class="reveal">Free Thermal Inspection</p>
+        <h2 class="comm-section-title reveal">What You'll Get &mdash; Zero Cost, Zero Obligation</h2>
+        <ul class="comm-deliverables reveal">
+          <li>High-resolution thermal + visual aerial survey of your entire roof.</li>
+          <li>AI-analyzed thermal heat map showing moisture intrusion zones, membrane damage, and insulation failures.</li>
+          <li>Branded findings report with prioritized repair recommendations and cost estimates.</li>
+        </ul>
+
+        <div class="comm-blockquote reveal">
+          <p>&ldquo;Our free scan found $38K of hidden moisture damage in a 40,000 sq ft warehouse roof. The owner had no idea.&rdquo;</p>
+          <cite>&mdash; Building Manager, Brooklyn Park Industrial Complex</cite>
+        </div>
+
+        <a href="#signup" class="comm-btn comm-btn--dark reveal" style="margin-top:20px;">Schedule My Free Inspection</a>
+      </div>
+    </section>
+
+    <!-- ========== THE HOYT PROMISE TIERS ========== -->
+    <section class="comm-section comm-section--alt" id="tiers">
+      <div class="container" style="text-align:center;">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;" class="reveal">The HOYT Promise</p>
+        <h2 class="comm-section-title reveal">Know Your Roof. Protect Your Budget.</h2>
+        <p class="comm-section-sub reveal">Three tiers built around one idea: you should never be surprised by your roof.</p>
+
+        <div class="comm-cards">
+          <!-- Annual Scan -->
+          <div class="comm-card reveal">
+            <h3>Annual Thermal Scan</h3>
+            <div class="price">$1,499<span style="font-size:0.55em;font-weight:600;color:var(--gray-400);"> starting</span></div>
+            <p>Complete thermal drone survey of your commercial roof. AI-analyzed report with findings, risk assessment, and maintenance recommendations. Know exactly what's happening on your roof.</p>
+            <a href="#signup" class="learn-more">Get Started &rarr;</a>
+          </div>
+
+          <!-- HOYT Promise — Most Popular -->
+          <div class="comm-card comm-card--popular reveal reveal-delay-1">
+            <span class="comm-card-badge">Most Popular</span>
+            <h3>The HOYT Promise</h3>
+            <div class="price">$2,999<span style="font-size:0.55em;font-weight:600;color:var(--gray-400);"> / yr starting</span></div>
+            <p>Annual thermal scan plus proactive maintenance plan. Priority emergency response. Quarterly check-ins. We don't just find problems &mdash; we prevent them. Your roof stays healthy year-round.</p>
+            <a href="#signup" class="learn-more">Get Started &rarr;</a>
+          </div>
+
+          <!-- Full Coverage -->
+          <div class="comm-card reveal reveal-delay-2">
+            <h3>Full Coverage</h3>
+            <div class="price">Custom</div>
+            <p>The HOYT Promise plus not-to-exceed emergency repairs. Capped annual cost, no surprises. When something breaks, we fix it &mdash; and you already know the maximum cost. Peace of mind for your building budget.</p>
+            <a href="#signup" class="learn-more">Let's Talk &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="comm-section" id="process">
+      <div class="container" style="text-align:center;">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;" class="reveal">How It Works</p>
+        <h2 class="comm-section-title reveal">Three Steps. Zero Disruption.</h2>
+        <ol class="comm-steps reveal">
+          <li>
+            <div class="comm-step-num"></div>
+            <div>
+              <h3>We Scan</h3>
+              <p>Our drone flies your building with thermal + HD cameras. Takes 30 minutes. Zero disruption to your operations.</p>
+            </div>
+          </li>
+          <li>
+            <div class="comm-step-num"></div>
+            <div>
+              <h3>AI Analyzes</h3>
+              <p>Our AI cross-references your thermal data against 5,000+ documented repairs. Finds what visual inspections miss.</p>
+            </div>
+          </li>
+          <li>
+            <div class="comm-step-num"></div>
+            <div>
+              <h3>You Decide</h3>
+              <p>Branded report delivered within 24 hours. No obligation. You see exactly what's happening on your roof.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ========== FLIGHT RELEASE ========== -->
+    <section class="comm-section comm-section--alt" id="release">
+      <div class="container" style="text-align:center;">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;" class="reveal">Flight Authorization</p>
+        <h2 class="comm-section-title reveal">Authorize Our Safe Drone Operations</h2>
+        <p class="reveal" style="color:var(--gray-300);max-width:720px;margin:0 auto 32px;font-size:1rem;line-height:1.7;">
+          By signing below you confirm you are authorized to approve inspection of this commercial property and authorize Hoyt Exteriors to conduct aerial flights over the property in accordance with FAA Part 107 regulations.
+        </p>
+        <div class="comm-release-frame reveal">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" style="width:48px;height:48px;margin:0 auto 16px;color:var(--red);">
+            <rect x="12" y="6" width="40" height="52" rx="4"/>
+            <path d="M22 30l6 6 14-14"/>
+            <path d="M22 46h20"/>
+            <path d="M22 18h20"/>
+          </svg>
+          <p><strong style="color:var(--white);">Digital Flight Release</strong></p>
+          <p>DocuSign integration coming soon. In the meantime, contact us to receive the flight release form via email.</p>
+          <a href="mailto:info@hoytexteriors.com?subject=Commercial%20Flight%20Release%20Request" class="comm-btn" style="margin-top:16px;">Request Flight Release</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SOCIAL PROOF ========== -->
+    <section class="comm-section" id="testimonials">
+      <div class="container" style="text-align:center;">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;" class="reveal">Results</p>
+        <h2 class="comm-section-title reveal">Building Owners Trust Hoyt &mdash; See Why</h2>
+
+        <div class="comm-testimonials reveal">
+          <div class="comm-testimonial">
+            <p>The thermal scan found moisture under our TPO membrane that we'd been chasing for two years. Hoyt fixed it in one visit.</p>
+            <cite>&mdash; Facility Manager, Eagan Office Park</cite>
+          </div>
+          <div class="comm-testimonial">
+            <p>We used to budget blind for roof maintenance. Now we have actual data. The HOYT Promise pays for itself.</p>
+            <cite>&mdash; Property Manager, Burnsville Commercial Plaza</cite>
+          </div>
+          <div class="comm-testimonial">
+            <p>Family-owned, no BS. They flew the drone, showed us the report, and let us decide. No pressure. We signed the Promise that week.</p>
+            <cite>&mdash; Building Owner, Prior Lake</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STATS BAR ========== -->
+    <section style="padding:60px 0;background:var(--red);">
+      <div class="container">
+        <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;">
+          <div>
+            <div style="font-family:var(--font-brand);font-size:2.5rem;font-weight:800;">25+</div>
+            <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.9;">Years in Minnesota</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-brand);font-size:2.5rem;font-weight:800;">5,000+</div>
+            <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.9;">Repairs Documented</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-brand);font-size:2.5rem;font-weight:800;">95%</div>
+            <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.9;">Detection Rate</div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-brand);font-size:2.5rem;font-weight:800;">GAF</div>
+            <div style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.9;">Master Elite Certified</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="comm-section comm-section--alt" id="faq">
+      <div class="container">
+        <p style="font-size:0.85rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);font-weight:700;margin-bottom:12px;text-align:center;" class="reveal">FAQ</p>
+        <h2 class="comm-section-title reveal">Your Questions Answered</h2>
+
+        <div class="comm-faq reveal" style="margin-top:40px;">
+          <div class="comm-faq-item">
+            <div class="comm-faq-question">
+              <h3>What types of commercial roofs do you inspect?</h3>
+              <span class="comm-faq-icon">+</span>
+            </div>
+            <div class="comm-faq-answer">
+              <p>Flat and low-slope roofs of all types: TPO, EPDM, modified bitumen, built-up, and metal. We handle everything from 5,000 sq ft strip malls to 200,000 sq ft warehouses.</p>
+            </div>
+          </div>
+
+          <div class="comm-faq-item">
+            <div class="comm-faq-question">
+              <h3>How long does the inspection take?</h3>
+              <span class="comm-faq-icon">+</span>
+            </div>
+            <div class="comm-faq-answer">
+              <p>The drone flight takes 20&ndash;30 minutes for most buildings. You receive the full AI-analyzed report within 24 hours.</p>
+            </div>
+          </div>
+
+          <div class="comm-faq-item">
+            <div class="comm-faq-question">
+              <h3>Is the inspection really free?</h3>
+              <span class="comm-faq-icon">+</span>
+            </div>
+            <div class="comm-faq-answer">
+              <p>Yes. No catch, no obligation. We offer it because the data sells itself. Once you see what's actually happening on your roof, the conversation about maintenance becomes easy.</p>
+            </div>
+          </div>
+
+          <div class="comm-faq-item">
+            <div class="comm-faq-question">
+              <h3>Do you handle the repairs too?</h3>
+              <span class="comm-faq-icon">+</span>
+            </div>
+            <div class="comm-faq-answer">
+              <p>Yes. We're a full-service exterior contractor &mdash; 25 years in Minnesota. If we find something, we can fix it. You're not just getting a report &mdash; you're getting a partner.</p>
+            </div>
+          </div>
+
+          <div class="comm-faq-item">
+            <div class="comm-faq-question">
+              <h3>What areas do you serve?</h3>
+              <span class="comm-faq-icon">+</span>
+            </div>
+            <div class="comm-faq-answer">
+              <p>We serve commercial buildings across the entire Minneapolis-St. Paul metro and beyond &mdash; including Duluth, Brainerd, St. Cloud, Rochester, and the Iron Range. If you're in Minnesota, we'll fly your building.</p>
+            </div>
+          </div>
+
+          <div class="comm-faq-item">
+            <div class="comm-faq-question">
+              <h3>What's the HOYT Promise?</h3>
+              <span class="comm-faq-icon">+</span>
+            </div>
+            <div class="comm-faq-answer">
+              <p>It's our annual maintenance program. We scan your roof, maintain it proactively, and respond fast when emergencies happen. Three tiers to fit your budget. Think of it as health insurance for your roof.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FINAL CTA + CONTACT FORM ========== -->
+    <section class="comm-section" id="signup" style="text-align:center;">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="comm-section-title" style="font-size:clamp(2rem,4.5vw,2.8rem);">See What's Hidden. Protect What Matters.</h2>
+          <p style="color:var(--gray-200);font-size:1.15rem;margin:20px auto 32px;max-width:600px;line-height:1.7;">
+            Free thermal inspection. No obligation. No credit card. Just the truth about your roof.
+          </p>
+          <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+            <a href="tel:+16512124965" class="comm-btn comm-btn--ghost">Call 651-212-4965</a>
+          </div>
+        </div>
+
+        <!-- Inline Contact Form -->
+        <div class="comm-form-wrap reveal" id="comm-form-wrap">
+          <h3>Request Your Free Inspection</h3>
+          <p style="color:var(--gray-400);font-size:0.9rem;text-align:center;margin-bottom:20px;">The company your dad tells you to call.</p>
+          <form class="comm-form" id="comm-contact-form" method="POST" action="https://hoytexteriors.com/functions/api/contact">
+            <div class="comm-form-row">
+              <label>
+                Name
+                <input type="text" name="name" required placeholder="Your name">
+              </label>
+              <label>
+                Company
+                <input type="text" name="company" placeholder="Company name">
+              </label>
+            </div>
+            <div class="comm-form-row">
+              <label>
+                Phone
+                <input type="tel" name="phone" required placeholder="(555) 555-5555">
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" required placeholder="you@company.com">
+              </label>
+            </div>
+            <label>
+              Building Address
+              <input type="text" name="address" required placeholder="Street address, city, state">
+            </label>
+            <div class="comm-form-row">
+              <label>
+                Approximate Roof Size
+                <select name="roof_size">
+                  <option value="">Select size</option>
+                  <option value="Under 10K sqft">Under 10,000 sq ft</option>
+                  <option value="10K-25K sqft">10,000 &ndash; 25,000 sq ft</option>
+                  <option value="25K-50K sqft">25,000 &ndash; 50,000 sq ft</option>
+                  <option value="50K-100K sqft">50,000 &ndash; 100,000 sq ft</option>
+                  <option value="100K+ sqft">100,000+ sq ft</option>
+                </select>
+              </label>
+              <label>
+                Roof Type
+                <select name="roof_type">
+                  <option value="">Select type</option>
+                  <option value="TPO">TPO</option>
+                  <option value="EPDM">EPDM</option>
+                  <option value="Modified Bitumen">Modified Bitumen</option>
+                  <option value="Built-Up">Built-Up (BUR)</option>
+                  <option value="Metal">Metal</option>
+                  <option value="Don't Know">Don't Know</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Message <span style="font-weight:400;color:var(--gray-500);">(optional)</span>
+              <textarea name="message" placeholder="Any details about your building or concerns..."></textarea>
+            </label>
+            <label class="consent-row">
+              <input type="checkbox" name="sms_consent" required>
+              <span>I agree to receive text messages from Hoyt Exteriors. Message frequency varies. Reply STOP to opt out.</span>
+            </label>
+            <input type="hidden" name="source" value="commercial-scan-page">
+            <button type="submit" class="comm-form-submit">Request Free Inspection</button>
+          </form>
+          <div class="comm-form-success" id="comm-form-success">
+            <svg viewBox="0 0 48 48" fill="none" stroke="var(--red)" stroke-width="3" style="width:48px;height:48px;margin:0 auto 16px;"><circle cx="24" cy="24" r="20"/><path d="M16 24l5 5 11-11"/></svg>
+            <p style="font-size:1.15rem;font-weight:700;margin-bottom:8px;">We got it, man.</p>
+            <p style="color:var(--gray-300);">Someone from the Hoyt team will reach out within one business day. We're looking forward to flying your building.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">HOYT EXTERIORS</span>
+          <p class="footer-description">Minnesota's most technologically advanced exterior contractor. Premium roofing, siding, and exterior services for the Twin Cities metro.</p>
+          <div class="footer-lanes">
+            <a href="../">Commercial</a>
+            <span class="footer-lane-divider">|</span>
+            <a href="../../multifamily/">Multifamily</a>
+            <span class="footer-lane-divider">|</span>
+            <a href="../../hoa/">HOA Scan</a>
+            <span class="footer-lane-divider">|</span>
+            <a href="../../residential/">Residential</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-column-title">Services</h4>
+          <ul class="footer-links">
+            <li><a href="../../roofing/">Roofing</a></li>
+            <li><a href="../../siding/">Siding</a></li>
+            <li><a href="../../decks/">Decks</a></li>
+            <li><a href="../../windows/">Windows</a></li>
+            <li><a href="../../gutters/">Gutters</a></li>
+            <li><a href="../../insulation/">Insulation</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-column-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../../about/">About</a></li>
+            <li><a href="../../articles/">Articles</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-column-title">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:6512124965">(651) 212-4965</a></li>
+            <li><a href="mailto:info@hoytexteriors.com">info@hoytexteriors.com</a></li>
+            <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener noreferrer">15112 Galaxie Ave, Apple Valley</a></li>
+          </ul>
+          <div style="display:flex;gap:12px;margin-top:12px;">
+            <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);">Facebook</a>
+            <a href="https://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);">Yelp</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved.</p>
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer" class="footer-attribution">Created with Perplexity Computer</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../app.js?v=20260324" defer></script>
+
+  <!-- FAQ Accordion -->
+  <script>
+    document.querySelectorAll('.comm-faq-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var answer = item.querySelector('.comm-faq-answer');
+        var icon = item.querySelector('.comm-faq-icon');
+        var isActive = item.classList.contains('active');
+        document.querySelectorAll('.comm-faq-item').forEach(function(other) {
+          if (other !== item) {
+            other.classList.remove('active');
+            other.querySelector('.comm-faq-answer').style.maxHeight = '0';
+            other.querySelector('.comm-faq-icon').textContent = '+';
+          }
+        });
+        item.classList.toggle('active');
+        answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
+        icon.textContent = isActive ? '+' : '\u2212';
+      });
+    });
+  </script>
+
+  <!-- Mobile drawer -->
+  <script>
+    (function(){
+      var hamburger = document.querySelector('.hamburger');
+      var overlay = document.querySelector('.mobile-drawer-overlay');
+      function toggle() { document.body.classList.toggle('drawer-open'); }
+      if(hamburger) hamburger.addEventListener('click', toggle);
+      if(overlay) overlay.addEventListener('click', toggle);
+      document.querySelectorAll('.mobile-drawer a').forEach(function(a){
+        a.addEventListener('click', function(){ document.body.classList.remove('drawer-open'); });
+      });
+    })();
+  </script>
+
+  <!-- Form handling -->
+  <script>
+    (function(){
+      var form = document.getElementById('comm-contact-form');
+      var wrap = document.getElementById('comm-form-wrap');
+      var success = document.getElementById('comm-form-success');
+      if(!form) return;
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var data = new FormData(form);
+        var obj = {};
+        data.forEach(function(v,k){ obj[k] = v; });
+        obj.source = 'commercial-scan-page';
+        fetch(form.action, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(obj)
+        }).then(function(r){
+          if(r.ok){
+            form.style.display = 'none';
+            success.style.display = 'block';
+          } else {
+            alert('Something went wrong. Please call us at (651) 212-4965.');
+          }
+        }).catch(function(){
+          alert('Something went wrong. Please call us at (651) 212-4965.');
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
