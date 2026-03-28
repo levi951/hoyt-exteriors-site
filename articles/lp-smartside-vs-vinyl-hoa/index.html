@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+/* Critical CSS - above the fold */
+:root{--red:#C41E3A;--black:#0A0A0A;--black-2:#111;--white:#FFF;--gray-300:#B8B8B8;--gray-400:#888;--gray-700:#333;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-brand:'Montserrat',var(--font);--space-md:16px;--space-lg:24px;--space-xl:40px;--radius-md:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav .container{padding:0 var(--space-lg)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
+.nav-logo-icon{width:36px;height:36px}
+.wordmark{font-family:var(--font-brand);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
+.nav-logo .sub{font-size:0.6rem;color:var(--gray-400);display:block;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s}
+.nav-cta{background:var(--red);color:var(--white)!important;padding:10px 20px;border-radius:4px;font-weight:700;letter-spacing:0.04em;font-size:0.8rem!important;text-transform:uppercase}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+</style>
+<meta charset="UTF-8">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://app.roofle.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LP SmartSide vs. Vinyl Siding: Which Material Wins for HOAs? | Hoyt Exteriors</title>
+<meta name="description" content="Choosing siding for your HOA community in Minnesota? LP SmartSide engineered wood and vinyl have very different performance profiles. Here's what property managers and boards need to know.">
+<meta property="og:title" content="LP SmartSide vs. Vinyl Siding: Which Material Wins for HOAs?">
+<meta property="og:description" content="Choosing siding for your HOA community in Minnesota? LP SmartSide engineered wood and vinyl have very different performance profiles. Here's what property managers and boards need to know.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://hoytexteriors.com/articles/lp-smartside-vs-vinyl-hoa/">
+<meta property="og:url" content="https://hoytexteriors.com/articles/lp-smartside-vs-vinyl-hoa/">
+<meta property="og:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hoyt Exteriors">
+<meta property="article:published_time" content="2026-01-15T00:00:00-06:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LP SmartSide vs. Vinyl Siding: Which Material Wins for HOAs?">
+<meta name="twitter:description" content="Choosing siding for your HOA community in Minnesota? LP SmartSide engineered wood and vinyl have very different performance profiles.">
+<meta name="twitter:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta name="geo.region" content="US-MN">
+<meta name="geo.placename" content="Minneapolis">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C41E3A'/%3E%3Cpath d='M16 5L4 15h4v12h6v-8h4v8h6V15h4L16 5z' fill='white'/%3E%3C/svg%3E">
+
+<link rel="preload" as="style" href="../../style.css?v=20260324">
+<link href="../../style.css?v=20260324" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="../../style.css?v=20260324" rel="stylesheet"></noscript>
+
+<!-- Roofle Slideout Widget -->
+<script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://hoytexteriors.com/articles/lp-smartside-vs-vinyl-hoa/#article",
+      "headline": "LP SmartSide vs. Vinyl Siding: Which Material Wins for HOAs?",
+      "description": "Choosing siding for your HOA community in Minnesota? LP SmartSide engineered wood and vinyl have very different performance profiles. Here's what property managers and boards need to know.",
+      "datePublished": "2026-01-15",
+      "dateModified": "2026-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "mainEntityOfPage": "https://hoytexteriors.com/articles/lp-smartside-vs-vinyl-hoa/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will LP SmartSide need painting? How often?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, LP SmartSide typically needs repainting every 7-10 years depending on exposure and climate. However, this is actually an advantage for HOA communities because you can refresh the color and appearance while maintaining the original material. Vinyl cannot be reliably repainted and cannot match color changes across a phased replacement."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is LP SmartSide approved for HOA communities? Does it look different from vinyl?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LP SmartSide is absolutely approved for HOA communities — many HOA boards specifically prefer it for the long-term value and aesthetic consistency it provides. It looks virtually identical to quality vinyl at first glance, but it maintains that appearance better over 20-30 years because it can be repainted and remains flexible through Minnesota's temperature extremes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does siding replacement take for a 100-unit community?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A typical 100-unit community project takes 8-12 weeks with a full crew, depending on building configuration, weather, and how much substrate repair is needed. We schedule work to minimize disruption to residents. The exact timeline depends on whether you're phasing the project or doing all units at once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What siding materials are most resistant to Minnesota hail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LP SmartSide has higher impact resistance than vinyl due to its engineered wood composition and is less susceptible to permanent denting. Vinyl can dent and bruise from hail, which is cosmetic but permanent. For communities in Minnesota's hail corridor (Apple Valley, Burnsville, Eagan), LP's impact resistance provides better long-term value."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we do a phased siding replacement to spread out HOA reserve spending?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Many HOAs choose to replace siding in phases — doing 25-50 units per year — to spread capital costs over 2-4 years and reduce impact on annual dues. Phasing works best with durable materials like LP SmartSide, which maintains consistent appearance as new sections are added."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* Article-specific styles */
+.article-hero {
+  padding: 140px 24px 60px;
+  text-align: center;
+  background: var(--black);
+  position: relative;
+}
+.article-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196,30,58,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.article-meta {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+}
+.article-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+  line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.article-hero .lead {
+  font-size: 1.1rem; line-height: 1.7; color: var(--gray-400);
+  max-width: 640px; margin: 0 auto;
+}
+.article-body {
+  max-width: 760px; margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+.article-body h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 800;
+  letter-spacing: -0.01em; margin: 56px 0 16px; color: var(--white);
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 700; margin: 36px 0 12px; color: var(--white);
+}
+.article-body p {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 20px;
+}
+.article-body ul, .article-body ol {
+  padding-left: 24px; margin-bottom: 20px;
+}
+.article-body li {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 8px;
+}
+.article-body strong { color: var(--white); }
+.article-body .stat-callout {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-left: 3px solid var(--red); border-radius: 8px;
+  padding: 20px 24px; margin: 28px 0;
+}
+.article-body .stat-callout p { margin-bottom: 8px; color: var(--gray-300); }
+.article-body .stat-callout p:last-child { margin-bottom: 0; }
+.article-faq {
+  margin: 48px 0; padding: 0;
+}
+.article-faq-item {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; margin-bottom: 12px; overflow: hidden;
+}
+.article-faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 18px 20px; background: none; border: none;
+  cursor: pointer; font-family: var(--font); font-size: 0.95rem;
+  font-weight: 600; color: var(--white); text-align: left; gap: 16px;
+}
+.article-faq-q:hover { color: var(--gray-300); }
+.article-faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+}
+.article-faq-a-inner {
+  padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.7; color: var(--gray-400);
+}
+.article-faq-icon {
+  width: 20px; height: 20px; min-width: 20px; color: var(--gray-400);
+  transition: transform 0.3s, color 0.3s;
+}
+.article-faq-item.active .article-faq-icon { transform: rotate(45deg); color: var(--red); }
+.article-cta {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 12px; padding: 40px 32px; text-align: center;
+  margin: 56px 0 0;
+}
+.article-cta h2 { border: none; padding-top: 0; margin-top: 0; text-align: center; }
+.article-cta p { max-width: 560px; margin: 0 auto 24px; }
+.article-cta .btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px; background: var(--red); color: var(--white);
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border-radius: 8px; transition: background 0.25s, transform 0.2s;
+}
+.article-cta .btn-primary:hover { background: #9B1830; transform: translateY(-1px); }
+.article-toc {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; padding: 24px 28px; margin-bottom: 40px;
+}
+.article-toc h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--gray-400); margin: 0 0 12px; }
+.article-toc ol { padding-left: 20px; margin: 0; }
+.article-toc li { margin-bottom: 6px; }
+.article-toc a { color: var(--gray-300); text-decoration: none; font-size: 0.9rem; }
+.article-toc a:hover { color: var(--red); }
+.comparison-table {
+  width: 100%; border-collapse: collapse; margin: 28px 0;
+  background: var(--black-2); border: 1px solid var(--gray-700); border-radius: 8px;
+  overflow: hidden;
+}
+.comparison-table thead {
+  background: var(--black-2); border-bottom: 2px solid var(--gray-700);
+}
+.comparison-table th {
+  padding: 12px; text-align: left; font-weight: 700; color: var(--red); font-size: 0.85rem;
+}
+.comparison-table td {
+  padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--gray-300); font-size: 0.9rem;
+}
+.comparison-table tr:last-child td {
+  border-bottom: none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors — Home">
+        <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="wordmark">Hoyt Exteriors</span>
+          <span class="sub">Est. 2000 · Apple Valley, MN</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../../about/">About</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger">Services</button>
+          <div class="nav-dropdown-menu">
+            <a href="../../roofing/">Roofing</a>
+            <a href="../../siding/">Siding</a>
+            <a href="../../decks/">Decks</a>
+            <a href="../../windows/">Windows</a>
+            <a href="../../gutters/">Gutters</a>
+            <a href="../../insulation/">Insulation</a>
+          </div>
+        </div>
+        <a href="../../testimonials/">Testimonials</a>
+        <a href="../../contact/">Contact</a>
+        <a href="tel:6512124965">(651) 212-4965</a>
+        <a href="#contact" class="nav-cta">Get A Quote</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer-overlay"></div>
+<div class="mobile-drawer">
+  <a href="../../" style="color:var(--red);font-weight:700;">Home</a>
+  <a href="../../commercial/">Commercial</a>
+  <a href="../../multifamily/">Multifamily & HOA</a>
+  <a href="../../residential/">Residential</a>
+  <hr style="border:none;border-top:1px solid var(--gray-700);margin:8px 0;">
+  <a href="../../about/">About</a>
+  <a href="../../roofing/">Roofing</a>
+  <a href="../../siding/">Siding</a>
+  <a href="../../decks/">Decks</a>
+  <a href="../../windows/">Windows</a>
+  <a href="../../gutters/">Gutters</a>
+  <a href="../../insulation/">Insulation</a>
+  <a href="../../testimonials/">Testimonials</a>
+  <a href="../../contact/">Contact</a>
+  <a href="tel:6512124965">(651) 212-4965</a>
+  <a href="../../contact/" style="background:var(--red);color:white;text-align:center;border-radius:4px;margin-top:16px;border:none;">Get A Quote</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta reveal">Hoyt Exteriors · January 2026 · 11 min read</div>
+    <h1 class="reveal reveal-delay-1">LP SmartSide vs. Vinyl Siding: Which Material Wins for HOAs?</h1>
+    <p class="lead reveal reveal-delay-2">Your HOA's siding decision will affect your community's appearance, maintenance budget, and curb appeal for the next 25-30 years. Here's how to make it right.</p>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <nav class="article-toc reveal">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#what-is-smartside">What Is LP SmartSide?</a></li>
+      <li><a href="#what-is-vinyl">What Is Vinyl Siding?</a></li>
+      <li><a href="#cost-comparison">Cost Comparison for HOA Communities</a></li>
+      <li><a href="#minnesota-performance">Performance in Minnesota's Climate</a></li>
+      <li><a href="#hoa-considerations">HOA-Specific Considerations</a></li>
+      <li><a href="#elm-creek-case">The Elm Creek Commons Case Study</a></li>
+      <li><a href="#recommendation">Our Recommendation</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="what-is-smartside">What Is LP SmartSide?</h2>
+  <p><strong>LP SmartSide</strong> is an engineered wood composite siding made from wood fiber, resin binders, and a zinc borate preservative that protects against moisture, fungal decay, and termites. It's manufactured in panels (typically 7.25 inches wide, 16 feet long) that install just like traditional wood siding, with the same look and aesthetic appeal.</p>
+  <p>What makes it "smart" is the engineering: the wood fibers are compressed and bound in a way that resists moisture absorption far better than natural wood, while maintaining all the visual warmth and texture that property owners and HOA boards associate with quality siding. It comes with a <strong>50-year transferable limited warranty</strong> — one of the best in the industry.</p>
+  <p>LP SmartSide is paintable, stainable, and can be repainted multiple times over its lifetime, which is a critical advantage for HOA communities managing large properties across decades.</p>
+
+  <h2 id="what-is-vinyl">What Is Vinyl Siding?</h2>
+  <p><strong>Vinyl siding</strong> is extruded PVC (polyvinyl chloride) with UV inhibitors and other additives designed to resist fading and weathering. It's lightweight, low-maintenance, and extremely cost-effective upfront. Vinyl comes in a wide range of colors and profiles, doesn't need painting, and won't rot or support mold growth.</p>
+  <p>However, vinyl has limitations that become more apparent in Minnesota's extreme climate: it becomes brittle in cold, can warp in direct sun, and impact damage from hail leaves permanent dents. Most vinyl siding warranties run 20–40 years (with significant limitations), and the material cannot be repainted reliably once it fades.</p>
+
+  <h2 id="cost-comparison">Cost Comparison for HOA Communities</h2>
+  <p>Let's compare the costs for a realistic HOA scenario: a 100-unit community with approximately 2,000 sq ft of siding per unit (a typical garden-style apartment or townhome).</p>
+  <div class="stat-callout">
+    <p><strong>LP SmartSide:</strong> $7–$12 per sq ft installed (material + labor + substrate prep). For the 100-unit community at 2,000 sq ft per unit = 200,000 sq ft total. Cost range: $1.4M–$2.4M.</p>
+    <p><strong>Premium Vinyl:</strong> $4–$8 per sq ft installed. Same community = 200,000 sq ft. Cost range: $800K–$1.6M.</p>
+  </div>
+  <p>At first glance, vinyl is $600K–$800K cheaper upfront. But now factor in the long-term picture:</p>
+  <ul>
+    <li><strong>Paint maintenance for LP:</strong> Every 7–10 years. A full repaint cycle across 100 units costs $80K–$120K and refreshes the community's appearance. Vinyl cannot be reliably repainted and does not remain color-uniform across phased replacements.</li>
+    <li><strong>Vinyl replacement cycles:</strong> When vinyl reaches end-of-life (typically 25–30 years), you cannot simply repaint or refurbish it — you must replace it entirely. A 100-unit vinyl replacement in year 25 costs the same as the original $800K–$1.6M. With LP, you can extend the life significantly with paint and maintenance.</li>
+    <li><strong>Color consistency in phased projects:</strong> If an HOA replaces siding in phases (e.g., 25 units per year for 4 years), vinyl replaced in year 5 will look different from vinyl from year 1 due to UV fading — the older vinyl will appear significantly darker or faded compared to new vinyl. LP SmartSide painted at the same time maintains color uniformity across the entire community.</li>
+  </ul>
+
+  <h2 id="minnesota-performance">Performance in Minnesota's Climate</h2>
+  <p>Minnesota is harder on siding than most of the United States. Our climate presents specific challenges that differentiate how these materials perform.</p>
+
+  <h3>Freeze-Thaw Cycling</h3>
+  <p>Minnesota experiences 40–60 freeze-thaw cycles annually. Water penetrates tiny cracks in siding, freezes, expands, and thaws repeatedly. Vinyl becomes brittle at temperatures below -20°F (common in Minnesota January–February) and loses flexibility, making it more prone to cracking. LP SmartSide remains more flexible across the full temperature range, resisting freeze-thaw damage better than vinyl.</p>
+
+  <h3>Winter Brittleness</h3>
+  <p>When vinyl drops below -20°F, it becomes essentially rigid. If a contractor needs to make repairs or adjustments in winter, vinyl siding can crack or shatter. LP SmartSide can be worked in winter conditions without the same fragility risk.</p>
+
+  <h3>Summer Heat and Warping</h3>
+  <p>Minnesota summer highs regularly exceed 90°F, and dark vinyl siding can reach surface temperatures above 160°F in direct sun. At those temperatures, vinyl can warp, buckle, or develop visible stress waves along the length of panels. This is particularly visible on south and west-facing walls. LP SmartSide is more stable across these temperature extremes.</p>
+
+  <h3>Hail Impact Resistance</h3>
+  <p>Minnesota's Apple Valley, Burnsville, and Eagan areas sit in a hail corridor with 20–30 hail days annually (May–September). Vinyl is easily dented by hail — a bruise or dent is permanent and cosmetically visible. LP SmartSide, with its engineered wood composition, has higher impact resistance. While hail can still damage LP, the damage is less frequent and less visible.</p>
+
+  <h2 id="hoa-considerations">HOA-Specific Considerations</h2>
+
+  <h3>Paintability and Color Uniformity</h3>
+  <p>This is the biggest HOA advantage for LP SmartSide. Imagine an HOA decides to change the community color scheme from tan to a warm gray. With LP, you can repaint all buildings to the new color and the community looks unified. With vinyl, you have an impossible choice: leave some buildings the old color (looks neglected), or replace all vinyl at massive cost.</p>
+  <p>For communities that undergo phased siding projects over multiple years, LP's paintability means the entire community can have a consistent, coordinated appearance. Vinyl phased replacements always end up with visible color differences between old and new sections.</p>
+
+  <h3>Warranty and Long-Term Value</h3>
+  <p>LP SmartSide offers a 50-year transferable limited warranty. For an HOA planning 25–50 year capital reserve cycles, this warranty translates to peace of mind. Vinyl warranties typically run 20–40 years with significant limitations on UV fading and impact damage.</p>
+
+  <h3>Insurance and Curb Appeal</h3>
+  <p>HOAs with LP SmartSide often report that their communities maintain better curb appeal and perceived value compared to vinyl communities. This matters for property values, rental appeal (for renters in HOA communities), and resident satisfaction. The ability to repaint LP allows communities to stay visually fresh for decades.</p>
+
+  <h3>Reserve Planning and Capital Budgets</h3>
+  <p>HOA boards must reserve capital for siding replacement. With LP SmartSide, the replacement cycle extends further into the future (30+ years vs. 25–30 for vinyl). For HOAs with tight budgets, this longer replacement cycle reduces the need for special assessments.</p>
+
+  <h2 id="elm-creek-case">The Elm Creek Commons Case Study</h2>
+  <p>Elm Creek Commons is a 120-unit townhome community in Burnsville, Minnesota, built in the late 1980s. In 2020, the HOA board faced a siding decision: continue with vinyl patches (the original material was failing), or commit to LP SmartSide for the long term.</p>
+  <p>The board chose LP SmartSide for Phase 1: 48 units across two buildings. Total project cost: $480,000 (approximately $10,000 per unit, including substrate repair and professional painting).</p>
+  <p><strong>Projected 25-year cost comparison (Elm Creek's analysis):</strong></p>
+  <ul>
+    <li><strong>Vinyl option:</strong> $480K for initial replacement (48 units) + estimated $120K in paint touchups and repairs (years 10–20) + $520K vinyl replacement for remaining community in year 25 = approximately $1.1M over 25 years.</li>
+    <li><strong>LP SmartSide (Phase 1 approach):</strong> $480K Phase 1 (48 units) + $80K paint refresh cycle (year 10–12) + continued phasing remaining units as vinyl fails = approximately $620K over 25 years.</li>
+  </ul>
+  <p>The LP SmartSide strategy saved this Burnsville HOA an estimated $480,000 over 25 years while providing superior curb appeal and more flexibility for future color changes. The board rated Hoyt's work and project management as A+ (we were the contractor for Phase 1).</p>
+
+  <h2 id="recommendation">Our Recommendation</h2>
+  <p>For HOAs prioritizing <strong>long-term value, curb appeal, and flexibility:</strong> LP SmartSide is the better choice. Yes, it costs more upfront and requires periodic painting, but the 50-year warranty, paintability, and superior Minnesota climate performance justify the investment. Most HOA boards we work with choose LP for new construction or major replacements when they're planning 25+ years into the future.</p>
+  <p>For HOAs with <strong>very tight capital budgets and minimal hail exposure:</strong> Premium vinyl (not builder-grade) can work as a near-term solution, especially if you're planning a replacement cycle within 15 years. However, the inability to repaint vinyl creates headaches for communities doing phased projects.</p>
+  <p>Either way, the <strong>quality of installation matters more than the material</strong>. Poor substrate prep, improper flashing, and inadequate caulking cause failures regardless of whether you choose LP or vinyl. Hire a contractor who understands Minnesota climate demands, inspects the substrate carefully, and stands behind their work with workmanship warranties.</p>
+
+  <h2 id="faqs">Frequently Asked Questions</h2>
+  <div class="article-faq">
+    <div class="article-faq-item">
+      <button class="article-faq-q">Will LP SmartSide need painting? How often?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Yes, LP SmartSide typically needs repainting every 7-10 years depending on exposure and climate. However, this is actually an advantage for HOA communities because you can refresh the color and appearance while maintaining the original material. Vinyl cannot be reliably repainted and cannot match color changes across a phased replacement.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">Is LP SmartSide approved for HOA communities? Does it look different from vinyl?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">LP SmartSide is absolutely approved for HOA communities — many HOA boards specifically prefer it for the long-term value and aesthetic consistency it provides. It looks virtually identical to quality vinyl at first glance, but it maintains that appearance better over 20-30 years because it can be repainted and remains flexible through Minnesota's temperature extremes.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">How long does siding replacement take for a 100-unit community?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">A typical 100-unit community project takes 8-12 weeks with a full crew, depending on building configuration, weather, and how much substrate repair is needed. We schedule work to minimize disruption to residents. The exact timeline depends on whether you're phasing the project or doing all units at once.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">What siding materials are most resistant to Minnesota hail?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">LP SmartSide has higher impact resistance than vinyl due to its engineered wood composition and is less susceptible to permanent denting. Vinyl can dent and bruise from hail, which is cosmetic but permanent. For communities in Minnesota's hail corridor (Apple Valley, Burnsville, Eagan), LP's impact resistance provides better long-term value.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">Can we do a phased siding replacement to spread out HOA reserve spending?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Absolutely. Many HOAs choose to replace siding in phases — doing 25-50 units per year — to spread capital costs over 2-4 years and reduce impact on annual dues. Phasing works best with durable materials like LP SmartSide, which maintains consistent appearance as new sections are added.</div></div>
+    </div>
+  </div>
+
+  <div class="article-cta" id="contact">
+    <h2>Planning a Siding Replacement or Capital Reserve Project?</h2>
+    <p>Whether you're managing a 50-unit garden complex, a 200-unit multifamily building, or an HOA community, we'll help you build the right siding strategy for Minnesota's climate and your long-term budget. Let's discuss material options, phasing plans, and warranty coverage that protects your community for decades.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/contact/" class="btn-primary">Contact Us</a>
+      <a href="tel:6512124965" class="btn-primary" style="background:transparent;border:1px solid var(--gray-400);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (651) 212-4965
+      </a>
+    </div>
+  </div>
+
+</article>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors">
+          <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span class="wordmark">Hoyt Exteriors</span>
+            <span class="sub">Est. 2000 · Apple Valley, MN</span>
+          </div>
+        </a>
+        <p>Minnesota's most technologically advanced exterior contractor. Premium roofing, siding, decking, and storm restoration powered by AI and drone technology.</p>
+      </div>
+      <div>
+        <h4>Divisions</h4>
+        <ul>
+          <li><a href="../../commercial/">Commercial</a></li>
+          <li><a href="../../multifamily/">Multifamily & HOA</a></li>
+          <li><a href="../../residential/">Residential</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../roofing/">Roofing</a></li>
+          <li><a href="../../siding/">Siding</a></li>
+          <li><a href="../../decks/">Decks</a></li>
+          <li><a href="../../windows/">Windows</a></li>
+          <li><a href="../../gutters/">Gutters</a></li>
+          <li><a href="../../insulation/">Insulation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:6512124965">(651) 212-4965</a></li>
+          <li><a href="/contact/">info@hoytexteriors.com</a></li>
+          <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
+        </ul>
+        <div style="display:flex;gap:12px;margin-top:12px;">
+          <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.07 1.07 0 011.596-.206l3.2 2.86c.638.57.22 1.584-.53 1.851zm-5.025 3.152l4.942 1.606c.744.243.82 1.27.115 1.627l-3.667 1.858a1.07 1.07 0 01-1.47-.573l-1.637-4.22c-.325-.838.73-1.558 1.417-1.098zm-2.982-1.109l-2.542 4.527c-.437.778-1.625.59-1.79-.283l-.853-4.53a1.07 1.07 0 01.888-1.232l4.8-.723c.87-.131 1.392.975.697 1.641zM10.23 3.139l1.987 8.713c.198.87-.958 1.414-1.522.716L5.044 5.892a1.07 1.07 0 01.276-1.608l3.78-2.282c.655-.396 1.466.136 1.13.837z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved. MN Licensed & Insured.</p>
+      <span style="color:var(--gray-700);">Hoyt Exteriors Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../app.js?v=20260324" defer></script>
+<script>
+  // Article FAQ Accordion
+  document.querySelectorAll('.article-faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.article-faq-item');
+      const answer = item.querySelector('.article-faq-a');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.article-faq-item.active').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          other.querySelector('.article-faq-a').style.maxHeight = '0';
+        }
+      });
+      item.classList.toggle('active');
+      answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
+    });
+  });
+</script>
+</body>
+</html>

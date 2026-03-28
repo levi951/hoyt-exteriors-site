@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+/* Critical CSS - above the fold */
+:root{--red:#C41E3A;--black:#0A0A0A;--black-2:#111;--white:#FFF;--gray-300:#B8B8B8;--gray-400:#888;--gray-700:#333;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-brand:'Montserrat',var(--font);--space-md:16px;--space-lg:24px;--space-xl:40px;--radius-md:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav .container{padding:0 var(--space-lg)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
+.nav-logo-icon{width:36px;height:36px}
+.wordmark{font-family:var(--font-brand);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
+.nav-logo .sub{font-size:0.6rem;color:var(--gray-400);display:block;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s}
+.nav-cta{background:var(--red);color:var(--white)!important;padding:10px 20px;border-radius:4px;font-weight:700;letter-spacing:0.04em;font-size:0.8rem!important;text-transform:uppercase}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+</style>
+<meta charset="UTF-8">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://app.roofle.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPO vs. Asphalt Shingles: A 10-Year Cost Analysis for Minnesota Properties | Hoyt Exteriors</title>
+<meta name="description" content="Deciding between TPO and asphalt shingles for your Minnesota commercial or HOA property? Here's a real 10-year cost breakdown accounting for installation, maintenance, energy, and replacement.">
+<meta property="og:title" content="TPO vs. Asphalt Shingles: A 10-Year Cost Analysis for Minnesota Properties">
+<meta property="og:description" content="Deciding between TPO and asphalt shingles for your Minnesota commercial or HOA property? Here's a real 10-year cost breakdown accounting for installation, maintenance, energy, and replacement.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://hoytexteriors.com/articles/tpo-vs-asphalt-shingles/">
+<meta property="og:url" content="https://hoytexteriors.com/articles/tpo-vs-asphalt-shingles/">
+<meta property="og:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hoyt Exteriors">
+<meta property="article:published_time" content="2026-02-01T00:00:00-06:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TPO vs. Asphalt Shingles: A 10-Year Cost Analysis for Minnesota Properties">
+<meta name="twitter:description" content="Deciding between TPO and asphalt shingles for your Minnesota commercial or HOA property? Here's a real 10-year cost breakdown.">
+<meta name="twitter:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta name="geo.region" content="US-MN">
+<meta name="geo.placename" content="Minneapolis">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C41E3A'/%3E%3Cpath d='M16 5L4 15h4v12h6v-8h4v8h6V15h4L16 5z' fill='white'/%3E%3C/svg%3E">
+
+<link rel="preload" as="style" href="../../style.css?v=20260324">
+<link href="../../style.css?v=20260324" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="../../style.css?v=20260324" rel="stylesheet"></noscript>
+
+<!-- Roofle Slideout Widget -->
+<script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://hoytexteriors.com/articles/tpo-vs-asphalt-shingles/#article",
+      "headline": "TPO vs. Asphalt Shingles: A 10-Year Cost Analysis for Minnesota Properties",
+      "description": "Deciding between TPO and asphalt shingles for your Minnesota commercial or HOA property? Here's a real 10-year cost breakdown accounting for installation, maintenance, energy, and replacement.",
+      "datePublished": "2026-02-01",
+      "dateModified": "2026-02-01",
+      "author": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "mainEntityOfPage": "https://hoytexteriors.com/articles/tpo-vs-asphalt-shingles/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can TPO be installed over an existing roof?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In some cases, yes — a mechanically fastened TPO system can be installed over a properly prepared existing roof. However, fully adhered TPO is preferable for Minnesota weather, which typically requires removal of the old roof to achieve proper substrate conditions. Your contractor should assess the existing roof condition first."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the best roofing material for Minnesota hail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For pitched roofs in Minnesota's hail corridor, impact-resistant asphalt shingles (Class 4 rated) offer excellent protection and often qualify for insurance discounts. For flat or low-slope roofs, TPO is superior because it's more flexible and resistant to impact damage, and hail damage to TPO is typically limited to surface marks with minimal functional impact."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should a TPO roof be inspected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We recommend annual inspections, especially after severe weather. Minnesota's freeze-thaw cycles, hail events, and wind storms can create stress on seams and flashing. Early detection of problems — like adhesion separation or membrane lifting — saves thousands in water damage repairs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does HOA reserve planning account for TPO vs. asphalt differently?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. TPO systems typically have a 20-30 year service life and lower ongoing maintenance costs, making them attractive for long-term reserve planning. Asphalt shingles average 25-35 years, but require more frequent inspections and partial repairs. HOA boards should account for both the material lifespan and replacement cycles when budgeting capital reserves."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What causes TPO seams to fail in Minnesota winters?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seam failure typically results from poor installation (inadequate heat fusion), freeze-thaw cycling that stresses adhesion, or substrate movement from structural settling. Minnesota's 40-60 annual freeze-thaw cycles are particularly hard on seams. This is why installation quality and proper substrate preparation matter so much — a fully adhered TPO system with quality seams handles Minnesota weather dramatically better than mechanically fastened systems."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* Article-specific styles */
+.article-hero {
+  padding: 140px 24px 60px;
+  text-align: center;
+  background: var(--black);
+  position: relative;
+}
+.article-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196,30,58,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.article-meta {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+}
+.article-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+  line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.article-hero .lead {
+  font-size: 1.1rem; line-height: 1.7; color: var(--gray-400);
+  max-width: 640px; margin: 0 auto;
+}
+.article-body {
+  max-width: 760px; margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+.article-body h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 800;
+  letter-spacing: -0.01em; margin: 56px 0 16px; color: var(--white);
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 700; margin: 36px 0 12px; color: var(--white);
+}
+.article-body p {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 20px;
+}
+.article-body ul, .article-body ol {
+  padding-left: 24px; margin-bottom: 20px;
+}
+.article-body li {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 8px;
+}
+.article-body strong { color: var(--white); }
+.article-body .stat-callout {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-left: 3px solid var(--red); border-radius: 8px;
+  padding: 20px 24px; margin: 28px 0;
+}
+.article-body .stat-callout p { margin-bottom: 8px; color: var(--gray-300); }
+.article-body .stat-callout p:last-child { margin-bottom: 0; }
+.article-faq {
+  margin: 48px 0; padding: 0;
+}
+.article-faq-item {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; margin-bottom: 12px; overflow: hidden;
+}
+.article-faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 18px 20px; background: none; border: none;
+  cursor: pointer; font-family: var(--font); font-size: 0.95rem;
+  font-weight: 600; color: var(--white); text-align: left; gap: 16px;
+}
+.article-faq-q:hover { color: var(--gray-300); }
+.article-faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+}
+.article-faq-a-inner {
+  padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.7; color: var(--gray-400);
+}
+.article-faq-icon {
+  width: 20px; height: 20px; min-width: 20px; color: var(--gray-400);
+  transition: transform 0.3s, color 0.3s;
+}
+.article-faq-item.active .article-faq-icon { transform: rotate(45deg); color: var(--red); }
+.article-cta {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 12px; padding: 40px 32px; text-align: center;
+  margin: 56px 0 0;
+}
+.article-cta h2 { border: none; padding-top: 0; margin-top: 0; text-align: center; }
+.article-cta p { max-width: 560px; margin: 0 auto 24px; }
+.article-cta .btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px; background: var(--red); color: var(--white);
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border-radius: 8px; transition: background 0.25s, transform 0.2s;
+}
+.article-cta .btn-primary:hover { background: #9B1830; transform: translateY(-1px); }
+.article-toc {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; padding: 24px 28px; margin-bottom: 40px;
+}
+.article-toc h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--gray-400); margin: 0 0 12px; }
+.article-toc ol { padding-left: 20px; margin: 0; }
+.article-toc li { margin-bottom: 6px; }
+.article-toc a { color: var(--gray-300); text-decoration: none; font-size: 0.9rem; }
+.article-toc a:hover { color: var(--red); }
+.cost-table {
+  width: 100%; border-collapse: collapse; margin: 28px 0;
+  background: var(--black-2); border: 1px solid var(--gray-700); border-radius: 8px;
+  overflow: hidden;
+}
+.cost-table thead {
+  background: var(--black-2); border-bottom: 2px solid var(--gray-700);
+}
+.cost-table th {
+  padding: 12px; text-align: left; font-weight: 700; color: var(--red); font-size: 0.85rem;
+}
+.cost-table td {
+  padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--gray-300); font-size: 0.9rem;
+}
+.cost-table tr:last-child td {
+  border-bottom: none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors — Home">
+        <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="wordmark">Hoyt Exteriors</span>
+          <span class="sub">Est. 2000 · Apple Valley, MN</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../../about/">About</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger">Services</button>
+          <div class="nav-dropdown-menu">
+            <a href="../../roofing/">Roofing</a>
+            <a href="../../siding/">Siding</a>
+            <a href="../../decks/">Decks</a>
+            <a href="../../windows/">Windows</a>
+            <a href="../../gutters/">Gutters</a>
+            <a href="../../insulation/">Insulation</a>
+          </div>
+        </div>
+        <a href="../../testimonials/">Testimonials</a>
+        <a href="../../contact/">Contact</a>
+        <a href="tel:6512124965">(651) 212-4965</a>
+        <a href="#contact" class="nav-cta">Get A Quote</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer-overlay"></div>
+<div class="mobile-drawer">
+  <a href="../../" style="color:var(--red);font-weight:700;">Home</a>
+  <a href="../../commercial/">Commercial</a>
+  <a href="../../multifamily/">Multifamily & HOA</a>
+  <a href="../../residential/">Residential</a>
+  <hr style="border:none;border-top:1px solid var(--gray-700);margin:8px 0;">
+  <a href="../../about/">About</a>
+  <a href="../../roofing/">Roofing</a>
+  <a href="../../siding/">Siding</a>
+  <a href="../../decks/">Decks</a>
+  <a href="../../windows/">Windows</a>
+  <a href="../../gutters/">Gutters</a>
+  <a href="../../insulation/">Insulation</a>
+  <a href="../../testimonials/">Testimonials</a>
+  <a href="../../contact/">Contact</a>
+  <a href="tel:6512124965">(651) 212-4965</a>
+  <a href="../../contact/" style="background:var(--red);color:white;text-align:center;border-radius:4px;margin-top:16px;border:none;">Get A Quote</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta reveal">Hoyt Exteriors · February 2026 · 12 min read</div>
+    <h1 class="reveal reveal-delay-1">TPO vs. Asphalt Shingles: A 10-Year Cost Analysis for Minnesota Properties</h1>
+    <p class="lead reveal reveal-delay-2">The upfront cost difference between TPO and asphalt shingles is significant. But the 10-year number often tells a completely different story.</p>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <nav class="article-toc reveal">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#basic-difference">The Basic Difference</a></li>
+      <li><a href="#installation-costs">Installation Costs in Minnesota (2026)</a></li>
+      <li><a href="#minnesota-performance">Minnesota-Specific Performance Factors</a></li>
+      <li><a href="#total-cost-ownership">10-Year Total Cost of Ownership</a></li>
+      <li><a href="#hoa-recommendations">What Hoyt Recommends for HOA Communities</a></li>
+      <li><a href="#red-flags">Red Flags to Watch For</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="basic-difference">The Basic Difference</h2>
+  <p>Let's start with what you're actually comparing. <strong>TPO (thermoplastic polyolefin)</strong> is a single-ply membrane roofing material designed for low-slope and flat roofs. It's a sheet of reinforced plastic that gets heat-welded or mechanically fastened at the seams. TPO is most commonly found on commercial buildings and flat-roof sections of multifamily properties.</p>
+  <p><strong>Asphalt shingles</strong> are a layered system: a fiberglass mat base coated in asphalt and topped with mineral granules for UV protection. They're ideal for pitched roofs with a slope of 2:12 (2 inches of vertical rise per 12 inches of horizontal run) or steeper. Most houses and pitched sections of commercial buildings use asphalt.</p>
+  <p>In practice, many commercial and multifamily properties have a mix of both. A building might have TPO covering the main flat roof field, then asphalt shingles on pitched cap roofs, dormers, or attached garage structures. This is why your decision isn't always a simple either-or — it's about which material wins for the specific area of your building.</p>
+
+  <h2 id="installation-costs">Installation Costs in Minnesota (2026)</h2>
+  <p>Here's where many property owners stop their analysis — and where they miss the bigger picture.</p>
+  <div class="stat-callout">
+    <p><strong>TPO installation:</strong> $5.50–$9.00 per square foot installed, depending on whether the system is mechanically fastened or fully adhered. A 10,000 sq ft flat roof costs $55,000–$90,000.</p>
+    <p><strong>Asphalt architectural shingles:</strong> $4.00–$7.50 per square foot installed. A 10,000 sq ft roof costs $40,000–$75,000.</p>
+  </div>
+  <p>On the surface, asphalt looks cheaper — up to $15,000 less on that 10,000 sq ft roof. But installation costs vary based on several factors that are specific to Minnesota:</p>
+  <ul>
+    <li><strong>Substrate condition:</strong> If your existing roof is in poor condition, both materials require substrate prep. TPO systems often need better substrate quality for fully adhered installations, which adds cost. Asphalt shingles are more forgiving but may mask underlying problems.</li>
+    <li><strong>Insulation requirements:</strong> Minnesota's climate demands robust insulation. TPO is often installed with rigid board insulation underneath, adding $1.50–$2.50/sq ft. Asphalt shingles don't typically require this.</li>
+    <li><strong>Drain configuration:</strong> Flat TPO roofs need proper drainage design to prevent ponding water. A roof with poor drainage might require additional slope work, adding cost. Pitched asphalt roofs self-drain naturally.</li>
+    <li><strong>Material quality tiers:</strong> Premium architectural asphalt shingles cost more than basic three-tab shingles. Impact-resistant Class 4 shingles (which we recommend for Minnesota) sit at the higher end of the $4.00–$7.50 range.</li>
+  </ul>
+
+  <h2 id="minnesota-performance">Minnesota-Specific Performance Factors</h2>
+  <p>Minnesota's climate is a crucial factor that most national roofing guides gloss over. Our 40–60 annual freeze-thaw cycles, hail-prone summer weather, and temperature swings of 100+ degrees Fahrenheit create performance differences that show up in real cost data.</p>
+
+  <h3>TPO in Minnesota</h3>
+  <p>TPO excels in Minnesota's freeze-thaw environment. The material remains flexible across a wide temperature range, which means it doesn't become brittle in winter or warp in summer heat the way other membranes can. When Minnesota's thermometer swings from -30°F to 95°F, a fully adhered TPO system handles the expansion and contraction better than mechanically fastened alternatives.</p>
+  <p>For wind uplift resistance — critical in Minnesota where we see 90+ mph wind events — a mechanically fastened TPO system can achieve excellent performance. Fully adhered TPO is superior but more expensive upfront.</p>
+  <p><strong>Energy performance:</strong> Light-colored (white or light gray) TPO reflects 72–85% of solar radiation, which reduces cooling loads and roof surface temperatures. In Minnesota's short summer, this matters less than in hotter states, but it does contribute to lower overall energy costs and extends roof life by reducing thermal stress.</p>
+
+  <h3>Asphalt Shingles in Minnesota</h3>
+  <p>Asphalt shingles are durable in Minnesota, but our climate is tougher on them than mild climates. The freeze-thaw cycles cause granule loss faster than in warmer regions. Over time, you'll notice more granules collecting in gutters and at downspouts — a sign that the shingles are aging.</p>
+  <p>Minnesota sits in a significant hail corridor. Apple Valley, Burnsville, and Eagan see frequent hail events, especially May through September. Standard asphalt shingles are susceptible to impact damage. <strong>Impact-resistant (Class 4) asphalt shingles</strong> are a much better choice for Minnesota and often qualify for homeowner and commercial insurance discounts (typically 10–25% on the roofing portion of your policy). This discount can recover some of the premium cost for Class 4 shingles within a few years.</p>
+
+  <h2 id="total-cost-ownership">10-Year Total Cost of Ownership</h2>
+  <p>This is where the real comparison happens. Let's build a realistic picture for a 10,000 sq ft property in Apple Valley.</p>
+
+  <table class="cost-table">
+    <thead>
+      <tr>
+        <th>Cost Item</th>
+        <th>TPO (Fully Adhered)</th>
+        <th>Asphalt (Class 4 IR)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Year 0 Installation</strong></td>
+        <td>$80,000</td>
+        <td>$70,000</td>
+      </tr>
+      <tr>
+        <td><strong>Year 3 Inspection & Minor Repairs</strong></td>
+        <td>$1,500</td>
+        <td>$2,000</td>
+      </tr>
+      <tr>
+        <td><strong>Year 5 Inspection, Seam Check</strong></td>
+        <td>$2,000</td>
+        <td>$2,500</td>
+      </tr>
+      <tr>
+        <td><strong>Year 7 Maintenance (TPO recoat/reseam or Asphalt partial replacement)</strong></td>
+        <td>$4,000</td>
+        <td>$12,000</td>
+      </tr>
+      <tr>
+        <td><strong>Insurance Savings (10 years, 15% discount Class 4 shingles)</strong></td>
+        <td>-$800</td>
+        <td>-$2,500</td>
+      </tr>
+      <tr>
+        <td><strong>Energy Savings (light TPO reflects heat, winter heating slightly lower with Class 4 + better insulation)</strong></td>
+        <td>-$3,000</td>
+        <td>-$1,500</td>
+      </tr>
+      <tr>
+        <td><strong>10-Year Total Cost per Sq Ft</strong></td>
+        <td><strong>$8.37/sq ft ($83,700)</strong></td>
+        <td><strong>$8.05/sq ft ($80,500)</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Remaining Useful Life at Year 10</strong></td>
+        <td><strong>~18–20 years (60–67% remaining)</strong></td>
+        <td><strong>~15–18 years (43–51% remaining)</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Notice what happens when you look beyond the installation cost. The upfront gap ($10,000) narrows considerably over 10 years. TPO's lower maintenance profile and longer remaining lifespan actually make it slightly more expensive for the decade but much more valuable in the long term.</p>
+  <p><strong>The verdict for most commercial and multifamily properties:</strong> TPO typically wins on low-slope roofs when you account for a 20–30 year building lifecycle. Asphalt shingles are competitive for pitched roofs, especially with Class 4 impact resistance and insurance discounts.</p>
+
+  <h2 id="hoa-recommendations">What Hoyt Recommends for HOA Communities</h2>
+  <p>Most HOA communities in the Apple Valley and Burnsville area have <em>both</em> TPO and asphalt on their buildings. The main clubhouse might have a flat TPO roof, while attached garages or pitched cap roofs use asphalt.</p>
+  <p>Our recommendation isn't to pick one winner — it's to build an <strong>integrated maintenance program</strong> that covers both systems:</p>
+  <ul>
+    <li><strong>Annual drone + thermal inspection:</strong> Catch problems early, before water damage spreads. We can cover both TPO and asphalt sections in one survey.</li>
+    <li><strong>Scheduled reseaming for TPO:</strong> Check all seams and thermal-weld any separation before Minnesota's freeze-thaw season begins.</li>
+    <li><strong>Granule monitoring for asphalt:</strong> Track granule loss over time. When granule loss accelerates (often by year 18–22), plan a replacement cycle.</li>
+    <li><strong>Flashing and penetration detail inspection:</strong> Roofs fail at edges, not fields. Proper flashing around walls, vents, and skylights is critical for both systems in Minnesota.</li>
+  </ul>
+  <p>An integrated approach prevents the common HOA scenario: discovering hidden water damage only when interior damage forces an emergency repair that costs 4–5x more than preventive work.</p>
+
+  <h2 id="red-flags">Red Flags to Watch For</h2>
+  <p><strong>For TPO:</strong></p>
+  <ul>
+    <li><strong>Alligatoring or crazing patterns:</strong> Surface cracking that looks like alligator skin usually indicates oxidative aging or UV degradation. The roof may be nearing end-of-life.</li>
+    <li><strong>Blistering or bubbling:</strong> Indicates adhesion failure between layers. This is a sign that moisture may be trapped underneath.</li>
+    <li><strong>Seam separation or lifting:</strong> A critical failure mode. Minnesota's freeze-thaw cycles stress seams more than milder climates. If seams are separating, water intrusion is likely happening.</li>
+  </ul>
+  <p><strong>For Asphalt:</strong></p>
+  <ul>
+    <li><strong>Excessive granule loss in gutters:</strong> If your gutters look like they're lined with sand, your shingles are degrading faster than expected.</li>
+    <li><strong>Visible impact dents or bruising:</strong> Soft spots where hail has compressed the shingle indicate potential future leaks as the damaged areas age.</li>
+    <li><strong>Flashing separation at walls and penetrations:</strong> This is the most common asphalt failure point. Water gets under shingles at flashing transitions.</li>
+  </ul>
+
+  <h2 id="faqs">Frequently Asked Questions</h2>
+  <div class="article-faq">
+    <div class="article-faq-item">
+      <button class="article-faq-q">Can TPO be installed over an existing roof?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">In some cases, yes — a mechanically fastened TPO system can be installed over a properly prepared existing roof. However, fully adhered TPO is preferable for Minnesota weather, which typically requires removal of the old roof to achieve proper substrate conditions. Your contractor should assess the existing roof condition first.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">What's the best roofing material for Minnesota hail?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">For pitched roofs in Minnesota's hail corridor, impact-resistant asphalt shingles (Class 4 rated) offer excellent protection and often qualify for insurance discounts. For flat or low-slope roofs, TPO is superior because it's more flexible and resistant to impact damage, and hail damage to TPO is typically limited to surface marks with minimal functional impact.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">How often should a TPO roof be inspected?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">We recommend annual inspections, especially after severe weather. Minnesota's freeze-thaw cycles, hail events, and wind storms can create stress on seams and flashing. Early detection of problems — like adhesion separation or membrane lifting — saves thousands in water damage repairs.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">Does HOA reserve planning account for TPO vs. asphalt differently?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Yes. TPO systems typically have a 20-30 year service life and lower ongoing maintenance costs, making them attractive for long-term reserve planning. Asphalt shingles average 25-35 years, but require more frequent inspections and partial repairs. HOA boards should account for both the material lifespan and replacement cycles when budgeting capital reserves.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">What causes TPO seams to fail in Minnesota winters?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Seam failure typically results from poor installation (inadequate heat fusion), freeze-thaw cycling that stresses adhesion, or substrate movement from structural settling. Minnesota's 40-60 annual freeze-thaw cycles are particularly hard on seams. This is why installation quality and proper substrate preparation matter so much — a fully adhered TPO system with quality seams handles Minnesota weather dramatically better than mechanically fastened systems.</div></div>
+    </div>
+  </div>
+
+  <div class="article-cta" id="contact">
+    <h2>Need a Roofing Assessment for Your Property?</h2>
+    <p>Whether your HOA, commercial building, or multifamily property has TPO, asphalt, or a mix of both, we'll tell you exactly what you have, what condition it's in, and what your 10-year maintenance and replacement plan should look like. Minnesota weather doesn't wait — and neither should your roof.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/contact/" class="btn-primary">Contact Us</a>
+      <a href="tel:6512124965" class="btn-primary" style="background:transparent;border:1px solid var(--gray-400);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (651) 212-4965
+      </a>
+    </div>
+  </div>
+
+</article>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors">
+          <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span class="wordmark">Hoyt Exteriors</span>
+            <span class="sub">Est. 2000 · Apple Valley, MN</span>
+          </div>
+        </a>
+        <p>Minnesota's most technologically advanced exterior contractor. Premium roofing, siding, decking, and storm restoration powered by AI and drone technology.</p>
+      </div>
+      <div>
+        <h4>Divisions</h4>
+        <ul>
+          <li><a href="../../commercial/">Commercial</a></li>
+          <li><a href="../../multifamily/">Multifamily & HOA</a></li>
+          <li><a href="../../residential/">Residential</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../roofing/">Roofing</a></li>
+          <li><a href="../../siding/">Siding</a></li>
+          <li><a href="../../decks/">Decks</a></li>
+          <li><a href="../../windows/">Windows</a></li>
+          <li><a href="../../gutters/">Gutters</a></li>
+          <li><a href="../../insulation/">Insulation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:6512124965">(651) 212-4965</a></li>
+          <li><a href="/contact/">info@hoytexteriors.com</a></li>
+          <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
+        </ul>
+        <div style="display:flex;gap:12px;margin-top:12px;">
+          <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.07 1.07 0 011.596-.206l3.2 2.86c.638.57.22 1.584-.53 1.851zm-5.025 3.152l4.942 1.606c.744.243.82 1.27.115 1.627l-3.667 1.858a1.07 1.07 0 01-1.47-.573l-1.637-4.22c-.325-.838.73-1.558 1.417-1.098zm-2.982-1.109l-2.542 4.527c-.437.778-1.625.59-1.79-.283l-.853-4.53a1.07 1.07 0 01.888-1.232l4.8-.723c.87-.131 1.392.975.697 1.641zM10.23 3.139l1.987 8.713c.198.87-.958 1.414-1.522.716L5.044 5.892a1.07 1.07 0 01.276-1.608l3.78-2.282c.655-.396 1.466.136 1.13.837z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved. MN Licensed & Insured.</p>
+      <span style="color:var(--gray-700);">Hoyt Exteriors Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../app.js?v=20260324" defer></script>
+<script>
+  // Article FAQ Accordion
+  document.querySelectorAll('.article-faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.article-faq-item');
+      const answer = item.querySelector('.article-faq-a');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.article-faq-item.active').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          other.querySelector('.article-faq-a').style.maxHeight = '0';
+        }
+      });
+      item.classList.toggle('active');
+      answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
+    });
+  });
+</script>
+</body>
+</html>

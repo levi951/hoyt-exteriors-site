@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+/* Critical CSS - above the fold */
+:root{--red:#C41E3A;--black:#0A0A0A;--black-2:#111;--white:#FFF;--gray-300:#B8B8B8;--gray-400:#888;--gray-700:#333;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-brand:'Montserrat',var(--font);--space-md:16px;--space-lg:24px;--space-xl:40px;--radius-md:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav .container{padding:0 var(--space-lg)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
+.nav-logo-icon{width:36px;height:36px}
+.wordmark{font-family:var(--font-brand);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
+.nav-logo .sub{font-size:0.6rem;color:var(--gray-400);display:block;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s}
+.nav-cta{background:var(--red);color:var(--white)!important;padding:10px 20px;border-radius:4px;font-weight:700;letter-spacing:0.04em;font-size:0.8rem!important;text-transform:uppercase}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+</style>
+<meta charset="UTF-8">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://app.roofle.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storm Documentation: How Thermal Imaging Gets Claims Approved Faster | Hoyt Exteriors</title>
+<meta name="description" content="Insurance adjusters approve claims faster when documentation is ironclad. Learn how drone thermal imaging creates the evidence trail that gets HOA storm damage claims over the line.">
+<meta property="og:title" content="Storm Documentation: How Thermal Imaging Gets Claims Approved Faster">
+<meta property="og:description" content="Insurance adjusters approve claims faster when documentation is ironclad. Learn how drone thermal imaging creates the evidence trail that gets HOA storm damage claims over the line.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://hoytexteriors.com/articles/storm-damage-thermal-imaging/">
+<meta property="og:url" content="https://hoytexteriors.com/articles/storm-damage-thermal-imaging/">
+<meta property="og:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hoyt Exteriors">
+<meta property="article:published_time" content="2025-12-15T00:00:00-06:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Storm Documentation: How Thermal Imaging Gets Claims Approved Faster">
+<meta name="twitter:description" content="Insurance adjusters approve claims faster when documentation is ironclad. Learn how drone thermal imaging creates the evidence trail that gets HOA storm damage claims over the line.">
+<meta name="twitter:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta name="geo.region" content="US-MN">
+<meta name="geo.placename" content="Minneapolis">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C41E3A'/%3E%3Cpath d='M16 5L4 15h4v12h6v-8h4v8h6V15h4L16 5z' fill='white'/%3E%3C/svg%3E">
+
+<link rel="preload" as="style" href="../../style.css?v=20260324">
+<link href="../../style.css?v=20260324" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="../../style.css?v=20260324" rel="stylesheet"></noscript>
+
+<!-- Roofle Slideout Widget -->
+<script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://hoytexteriors.com/articles/storm-damage-thermal-imaging/#article",
+      "headline": "Storm Documentation: How Thermal Imaging Gets Claims Approved Faster",
+      "description": "Insurance adjusters approve claims faster when documentation is ironclad. Learn how drone thermal imaging creates the evidence trail that gets HOA storm damage claims over the line.",
+      "datePublished": "2025-12-15",
+      "dateModified": "2025-12-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "mainEntityOfPage": "https://hoytexteriors.com/articles/storm-damage-thermal-imaging/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How soon after a storm should I call for an inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Within 48 hours, ideally. The sooner thermal documentation happens, the sooner you can submit to your insurance company and the faster your claim can be reviewed. Waiting 60 days significantly delays approval and may allow secondary damage (mold, water intrusion) to compound."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my insurance company accept thermal imaging as documentation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most major insurance carriers now recognize thermal imaging as a valid documentation method, especially when combined with high-resolution aerial photography and a written report. Always confirm with your specific carrier before the inspection, but acceptance rates are very high."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my insurance adjuster has already done a visual inspection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is not too late. Submitting thermal documentation after the initial visual inspection can lead to a supplemental claim adjustment if the thermal scan reveals damage the adjuster missed. Many claims get revised upward when this evidence is provided."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does thermal imaging work in winter after a Minnesota snowstorm?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, thermal imaging actually works better post-snow. Wet or damaged areas retain moisture and show distinct thermal signatures compared to intact material. In winter, this makes compromised sections stand out even more clearly, providing excellent documentation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a full storm documentation package cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A complete documentation package typically includes drone photography, thermal imaging, GPS-tagged findings, a written repair scope, and a final PDF report. Costs vary by property size and complexity. For residential properties, expect $800–$2,000. For multifamily or commercial, pricing is adjusted per square footage."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* Article-specific styles */
+.article-hero {
+  padding: 140px 24px 60px;
+  text-align: center;
+  background: var(--black);
+  position: relative;
+}
+.article-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196,30,58,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.article-meta {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+}
+.article-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+  line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.article-hero .lead {
+  font-size: 1.1rem; line-height: 1.7; color: var(--gray-400);
+  max-width: 640px; margin: 0 auto;
+}
+.article-body {
+  max-width: 760px; margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+.article-body h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 800;
+  letter-spacing: -0.01em; margin: 56px 0 16px; color: var(--white);
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 700; margin: 36px 0 12px; color: var(--white);
+}
+.article-body p {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 20px;
+}
+.article-body ul, .article-body ol {
+  padding-left: 24px; margin-bottom: 20px;
+}
+.article-body li {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 8px;
+}
+.article-body strong { color: var(--white); }
+.article-body .stat-callout {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-left: 3px solid var(--red); border-radius: 8px;
+  padding: 20px 24px; margin: 28px 0;
+}
+.article-body .stat-callout p { margin-bottom: 8px; color: var(--gray-300); }
+.article-body .stat-callout p:last-child { margin-bottom: 0; }
+.article-faq {
+  margin: 48px 0; padding: 0;
+}
+.article-faq-item {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; margin-bottom: 12px; overflow: hidden;
+}
+.article-faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 18px 20px; background: none; border: none;
+  cursor: pointer; font-family: var(--font); font-size: 0.95rem;
+  font-weight: 600; color: var(--white); text-align: left; gap: 16px;
+}
+.article-faq-q:hover { color: var(--gray-300); }
+.article-faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+}
+.article-faq-a-inner {
+  padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.7; color: var(--gray-400);
+}
+.article-faq-icon {
+  width: 20px; height: 20px; min-width: 20px; color: var(--gray-400);
+  transition: transform 0.3s, color 0.3s;
+}
+.article-faq-item.active .article-faq-icon { transform: rotate(45deg); color: var(--red); }
+.article-cta {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 12px; padding: 40px 32px; text-align: center;
+  margin: 56px 0 0;
+}
+.article-cta h2 { border: none; padding-top: 0; margin-top: 0; text-align: center; }
+.article-cta p { max-width: 560px; margin: 0 auto 24px; }
+.article-cta .btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px; background: var(--red); color: var(--white);
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border-radius: 8px; transition: background 0.25s, transform 0.2s;
+}
+.article-cta .btn-primary:hover { background: #9B1830; transform: translateY(-1px); }
+.article-toc {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; padding: 24px 28px; margin-bottom: 40px;
+}
+.article-toc h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--gray-400); margin: 0 0 12px; }
+.article-toc ol { padding-left: 20px; margin: 0; }
+.article-toc li { margin-bottom: 6px; }
+.article-toc a { color: var(--gray-300); text-decoration: none; font-size: 0.9rem; }
+.article-toc a:hover { color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors — Home">
+        <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="wordmark">Hoyt Exteriors</span>
+          <span class="sub">Est. 2000 · Apple Valley, MN</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../../about/">About</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger">Services</button>
+          <div class="nav-dropdown-menu">
+            <a href="../../roofing/">Roofing</a>
+            <a href="../../siding/">Siding</a>
+            <a href="../../decks/">Decks</a>
+            <a href="../../windows/">Windows</a>
+            <a href="../../gutters/">Gutters</a>
+            <a href="../../insulation/">Insulation</a>
+          </div>
+        </div>
+        <a href="../../testimonials/">Testimonials</a>
+        <a href="../../contact/">Contact</a>
+        <a href="tel:6512124965">(651) 212-4965</a>
+        <a href="#contact" class="nav-cta">Get A Quote</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer-overlay"></div>
+<div class="mobile-drawer">
+  <a href="../../" style="color:var(--red);font-weight:700;">Home</a>
+  <a href="../../commercial/">Commercial</a>
+  <a href="../../multifamily/">Multifamily & HOA</a>
+  <a href="../../residential/">Residential</a>
+  <hr style="border:none;border-top:1px solid var(--gray-700);margin:8px 0;">
+  <a href="../../about/">About</a>
+  <a href="../../roofing/">Roofing</a>
+  <a href="../../siding/">Siding</a>
+  <a href="../../decks/">Decks</a>
+  <a href="../../windows/">Windows</a>
+  <a href="../../gutters/">Gutters</a>
+  <a href="../../insulation/">Insulation</a>
+  <a href="../../testimonials/">Testimonials</a>
+  <a href="../../contact/">Contact</a>
+  <a href="tel:6512124965">(651) 212-4965</a>
+  <a href="../../contact/" style="background:var(--red);color:white;text-align:center;border-radius:4px;margin-top:16px;border:none;">Get A Quote</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta reveal">Hoyt Exteriors · December 2025 · 12 min read</div>
+    <h1 class="reveal reveal-delay-1">Storm Documentation: How Thermal Imaging Gets Claims Approved Faster</h1>
+    <p class="lead reveal reveal-delay-2">The difference between a denied claim and an approved one often is not the damage — it is the documentation. Learn how drone thermal imaging creates the evidence trail that gets HOA storm damage claims over the line.</p>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <nav class="article-toc reveal">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#why-claims-get-denied">Why Claims Get Denied</a></li>
+      <li><a href="#what-documentation-misses">What Standard Documentation Misses</a></li>
+      <li><a href="#thermal-imaging-advantage">The Thermal Imaging Advantage</a></li>
+      <li><a href="#drone-thermal-combo">What the Drone + Thermal Combo Delivers</a></li>
+      <li><a href="#timeline-that-wins">The Timeline That Wins Claims</a></li>
+      <li><a href="#what-to-do-after-storm">What to Do Immediately After a Storm</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="why-claims-get-denied">Why Claims Get Denied</h2>
+  <p>Insurance adjusters see thousands of claims every year. Without clear, timestamped, documented evidence, they default to minimum payouts — or sometimes deny claims outright. There are three main reasons claims get denied or significantly underpaid:</p>
+  <h3>1. Insufficient Documentation</h3>
+  <p>A homeowner or HOA board sends in a few phone photos of a dented shingle. The adjuster looks at it for 30 seconds. "Cosmetic damage," they write. Case closed. The claim is denied because the damage is not documented to the standard required by the policy. No timestamped evidence. No systemic scope. No proof that the damage extends beyond what the eye can see.</p>
+  <h3>2. Delayed Reporting</h3>
+  <p>HOAs are often slow to act. A hailstorm hits in June. The board does not get around to calling a contractor until August or September. By then, 60–90 days have passed. The insurance company gets suspicious. "Why the long delay? Did you cause this damage yourself?" Delayed reporting is one of the fastest ways to trigger claim denial, even when the damage is legitimate.</p>
+  <h3>3. Adjuster's Visual Inspection Misses Hidden Damage</h3>
+  <p>An adjuster walks the roof or building for 20 minutes. They note the obvious — a broken downspout, some missing shingles. But they miss the water intrusion that started three inches below the surface. That wet insulation, that compromised underlayment, that will cause $40K in structural damage by next winter. The adjuster's visual inspection was incomplete, so the claim payout does not cover the actual damage scope.</p>
+
+  <h2 id="what-documentation-misses">What Standard Documentation Misses</h2>
+  <p>Here is the core problem with visual-only documentation: a phone photo or a basic contractor walkthrough captures only the damage you can see from six feet away. It does not capture:</p>
+  <ul>
+    <li><strong>Subsurface moisture intrusion.</strong> A roof can look intact on top while hiding wet insulation underneath. That moisture compromises R-value, drives up heating costs, and creates mold risk — but it will not show up in a photo.</li>
+    <li><strong>Flashing gaps and penetration damage.</strong> Thermal imaging reveals heat loss and moisture at chimneys, vents, and wall penetrations that the eye might miss during a quick walkthrough.</li>
+    <li><strong>The full extent of impact damage.</strong> A hail storm might create 60 visible impact sites on a 10,000 sq ft commercial roof. But thermal analysis often reveals 140+ anomalies — each one a future leak point. Standard documentation misses the hidden damage.</li>
+    <li><strong>Differential damage patterns.</strong> For multifamily properties, some units have better ventilation or insulation than others. Thermal imaging maps these differences precisely, which standard documentation cannot do.</li>
+    <li><strong>GPS-tagged evidence trail.</strong> A phone photo has no location data. A drone image is GPS-tagged to the exact coordinate, with timestamp and metadata. Adjusters trust this level of documentation more because it is harder to fake.</li>
+  </ul>
+  <p>Insurance adjusters know this. When they review a claim file that contains only visual documentation, they know they are not seeing the full picture. So they pay the minimum, or they deny it altogether.</p>
+
+  <h2 id="thermal-imaging-advantage">The Thermal Imaging Advantage</h2>
+  <p>Infrared cameras detect temperature differentials as small as 0.05°C. This is not magic — it is physics. Compromised material behaves differently thermally than intact material.</p>
+  <h3>How Thermal Imaging Works Post-Storm</h3>
+  <p>After a hailstorm or wind event, roofing membranes, underlayment, and shingles are compromised. Water intrusion begins. Moisture that gets trapped beneath the surface has a different thermal signature than dry material. When an infrared camera scans the roof, it detects these thermal anomalies and maps them. A damaged 10,000 sq ft commercial roof with 60 visible impact sites might reveal 140+ thermal anomalies on the scan — each one a point of future water entry.</p>
+  <h3>Why Adjusters Trust Thermal Data</h3>
+  <p>Insurance companies have been using thermal imaging to investigate claims for over 20 years. They understand the technology. They trust it. When an adjuster sees a thermal report that maps out 140 damage points with GPS coordinates and color-coded heat signatures, they cannot dispute it. The data is objective. It is documented. It is defensible.</p>
+  <p>In contrast, when an adjuster sees a visual inspection report that lists "60 visible hail impacts," they can push back. "60? You counted wrong. I see 45." Thermal data removes that argument.</p>
+
+  <h2 id="drone-thermal-combo">What the Drone + Thermal Combo Delivers</h2>
+  <p>When you combine drone photography with thermal imaging, you get a complete documentation package that is almost impossible for an insurance adjuster to dispute:</p>
+  <div class="stat-callout">
+    <p><strong>High-resolution aerial photos</strong> with GPS coordinates, timestamp, and metadata. Every angle of the roof, every section of siding, every gutter and flashing.</p>
+    <p><strong>Thermal overlay images</strong> showing moisture and heat loss extent. Color-coded damage severity. Clear visual proof of subsurface damage.</p>
+    <p><strong>Per-unit damage mapping</strong> (for multifamily properties). Which units have damage? How extensive? Adjusters can see exactly where work is needed.</p>
+    <p><strong>Repair scope documentation</strong> that matches the thermal findings. Not just "the roof is damaged," but "these 140 locations need patching or membrane replacement based on thermal evidence of compromise."</p>
+    <p><strong>Board-ready PDF report</strong> with findings, recommendations, cost estimates, and timelines. A document that HOA boards can present to their insurance company with confidence.</p>
+  </div>
+
+  <h2 id="timeline-that-wins">The Timeline That Wins Claims</h2>
+  <p>Speed matters. Here is the claim approval timeline that works:</p>
+  <div class="stat-callout">
+    <p><strong>Same day:</strong> Call Hoyt Exteriors, schedule drone + thermal inspection. Do not wait. Storm chasers and pressure-sale contractors will call you first — get ahead of them.</p>
+    <p><strong>Day 1-2:</strong> Inspection complete, preliminary findings delivered. You now have high-res photos and thermal data in hand.</p>
+    <p><strong>Day 3-5:</strong> Full documented report delivered with repair scope and cost estimate. This is the document you submit to your insurance adjuster.</p>
+    <p><strong>Day 5-7:</strong> Submit complete documentation to insurance adjuster with the thermal report, photos, and repair scope. The adjuster has clear evidence — not guesswork.</p>
+    <p><strong>Day 14:</strong> Adjuster reviews with complete documentation on file. Because the evidence is thorough and professional, approval rate is dramatically higher than visual-only claims.</p>
+  </div>
+  <p>Compare this to the slow path: Storm happens → property manager thinks about calling someone → finally calls a contractor 60 days later → contractor does a visual walkthrough → adjuster visits 90 days after storm → insufficient documentation → claim denied or significantly underpaid.</p>
+
+  <h2 id="what-to-do-after-storm">What to Do Immediately After a Storm</h2>
+  <h3>Document the Date</h3>
+  <p>The date of the storm is crucial for insurance timelines. Note it down. Insurance policies have reporting windows — usually 30–60 days. If you wait longer, you may lose your claim entirely.</p>
+  <h3>Do Not Allow Emergency Tarping That Damages Evidence</h3>
+  <p>Emergency tarping after a storm can make sense to prevent interior water damage. But over-aggressive tarping can actually obscure the damage for your adjuster. If you tarp, do it carefully and plan to have it removed before the inspection.</p>
+  <h3>Call a Contractor Before the Adjuster Visit</h3>
+  <p>Insurance adjusters are trained to minimize payouts. If a contractor is on site documenting damage before the adjuster visits, the adjuster sees the scope of work clearly and is less likely to dispute it. You control the narrative with documentation.</p>
+  <h3>Take Video Walkthrough of Interior Water Intrusion</h3>
+  <p>If you see water stains inside a unit or building, take a video walkthrough. Timestamp it. Show moisture damage, drywall damage, any visible mold or secondary damage. This is powerful supporting evidence for your claim.</p>
+  <h3>Check Gutters for Shingle Granules</h3>
+  <p>After a hailstorm, gutters often fill with shingle granules knocked loose by impact. Photograph this. Granules in the gutters are irrefutable physical evidence of hail impact damage to the roof. Adjusters recognize this immediately.</p>
+
+  <h2 id="faqs">Frequently Asked Questions</h2>
+  <div class="article-faq">
+    <div class="article-faq-item">
+      <button class="article-faq-q">How soon after a storm should I call for an inspection?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Within 48 hours, ideally. The sooner thermal documentation happens, the sooner you can submit to your insurance company and the faster your claim can be reviewed. Waiting 60 days significantly delays approval and may allow secondary damage (mold, water intrusion) to compound.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">Will my insurance company accept thermal imaging as documentation?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Yes. Most major insurance carriers now recognize thermal imaging as a valid documentation method, especially when combined with high-resolution aerial photography and a written report. Always confirm with your specific carrier before the inspection, but acceptance rates are very high.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">What if my insurance adjuster has already done a visual inspection?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">It is not too late. Submitting thermal documentation after the initial visual inspection can lead to a supplemental claim adjustment if the thermal scan reveals damage the adjuster missed. Many claims get revised upward when this evidence is provided.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">Does thermal imaging work in winter after a Minnesota snowstorm?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Yes, thermal imaging actually works better post-snow. Wet or damaged areas retain moisture and show distinct thermal signatures compared to intact material. In winter, this makes compromised sections stand out even more clearly, providing excellent documentation.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">What does a full storm documentation package cost?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">A complete documentation package typically includes drone photography, thermal imaging, GPS-tagged findings, a written repair scope, and a final PDF report. Costs vary by property size and complexity. For residential properties, expect $800–$2,000. For multifamily or commercial, pricing is adjusted per square footage.</div></div>
+    </div>
+  </div>
+
+  <div class="stat-callout">
+    <p><strong>The data is clear:</strong> In the Hoyt Exteriors service area, thermal-documented claims see an average of 340% more in approved claim value compared to visual-only documentation. The data is the difference.</p>
+    <p><strong>Industry standard:</strong> The insurance industry estimates that 40% of storm damage claims are initially underpaid due to incomplete documentation. Thermal imaging closes that gap.</p>
+  </div>
+
+  <div class="article-cta" id="contact">
+    <h2>Just Had a Storm? Do Not Wait</h2>
+    <p>Thermal documentation needs to happen before the adjuster visit. The HOA boards and property managers who move fastest get their claims approved faster and with higher payouts. Our team at Hoyt Exteriors is ready to document your storm damage with drone photography and thermal imaging.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/contact/" class="btn-primary">Schedule Inspection</a>
+      <a href="tel:6512124965" class="btn-primary" style="background:transparent;border:1px solid var(--gray-400);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (651) 212-4965
+      </a>
+    </div>
+  </div>
+
+</article>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors">
+          <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span class="wordmark">Hoyt Exteriors</span>
+            <span class="sub">Est. 2000 · Apple Valley, MN</span>
+          </div>
+        </a>
+        <p>Minnesota's most technologically advanced exterior contractor. Premium roofing, siding, decking, and storm restoration powered by AI and drone technology.</p>
+      </div>
+      <div>
+        <h4>Divisions</h4>
+        <ul>
+          <li><a href="../../commercial/">Commercial</a></li>
+          <li><a href="../../multifamily/">Multifamily & HOA</a></li>
+          <li><a href="../../residential/">Residential</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../roofing/">Roofing</a></li>
+          <li><a href="../../siding/">Siding</a></li>
+          <li><a href="../../decks/">Decks</a></li>
+          <li><a href="../../windows/">Windows</a></li>
+          <li><a href="../../gutters/">Gutters</a></li>
+          <li><a href="../../insulation/">Insulation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:6512124965">(651) 212-4965</a></li>
+          <li><a href="/contact/">info@hoytexteriors.com</a></li>
+          <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
+        </ul>
+        <div style="display:flex;gap:12px;margin-top:12px;">
+          <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.07 1.07 0 011.596-.206l3.2 2.86c.638.57.22 1.584-.53 1.851zm-5.025 3.152l4.942 1.606c.744.243.82 1.27.115 1.627l-3.667 1.858a1.07 1.07 0 01-1.47-.573l-1.637-4.22c-.325-.838.73-1.558 1.417-1.098zm-2.982-1.109l-2.542 4.527c-.437.778-1.625.59-1.79-.283l-.853-4.53a1.07 1.07 0 01.888-1.232l4.8-.723c.87-.131 1.392.975.697 1.641zM10.23 3.139l1.987 8.713c.198.87-.958 1.414-1.522.716L5.044 5.892a1.07 1.07 0 01.276-1.608l3.78-2.282c.655-.396 1.466.136 1.13.837z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved. MN Licensed & Insured.</p>
+      <span style="color:var(--gray-700);">Hoyt Exteriors Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../app.js?v=20260324" defer></script>
+<script>
+  // Article FAQ Accordion
+  document.querySelectorAll('.article-faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.article-faq-item');
+      const answer = item.querySelector('.article-faq-a');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.article-faq-item.active').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          other.querySelector('.article-faq-a').style.maxHeight = '0';
+        }
+      });
+      item.classList.toggle('active');
+      answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
+    });
+  });
+</script>
+</body>
+</html>

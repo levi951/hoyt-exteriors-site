@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<style>
+/* Critical CSS - above the fold */
+:root{--red:#C41E3A;--black:#0A0A0A;--black-2:#111;--white:#FFF;--gray-300:#B8B8B8;--gray-400:#888;--gray-700:#333;--font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-brand:'Montserrat',var(--font);--space-md:16px;--space-lg:24px;--space-xl:40px;--radius-md:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-lg)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.nav .container{padding:0 var(--space-lg)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--white)}
+.nav-logo-icon{width:36px;height:36px}
+.wordmark{font-family:var(--font-brand);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em}
+.nav-logo .sub{font-size:0.6rem;color:var(--gray-400);display:block;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--gray-300);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s}
+.nav-cta{background:var(--red);color:var(--white)!important;padding:10px 20px;border-radius:4px;font-weight:700;letter-spacing:0.04em;font-size:0.8rem!important;text-transform:uppercase}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;transition:0.3s}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+</style>
+<meta charset="UTF-8">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="dns-prefetch" href="https://app.roofle.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minnesota Winter: The Exterior Maintenance Schedule Every HOA Should Follow | Hoyt Exteriors</title>
+<meta name="description" content="Minnesota's winters are brutal on building exteriors. Here's the month-by-month maintenance checklist HOA boards and property managers use to prevent costly spring surprises.">
+<meta property="og:title" content="Minnesota Winter: The Exterior Maintenance Schedule Every HOA Should Follow">
+<meta property="og:description" content="Minnesota's winters are brutal on building exteriors. Here's the month-by-month maintenance checklist HOA boards and property managers use to prevent costly spring surprises.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://hoytexteriors.com/articles/minnesota-hoa-winter-maintenance/">
+<meta property="og:url" content="https://hoytexteriors.com/articles/minnesota-hoa-winter-maintenance/">
+<meta property="og:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Hoyt Exteriors">
+<meta property="article:published_time" content="2025-11-01T00:00:00-05:00">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Minnesota Winter: The Exterior Maintenance Schedule Every HOA Should Follow">
+<meta name="twitter:description" content="Minnesota's winters are brutal on building exteriors. Here's the month-by-month maintenance checklist HOA boards and property managers use to prevent costly spring surprises.">
+<meta name="twitter:image" content="https://hoytexteriors.com/assets/hero.jpg">
+<meta name="geo.region" content="US-MN">
+<meta name="geo.placename" content="Minneapolis">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C41E3A'/%3E%3Cpath d='M16 5L4 15h4v12h6v-8h4v8h6V15h4L16 5z' fill='white'/%3E%3C/svg%3E">
+
+<link rel="preload" as="style" href="../../style.css?v=20260324">
+<link href="../../style.css?v=20260324" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="../../style.css?v=20260324" rel="stylesheet"></noscript>
+
+<!-- Roofle Slideout Widget -->
+<script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://hoytexteriors.com/articles/minnesota-hoa-winter-maintenance/#article",
+      "headline": "Minnesota Winter: The Exterior Maintenance Schedule Every HOA Should Follow",
+      "description": "Minnesota's winters are brutal on building exteriors. Here's the month-by-month maintenance checklist HOA boards and property managers use to prevent costly spring surprises.",
+      "datePublished": "2025-11-01",
+      "dateModified": "2025-11-01",
+      "author": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Hoyt Exteriors, Inc.",
+        "url": "https://hoytexteriors.com"
+      },
+      "mainEntityOfPage": "https://hoytexteriors.com/articles/minnesota-hoa-winter-maintenance/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much snow weight can a flat commercial roof handle in Minnesota?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most modern commercial roofs are designed to handle 25–40 lbs per square foot of snow load. Minnesota's average annual snowfall creates variable loads, but heavy wet snow can exceed design capacity quickly. Professional snow removal is recommended when accumulation exceeds 12 inches on flat or low-slope roofs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the first signs of ice dam damage inside a unit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look for water stains on ceilings near exterior walls, soft or bubbling drywall, visible mold or dark spots on ceiling paint, and water pooling in corners during freeze-thaw cycles. Early detection prevents tens of thousands in structural damage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do we budget for winter maintenance in our HOA reserve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Plan for 2–3% of your annual budget for winter maintenance and emergency repairs. Most HOA reserve studies recommend 10–25% set aside for capital improvements annually, with winter-related work comprising a significant portion in Minnesota climates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can roof repairs be done in winter in Minnesota?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Emergency repairs can be done year-round, but most membrane roofing systems require temperatures above 40°F for proper installation. Winter work is typically limited to tarping, emergency patching, and snow removal. Major replacements are scheduled for spring through fall."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should we inspect gutters in the fall?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At minimum, conduct a thorough gutter inspection in late October and early November before winter storms arrive. If your property is surrounded by deciduous trees, inspect after major leaf-drop events. Monthly checks during fall are ideal for properties in heavily wooded areas."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* Article-specific styles */
+.article-hero {
+  padding: 140px 24px 60px;
+  text-align: center;
+  background: var(--black);
+  position: relative;
+}
+.article-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196,30,58,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.article-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+.article-meta {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 20px;
+}
+.article-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900;
+  line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px;
+}
+.article-hero .lead {
+  font-size: 1.1rem; line-height: 1.7; color: var(--gray-400);
+  max-width: 640px; margin: 0 auto;
+}
+.article-body {
+  max-width: 760px; margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+.article-body h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 800;
+  letter-spacing: -0.01em; margin: 56px 0 16px; color: var(--white);
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.article-body h3 {
+  font-size: 1.15rem; font-weight: 700; margin: 36px 0 12px; color: var(--white);
+}
+.article-body p {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 20px;
+}
+.article-body ul, .article-body ol {
+  padding-left: 24px; margin-bottom: 20px;
+}
+.article-body li {
+  font-size: 1rem; line-height: 1.8; color: var(--gray-300);
+  margin-bottom: 8px;
+}
+.article-body strong { color: var(--white); }
+.article-body .stat-callout {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-left: 3px solid var(--red); border-radius: 8px;
+  padding: 20px 24px; margin: 28px 0;
+}
+.article-body .stat-callout p { margin-bottom: 8px; color: var(--gray-300); }
+.article-body .stat-callout p:last-child { margin-bottom: 0; }
+.maintenance-table {
+  width: 100%; border-collapse: collapse;
+  margin: 32px 0; font-size: 0.95rem;
+}
+.maintenance-table th, .maintenance-table td {
+  padding: 12px 16px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.maintenance-table th {
+  background: var(--black-2); font-weight: 700; color: var(--white);
+}
+.maintenance-table td { color: var(--gray-300); }
+.maintenance-table td:first-child { color: var(--white); font-weight: 600; }
+.priority-high { color: var(--red); font-weight: 600; }
+.priority-medium { color: #FFB800; font-weight: 600; }
+.priority-low { color: var(--gray-400); font-weight: 600; }
+.article-faq {
+  margin: 48px 0; padding: 0;
+}
+.article-faq-item {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; margin-bottom: 12px; overflow: hidden;
+}
+.article-faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 18px 20px; background: none; border: none;
+  cursor: pointer; font-family: var(--font); font-size: 0.95rem;
+  font-weight: 600; color: var(--white); text-align: left; gap: 16px;
+}
+.article-faq-q:hover { color: var(--gray-300); }
+.article-faq-a {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+}
+.article-faq-a-inner {
+  padding: 0 20px 18px; font-size: 0.9rem; line-height: 1.7; color: var(--gray-400);
+}
+.article-faq-icon {
+  width: 20px; height: 20px; min-width: 20px; color: var(--gray-400);
+  transition: transform 0.3s, color 0.3s;
+}
+.article-faq-item.active .article-faq-icon { transform: rotate(45deg); color: var(--red); }
+.article-cta {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 12px; padding: 40px 32px; text-align: center;
+  margin: 56px 0 0;
+}
+.article-cta h2 { border: none; padding-top: 0; margin-top: 0; text-align: center; }
+.article-cta p { max-width: 560px; margin: 0 auto 24px; }
+.article-cta .btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 16px 32px; background: var(--red); color: var(--white);
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border-radius: 8px; transition: background 0.25s, transform 0.2s;
+}
+.article-cta .btn-primary:hover { background: #9B1830; transform: translateY(-1px); }
+.article-toc {
+  background: var(--black-2); border: 1px solid var(--gray-700);
+  border-radius: 10px; padding: 24px 28px; margin-bottom: 40px;
+}
+.article-toc h3 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--gray-400); margin: 0 0 12px; }
+.article-toc ol { padding-left: 20px; margin: 0; }
+.article-toc li { margin-bottom: 6px; }
+.article-toc a { color: var(--gray-300); text-decoration: none; font-size: 0.9rem; }
+.article-toc a:hover { color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors — Home">
+        <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+          <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span class="wordmark">Hoyt Exteriors</span>
+          <span class="sub">Est. 2000 · Apple Valley, MN</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../../about/">About</a>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-trigger">Services</button>
+          <div class="nav-dropdown-menu">
+            <a href="../../roofing/">Roofing</a>
+            <a href="../../siding/">Siding</a>
+            <a href="../../decks/">Decks</a>
+            <a href="../../windows/">Windows</a>
+            <a href="../../gutters/">Gutters</a>
+            <a href="../../insulation/">Insulation</a>
+          </div>
+        </div>
+        <a href="../../testimonials/">Testimonials</a>
+        <a href="../../contact/">Contact</a>
+        <a href="tel:6512124965">(651) 212-4965</a>
+        <a href="#contact" class="nav-cta">Get A Quote</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer-overlay"></div>
+<div class="mobile-drawer">
+  <a href="../../" style="color:var(--red);font-weight:700;">Home</a>
+  <a href="../../commercial/">Commercial</a>
+  <a href="../../multifamily/">Multifamily & HOA</a>
+  <a href="../../residential/">Residential</a>
+  <hr style="border:none;border-top:1px solid var(--gray-700);margin:8px 0;">
+  <a href="../../about/">About</a>
+  <a href="../../roofing/">Roofing</a>
+  <a href="../../siding/">Siding</a>
+  <a href="../../decks/">Decks</a>
+  <a href="../../windows/">Windows</a>
+  <a href="../../gutters/">Gutters</a>
+  <a href="../../insulation/">Insulation</a>
+  <a href="../../testimonials/">Testimonials</a>
+  <a href="../../contact/">Contact</a>
+  <a href="tel:6512124965">(651) 212-4965</a>
+  <a href="../../contact/" style="background:var(--red);color:white;text-align:center;border-radius:4px;margin-top:16px;border:none;">Get A Quote</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta reveal">Hoyt Exteriors · November 2025 · 14 min read</div>
+    <h1 class="reveal reveal-delay-1">Minnesota Winter: The Exterior Maintenance Schedule Every HOA Should Follow</h1>
+    <p class="lead reveal reveal-delay-2">Minnesota gives your building exterior 40–60 freeze-thaw cycles every winter. Each one is a test. Here is how to make sure your community passes.</p>
+  </div>
+</section>
+
+<!-- ARTICLE BODY -->
+<article class="article-body">
+
+  <nav class="article-toc reveal">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li><a href="#why-minnesota-winters">Why Minnesota Winters Are Different</a></li>
+      <li><a href="#pre-winter-checklist">The Pre-Winter Checklist (September–October)</a></li>
+      <li><a href="#november-before-freeze">November: Before the Ground Freezes</a></li>
+      <li><a href="#december-february-monitoring">December–February: Active Winter Monitoring</a></li>
+      <li><a href="#ice-dam-problem">The Ice Dam Problem — and How to Prevent It</a></li>
+      <li><a href="#spring-assessment">March–April: Spring Assessment</a></li>
+      <li><a href="#capital-reserve-planning">Building a Capital Reserve Plan Around the Minnesota Calendar</a></li>
+      <li><a href="#maintenance-calendar">Maintenance Calendar</a></li>
+      <li><a href="#faqs">FAQs</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="why-minnesota-winters">Why Minnesota Winters Are Different</h2>
+  <p>Minnesota's climate is relentless. Your building exterior does not just experience winter once—it experiences it dozens of times. Here is what the numbers actually mean for an HOA:</p>
+  <div class="stat-callout">
+    <p><strong>40–60 freeze-thaw cycles per year</strong> in the Twin Cities. Every time moisture in roofing materials freezes and expands, then thaws and contracts, it weakens seams, flashing, and membrane adhesion. Over a 20-year lifespan, a roof experiences 800–1,200 freeze-thaw cycles. Each one is stress.</p>
+    <p><strong>Temperature swings of 100+ degrees Fahrenheit</strong> between summer highs (above 95°F) and winter lows (below -30°F with wind chill). Few building materials handle that range without degradation over time. Caulk cracks. Siding separates. Roofing membranes become brittle.</p>
+    <p><strong>Average annual snowfall in Minneapolis: 54 inches.</strong> Snow load stress on flat commercial roofs is a real structural concern, especially on older buildings. A single wet-snow event can load a roof at 25–40 lbs per square foot—the design limit for many buildings.</p>
+    <p><strong>20–30 hail days per year,</strong> with the Twin Cities sitting in a corridor that sees significant storm activity from May through September. Storm damage is not theoretical in Minnesota—it is an annual planning item.</p>
+  </div>
+  <p>For an HOA, this means deferred maintenance does not just add up—it compounds. A single harsh winter can add $200K to your 5-year capital reserve plan if exterior maintenance has been deferred. This schedule exists to prevent that outcome.</p>
+
+  <h2 id="pre-winter-checklist">The Pre-Winter Checklist (September–October)</h2>
+  <h3>Gutter Cleaning and Inspection</h3>
+  <p>Leaves from September storms clog gutters. Clogged gutters hold water and ice, leading to ice dams and overflow damage to siding and foundations. Schedule professional gutter cleaning by mid-October, before the first hard freeze. Inspect for:</p>
+  <ul>
+    <li>Debris accumulation and leaf dams</li>
+    <li>Sagging sections (indicates standing water weight)</li>
+    <li>Separation from fascia (loose fasteners or damage)</li>
+    <li>Rust or corrosion spots on metal gutters</li>
+    <li>Clogged downspouts (water backup indicator)</li>
+  </ul>
+  <h3>Roof Inspection Focusing on Flashing, Valleys, and Penetrations</h3>
+  <p>The roof is your primary defense. Before winter, inspect:</p>
+  <ul>
+    <li>Flashing around chimneys, vents, and wall penetrations for gaps, separation, or caulk failure</li>
+    <li>Valleys (where two roof planes meet) for debris, dams, or water staining</li>
+    <li>Shingles for missing granules, curling, or damage from summer storms</li>
+    <li>Any ponding water on flat sections (indicates possible drainage or structural issues)</li>
+  </ul>
+  <h3>Caulk Inspection Around Windows and Doors</h3>
+  <p>Caulking is a thermal barrier and water seal. Inspect all window and door caulking. Look for:</p>
+  <ul>
+    <li>Cracked, peeling, or missing caulk (these become ice pathways in winter)</li>
+    <li>Gaps wider than 1/4 inch (require professional re-caulking)</li>
+    <li>Dark stains or mold growth (sign of water infiltration)</li>
+  </ul>
+  <p>Replacing failed caulk before winter prevents interior water damage and ice dam formation around penetrations.</p>
+  <h3>Downspout Extensions and Foundation Drainage</h3>
+  <p>Downspouts must direct water at least 6 feet from the foundation. Verify:</p>
+  <ul>
+    <li>Downspouts are clear and flowing</li>
+    <li>Extensions are in place and not frozen/blocked</li>
+    <li>Water does not pool near foundation or building perimeter</li>
+  </ul>
+  <h3>Siding Inspection for Cracks and Gaps</h3>
+  <p>Cracks and gaps become ice pathways. Water enters through small gaps, freezes, expands, and creates larger damage. Inspect siding for:</p>
+  <ul>
+    <li>Visible cracks (even hairline cracks collect water)</li>
+    <li>Missing or damaged trim pieces</li>
+    <li>Gaps where siding meets windows, doors, or foundation</li>
+    <li>Paint failure or water staining (indicates previous water entry)</li>
+  </ul>
+  <p>Mark compromised areas with flags for spring repair scheduling.</p>
+
+  <h2 id="november-before-freeze">November: Before the Ground Freezes</h2>
+  <h3>Tree Trimming Near Structures</h3>
+  <p>Branch weight from ice and snow can collapse overhanging branches onto roofs, gutters, and siding. Trim back branches more than 10 feet above the roofline and 6 feet from the building perimeter. This also reduces leaf litter in gutters.</p>
+  <h3>Exterior Faucet Shutoffs and Pipe Insulation</h3>
+  <p>Freeze damage to exterior water lines is expensive. Before the first frost:</p>
+  <ul>
+    <li>Shut off water to all exterior faucets</li>
+    <li>Drain hoses and remove them from connections</li>
+    <li>Insulate exposed exterior pipes with foam pipe wrap or fiberglass insulation</li>
+    <li>Verify that irrigation systems are winterized and drained</li>
+  </ul>
+  <h3>Common Area Walkway Seal Coat</h3>
+  <p>Asphalt and concrete expand and contract with freeze-thaw cycles. Applying a seal coat in November (before hard freezes) provides a moisture barrier that reduces damage. Reapply annually for best results.</p>
+  <h3>Parking Lot Crack Sealing</h3>
+  <p>Water seeps into cracks in parking lots. In winter, that water freezes, expands, and widening the cracks exponentially. Professional crack sealing before November prevents this compounding damage.</p>
+
+  <h2 id="december-february-monitoring">December–February: Active Winter Monitoring</h2>
+  <h3>Ice Dam Watch</h3>
+  <p>Ice dams are the most expensive winter problem for Minnesota HOAs. Watch for them after every significant freeze-thaw event. Warning signs:</p>
+  <ul>
+    <li>Visible icicles forming from eaves (especially on south-facing and west-facing exposures)</li>
+    <li>Ice forming at the roof edge or gutters</li>
+    <li>Water stains on interior ceilings near exterior walls</li>
+    <li>Bulging or soft drywall (sign of water infiltration from above)</li>
+  </ul>
+  <p>If ice dams form, contact a professional immediately. DIY ice dam removal can damage roofing and is dangerous. Prevention (proper insulation and ventilation) is far cheaper than remediation.</p>
+  <h3>Snow Removal from Flat Roofs</h3>
+  <p>Snow weight is structural. Keep loading off flat and low-slope roofs. Design limits are typically 25–40 lbs per square foot. Wet, dense snow can exceed this quickly. Professional snow removal is recommended when accumulation exceeds 12 inches on:</p>
+  <ul>
+    <li>Flat commercial roofs</li>
+    <li>Low-slope multifamily roofs</li>
+    <li>Any roof over 5,000 sq ft</li>
+  </ul>
+  <p>Residential steep-slope roofs (pitch 6:12 or greater) typically do not need snow removal, as snow slides off naturally.</p>
+  <h3>Monthly Visual Checks</h3>
+  <p>Walk the perimeter monthly during December–February. Look for:</p>
+  <ul>
+    <li>New cracks in siding or foundation</li>
+    <li>Gutter damage or sagging from snow/ice weight</li>
+    <li>Downspout blockages from ice</li>
+    <li>Areas where snow is melting unevenly (possible heat loss or ice dam formation)</li>
+  </ul>
+
+  <h2 id="ice-dam-problem">The Ice Dam Problem — and How to Prevent It</h2>
+  <h3>Why Ice Dams Form</h3>
+  <p>An ice dam is not just an icicle—it is a barrier of ice that traps water on the roof. Here is how it happens:</p>
+  <ol>
+    <li><strong>Warm attic air melts snow:</strong> If your attic is poorly insulated or ventilation is inadequate, heat escapes through the roof. That heat melts snow near the ridge.</li>
+    <li><strong>Water runs down to cold eaves:</strong> The meltwater runs down the roof toward the eaves, where the roof extends beyond the heated building and stays below freezing.</li>
+    <li><strong>Water refreezes at the eaves:</strong> The water hits the cold eaves and refreezes, forming an ice barrier. More water backs up behind it.</li>
+    <li><strong>Water infiltrates under shingles:</strong> With nowhere to go, the backed-up water flows under shingles, down through flashing gaps, and into walls and attics. Interior water damage follows.</li>
+  </ol>
+  <h3>Ice Dam Prevention (The Real Solution)</h3>
+  <p>Proper ice dam prevention requires three elements:</p>
+  <div class="stat-callout">
+    <p><strong>Attic insulation:</strong> R-49 or higher recommended for Minnesota. Proper insulation prevents heat from escaping through the roof and melting snow at the ridge.</p>
+    <p><strong>Attic ventilation:</strong> 1 sq ft of ventilation opening for every 150 sq ft of attic floor space. Proper ventilation allows cold outdoor air to circulate under the roof decking, keeping eaves below freezing.</p>
+    <p><strong>Air sealing around attic penetrations:</strong> Electrical chases, pipe penetrations, and dampers allow warm air to leak into the attic. Sealing these prevents heat loss and ice dam formation.</p>
+  </div>
+  <p><strong>For multifamily properties:</strong> Verify that all units' attic spaces are uniformly insulated. The most common cause of ice dams in multifamily buildings is variance between units—some are well-insulated, others are not. Cold units with poor insulation become ice dam zones while warm units next door remain ice-free.</p>
+
+  <h2 id="spring-assessment">March–April: Spring Assessment</h2>
+  <p>This is the critical inspection window. After the final thaw, conduct a comprehensive exterior assessment:</p>
+  <h3>Shingle and Membrane Inspection</h3>
+  <ul>
+    <li>Look for shingle granule loss in gutters and downspouts (indicates shingle damage from freeze-thaw stress)</li>
+    <li>Check for any membrane blistering or separating on flat roofs</li>
+    <li>Verify that flashing has not lifted or separated</li>
+  </ul>
+  <h3>Flashing and Penetration Gaps</h3>
+  <ul>
+    <li>Inspect chimneys, vents, and wall penetrations for new gaps or caulk failure</li>
+    <li>Look for evidence of water entry (staining, mold, soft wood)</li>
+    <li>Check that flashing is properly sealed and adhered</li>
+  </ul>
+  <h3>Fascia and Soffit Rot</h3>
+  <ul>
+    <li>Press fascia boards—soft spots indicate rot from water infiltration (often caused by ice dam backup)</li>
+    <li>Check soffit vents for proper ventilation and clearance from debris</li>
+    <li>Look for paint failure or wood discoloration</li>
+  </ul>
+  <h3>Siding Separation and Warping</h3>
+  <ul>
+    <li>Freeze-thaw cycles can separate siding from its base or cause warping</li>
+    <li>Look for gaps appearing between siding pieces or around trim</li>
+    <li>Check caulking for new cracks or separations</li>
+  </ul>
+  <h3>Foundation and Walkway Cracks</h3>
+  <ul>
+    <li>New cracks in concrete or foundation are common after harsh winters</li>
+    <li>Check parking lot and walkway cracks—prioritize for summer repair</li>
+  </ul>
+  <h3>Schedule Thermal Inspection in April</h3>
+  <p>In April, before heating costs drop, schedule a professional thermal inspection of your buildings. Thermal imaging reveals:</p>
+  <ul>
+    <li>Hidden moisture damage from ice dams</li>
+    <li>Insulation voids or compression</li>
+    <li>Air leakage pathways (draft sources)</li>
+  </ul>
+  <p>This data allows you to catch hidden damage before it compounds through summer and into next winter.</p>
+
+  <h2 id="capital-reserve-planning">Building a Capital Reserve Plan Around the Minnesota Calendar</h2>
+  <p>Minnesota's seasonal cycle creates a natural planning rhythm for your capital reserve funding:</p>
+  <ul>
+    <li><strong>April–May:</strong> Spring inspection data comes in. Board meets and evaluates damage. Thermal inspection reveals hidden issues. This data feeds into capital reserve updates.</li>
+    <li><strong>May–June:</strong> Board approves capital reserve projections based on spring findings. Budget updates reflect winter damage and upcoming work needs.</li>
+    <li><strong>July–August:</strong> Bid collection period. Contractors estimate costs for identified repairs (roof patching, flashing replacement, siding repairs, ice dam remediation, etc.).</li>
+    <li><strong>September–October:</strong> Project scheduling. Multifamily and commercial buildings can often accommodate exterior work in fall (after summer heat but before winter). Spring roofing work is also scheduled during this planning window.</li>
+    <li><strong>November–December:</strong> Emergency response mode. Winter monitoring and reactive repairs only. No major capital work scheduled.</li>
+    <li><strong>January–March:</strong> Winter observation and documentation. Data collection for next spring's inspection cycle.</li>
+  </ul>
+  <p>This cycle keeps communities ahead of deferred maintenance and prevents the $200K capital reserve shocks that hit HOAs with reactive (rather than proactive) maintenance approaches.</p>
+
+  <h2 id="maintenance-calendar">Maintenance Calendar and Priority Guide</h2>
+  <table class="maintenance-table">
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Task</th>
+        <th>Priority</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>September</td>
+        <td>Fall gutter inspection, leaf monitoring</td>
+        <td><span class="priority-medium">Medium</span></td>
+        <td>Schedule gutter cleaning for October</td>
+      </tr>
+      <tr>
+        <td>October</td>
+        <td>Professional gutter cleaning, roof inspection, caulk assessment</td>
+        <td><span class="priority-high">High</span></td>
+        <td>Complete before first hard freeze</td>
+      </tr>
+      <tr>
+        <td>November</td>
+        <td>Tree trimming, exterior faucet shutoffs, parking lot seal coat, crack sealing</td>
+        <td><span class="priority-high">High</span></td>
+        <td>Final preparations before winter</td>
+      </tr>
+      <tr>
+        <td>December–February</td>
+        <td>Ice dam watch, snow removal from flat roofs, monthly visual checks</td>
+        <td><span class="priority-high">High</span></td>
+        <td>Active monitoring and emergency response</td>
+      </tr>
+      <tr>
+        <td>March</td>
+        <td>Post-thaw inspection planning, thermal inspection scheduling</td>
+        <td><span class="priority-medium">Medium</span></td>
+        <td>Prepare for April assessment</td>
+      </tr>
+      <tr>
+        <td>April</td>
+        <td>Comprehensive spring inspection, thermal imaging, damage documentation</td>
+        <td><span class="priority-high">High</span></td>
+        <td>Critical for capital reserve planning</td>
+      </tr>
+      <tr>
+        <td>May</td>
+        <td>Board meeting, capital reserve review, bid collection begins</td>
+        <td><span class="priority-high">High</span></td>
+        <td>Budget decisions based on spring data</td>
+      </tr>
+      <tr>
+        <td>June–August</td>
+        <td>Project execution, roof repairs, siding repairs, flashing replacement</td>
+        <td><span class="priority-medium">Medium</span></td>
+        <td>Prioritize based on spring inspection findings</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 id="faqs">Frequently Asked Questions</h2>
+  <div class="article-faq">
+    <div class="article-faq-item">
+      <button class="article-faq-q">How much snow weight can a flat commercial roof handle in Minnesota?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Most modern commercial roofs are designed to handle 25–40 lbs per square foot of snow load. Minnesota's average annual snowfall creates variable loads, but heavy wet snow can exceed design capacity quickly. Professional snow removal is recommended when accumulation exceeds 12 inches on flat or low-slope roofs.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">What are the first signs of ice dam damage inside a unit?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Look for water stains on ceilings near exterior walls, soft or bubbling drywall, visible mold or dark spots on ceiling paint, and water pooling in corners during freeze-thaw cycles. Early detection prevents tens of thousands in structural damage.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">How do we budget for winter maintenance in our HOA reserve?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Plan for 2–3% of your annual budget for winter maintenance and emergency repairs. Most HOA reserve studies recommend 10–25% set aside for capital improvements annually, with winter-related work comprising a significant portion in Minnesota climates.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">Can roof repairs be done in winter in Minnesota?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">Emergency repairs can be done year-round, but most membrane roofing systems require temperatures above 40°F for proper installation. Winter work is typically limited to tarping, emergency patching, and snow removal. Major replacements are scheduled for spring through fall.</div></div>
+    </div>
+    <div class="article-faq-item">
+      <button class="article-faq-q">How often should we inspect gutters in the fall?<svg class="article-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <div class="article-faq-a"><div class="article-faq-a-inner">At minimum, conduct a thorough gutter inspection in late October and early November before winter storms arrive. If your property is surrounded by deciduous trees, inspect after major leaf-drop events. Monthly checks during fall are ideal for properties in heavily wooded areas.</div></div>
+    </div>
+  </div>
+
+  <div class="stat-callout">
+    <p><strong>The Minnesota average:</strong> An HOA that defers one season of exterior maintenance adds an estimated $18,000–$45,000 to their next capital reserve call. Prevention costs a fraction of repair.</p>
+    <p><strong>Ice dam insurance claims:</strong> Ice dams account for 28% of all HOA winter insurance claims in the Twin Cities metro. Proper attic insulation and gutters eliminate 90% of ice dam risk.</p>
+  </div>
+
+  <div class="article-cta" id="contact">
+    <h2>Want a Professional Eye on Your Community?</h2>
+    <p>Whether you are preparing for winter or assessing spring damage, our team at Hoyt Exteriors is ready to provide a comprehensive inspection. We document existing conditions, identify deferred maintenance, and help you build a capital reserve plan that prevents costly surprises.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/contact/" class="btn-primary">Schedule Inspection</a>
+      <a href="tel:6512124965" class="btn-primary" style="background:transparent;border:1px solid var(--gray-400);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call (651) 212-4965
+      </a>
+    </div>
+  </div>
+
+</article>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../../" class="nav-logo" aria-label="Hoyt Exteriors">
+          <svg width="36" height="36" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="1" y="1" width="40" height="40" rx="8" stroke="#C41E3A" stroke-width="2" fill="none"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" fill="#C41E3A" opacity="0.15"/>
+            <path d="M21 8L7 20h4v14h8v-9h4v9h8V20h4L21 8z" stroke="#C41E3A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span class="wordmark">Hoyt Exteriors</span>
+            <span class="sub">Est. 2000 · Apple Valley, MN</span>
+          </div>
+        </a>
+        <p>Minnesota's most technologically advanced exterior contractor. Premium roofing, siding, decking, and storm restoration powered by AI and drone technology.</p>
+      </div>
+      <div>
+        <h4>Divisions</h4>
+        <ul>
+          <li><a href="../../commercial/">Commercial</a></li>
+          <li><a href="../../multifamily/">Multifamily & HOA</a></li>
+          <li><a href="../../residential/">Residential</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="../../roofing/">Roofing</a></li>
+          <li><a href="../../siding/">Siding</a></li>
+          <li><a href="../../decks/">Decks</a></li>
+          <li><a href="../../windows/">Windows</a></li>
+          <li><a href="../../gutters/">Gutters</a></li>
+          <li><a href="../../insulation/">Insulation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:6512124965">(651) 212-4965</a></li>
+          <li><a href="/contact/">info@hoytexteriors.com</a></li>
+          <li><a href="https://maps.google.com/maps?q=15112+Galaxie+Ave,+Apple+Valley,+MN+55124" target="_blank" rel="noopener">15112 Galaxie Ave<br>Apple Valley, MN 55124</a></li>
+        </ul>
+        <div style="display:flex;gap:12px;margin-top:12px;">
+          <a href="https://www.facebook.com/hoytconstructionandexteriors" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.yelp.com/biz/hoyt-exteriors-apple-valley" target="_blank" rel="noopener noreferrer" aria-label="Yelp" style="color:var(--gray-400);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.16 12.594l-4.995 1.433c-.96.276-1.74-.8-1.176-1.63l2.905-4.308a1.07 1.07 0 011.596-.206l3.2 2.86c.638.57.22 1.584-.53 1.851zm-5.025 3.152l4.942 1.606c.744.243.82 1.27.115 1.627l-3.667 1.858a1.07 1.07 0 01-1.47-.573l-1.637-4.22c-.325-.838.73-1.558 1.417-1.098zm-2.982-1.109l-2.542 4.527c-.437.778-1.625.59-1.79-.283l-.853-4.53a1.07 1.07 0 01.888-1.232l4.8-.723c.87-.131 1.392.975.697 1.641zM10.23 3.139l1.987 8.713c.198.87-.958 1.414-1.522.716L5.044 5.892a1.07 1.07 0 01.276-1.608l3.78-2.282c.655-.396 1.466.136 1.13.837z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Hoyt Exteriors Inc. All rights reserved. MN Licensed & Insured.</p>
+      <span style="color:var(--gray-700);">Hoyt Exteriors Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../app.js?v=20260324" defer></script>
+<script>
+  // Article FAQ Accordion
+  document.querySelectorAll('.article-faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.article-faq-item');
+      const answer = item.querySelector('.article-faq-a');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.article-faq-item.active').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          other.querySelector('.article-faq-a').style.maxHeight = '0';
+        }
+      });
+      item.classList.toggle('active');
+      answer.style.maxHeight = isActive ? '0' : answer.scrollHeight + 'px';
+    });
+  });
+</script>
+</body>
+</html>
