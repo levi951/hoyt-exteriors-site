@@ -31,8 +31,8 @@
   Cache-Control: public, max-age=3600, must-revalidate
 
 /robots.txt
-  Content-Signal: search=yes, ai-train=yes, ai-input=yes
-  Cache-Control: public, max-age=3600
+  Content-Signal: search=yes,ai-train=yes,ai-input=yes
+  Cache-Control: public, max-age=86400
 
 /command/*
   X-Robots-Tag: noindex, nofollow
