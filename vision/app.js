@@ -51,7 +51,7 @@ function initializeSettings() {
     const wraybotToken = document.getElementById('wraybotToken');
     const enableVoiceOutput = document.getElementById('enableVoiceOutput');
 
-    geminiKey.value = savedSettings.geminiKey || 'AIzaSyBzCrI6LjRBb4CE5QA8PLPEdhzzH2hyYBU';
+    geminiKey.value = savedSettings.geminiKey || 'AIzaSyCt4mtXYoafxagEWa3JRAkZT5QYJXEjxE8';
     wraybotUrl.value = savedSettings.wraybotUrl || '';
     wraybotToken.value = savedSettings.wraybotToken || '';
     if (savedSettings.enableVoiceOutput !== undefined) enableVoiceOutput.checked = savedSettings.enableVoiceOutput;
