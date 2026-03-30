@@ -1,12 +1,22 @@
 User-agent: *
 Allow: /
-Disallow: /cgi-bin/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
 
 Sitemap: https://hoytexteriors.com/sitemap.xml
-
-# Crawl-delay for polite crawling
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /

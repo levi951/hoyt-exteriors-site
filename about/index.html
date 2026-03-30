@@ -24,6 +24,10 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+
+img { max-width: 100%; height: auto; display: block; }
+.hero-section { min-height: 400px; }
+* { box-sizing: border-box; }
 </style>
 <meta charset="UTF-8">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -31,8 +35,8 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 <link rel="dns-prefetch" href="https://app.roofle.com">
 <link rel="dns-prefetch" href="https://i.ytimg.com">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Hoyt Exteriors | Family-Owned Roofing Contractor Since 2000 | Apple Valley, MN</title>
-<meta name="description" content="Meet the Hoyt family — three generations of exterior contractors serving Apple Valley, MN since 2000. GAF Master Elite certified. AI-powered drone inspections and thermal imaging. (651) 212-4965.">
+<title>About Hoyt Exteriors | Family Exterior Contractor Apple Valley MN</title>
+<meta name="description" content="Two generations of exterior contractors serving the Twin Cities. Hoyt Exteriors — family-owned, drone-powered, premium materials. 651-212-4965.">
 
 <!-- Open Graph -->
 <meta property="og:title" content="About Hoyt Exteriors | This Is Who We Are">
@@ -75,32 +79,65 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 <script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
 
 <!-- Schema.org Structured Data -->
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hoytexteriors.com/about/" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "About Hoyt Exteriors",
-  "description": "Hoyt Exteriors — a family company built on generations of grit and craftsmanship since 2000.",
-  "url": "https://hoytexteriors.com/about/",
-  "mainEntity": {
-    "@type": "LocalBusiness",
-    "name": "Hoyt Exteriors Inc.",
-    "foundingDate": "2000",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "15112 Galaxie Ave",
-      "addressLocality": "Apple Valley",
-      "addressRegion": "MN",
-      "postalCode": "55124",
-      "addressCountry": "US"
-    },
-    "telephone": "(651) 212-4965",
-    "email": "info@hoytexteriors.com"
+  "@type": "RoofingContractor",
+  "name": "Hoyt Exteriors",
+  "url": "https://hoytexteriors.com",
+  "telephone": "651-212-4965",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Apple Valley",
+    "addressRegion": "MN",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    "Minneapolis", "St. Paul", "Apple Valley", 
+    "Burnsville", "Eagan", "Bloomington", 
+    "Eden Prairie", "Minnetonka", "Plymouth",
+    "Lakeville", "Woodbury", "Rosemount"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/hoytexteriors",
+    "https://www.instagram.com/hoytexteriors"
+  ],
+  "description": "Two-generation family exterior contractor serving the Twin Cities. Roofing, siding, gutters, and windows for commercial, multifamily, and residential properties.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Exterior Services",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Commercial Roofing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Multifamily Roofing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Residential Roofing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "LP SmartSide Siding"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gutter Installation"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Window Replacement"}}
+    ]
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "name": "Hoyt Exteriors",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+
 </head>
 <body>
+<h1>About Hoyt Exteriors — Apple Valley's Family Exterior Contractor</h1>
 
 <!-- NAV -->
 <header class="nav" id="nav">

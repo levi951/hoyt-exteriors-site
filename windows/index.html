@@ -24,6 +24,10 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
 .reveal.visible{opacity:1;transform:translateY(0)}
 @media(max-width:1024px){.nav-links{display:none}.hamburger{display:block}}
+
+img { max-width: 100%; height: auto; display: block; }
+.hero-section { min-height: 400px; }
+* { box-sizing: border-box; }
 </style>
 <meta charset="UTF-8">
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -31,8 +35,8 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 <link rel="dns-prefetch" href="https://app.roofle.com">
 <link rel="dns-prefetch" href="https://i.ytimg.com">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Window Installation — Twin Cities | Hoyt Exteriors</title>
-<meta name="description" content="Professional window installation in the Twin Cities. Vinyl, fiberglass, wood, and composite windows. Energy-efficient upgrades from Hoyt Exteriors in Apple Valley, MN.">
+<title>Window Replacement Minnesota | Hoyt Exteriors</title>
+<meta name="description" content="Professional window replacement in Minneapolis & Twin Cities. Energy-efficient windows. Hoyt Exteriors 651-212-4965.">
 
 <!-- Open Graph -->
 <meta property="og:title" content="Window Installation — Twin Cities | Hoyt Exteriors">
@@ -69,78 +73,110 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
 <script src="https://app.roofle.com/roof-quote-pro-widget.js?id=cMr4cvpf6XSSloUXlD27j" async defer></script>
 
 <!-- Schema.org JSON-LD -->
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hoytexteriors.com/windows/" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
+  "@type": "RoofingContractor",
+  "name": "Hoyt Exteriors",
+  "url": "https://hoytexteriors.com",
+  "telephone": "651-212-4965",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Apple Valley",
+    "addressRegion": "MN",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    "Minneapolis", "St. Paul", "Apple Valley", 
+    "Burnsville", "Eagan", "Bloomington", 
+    "Eden Prairie", "Minnetonka", "Plymouth",
+    "Lakeville", "Woodbury", "Rosemount"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/hoytexteriors",
+    "https://www.instagram.com/hoytexteriors"
+  ],
+  "description": "Two-generation family exterior contractor serving the Twin Cities. Roofing, siding, gutters, and windows for commercial, multifamily, and residential properties.",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Exterior Services",
+    "itemListElement": [
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Commercial Roofing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Multifamily Roofing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Residential Roofing"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "LP SmartSide Siding"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Gutter Installation"}},
+      {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Window Replacement"}}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-      "@type": "LocalBusiness",
-      "name": "Hoyt Exteriors Inc.",
-      "description": "Professional window installation in the Twin Cities. Vinyl, fiberglass, wood, and composite windows.",
-      "url": "https://hoytexteriors.com/windows/",
-      "telephone": "(651) 212-4965",
-      "email": "info@hoytexteriors.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "15112 Galaxie Ave",
-        "addressLocality": "Apple Valley",
-        "addressRegion": "MN",
-        "postalCode": "55124",
-        "addressCountry": "US"
-      },
-      "foundingDate": "2000",
-      "areaServed": ["Apple Valley, MN","Burnsville, MN","Lakeville, MN","Eagan, MN","Rosemount, MN","Savage, MN","Prior Lake, MN","Farmington, MN","Hastings, MN"],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Window Installation Services",
-        "itemListElement": [
-          {"@type": "Service", "name": "Vinyl Window Installation", "description": "Affordable, energy-efficient vinyl windows for Twin Cities homes."},
-          {"@type": "Service", "name": "Fiberglass Window Installation", "description": "Strongest frames with the best insulation performance."},
-          {"@type": "Service", "name": "Wood Window Installation", "description": "Classic beauty with excellent insulation properties."},
-          {"@type": "Service", "name": "Composite Window Installation", "description": "The best of all worlds — strength, beauty, and efficiency combined."}
-        ]
+      "@type": "Question",
+      "name": "How much does a commercial roof replacement cost in Minneapolis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Commercial roof replacement in Minneapolis typically ranges from USD 8 to USD 20 per square foot depending on membrane type (TPO, EPDM, or modified bitumen), roof size, and access complexity. Hoyt Exteriors provides free drone-inspected estimates — call 651-212-4965."
       }
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I know if my windows need to be replaced?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Common signs include drafts near closed windows, condensation between glass panes, difficulty opening or closing, visible damage or decay, and noticeably higher energy bills. If your windows are over 20 years old, they likely lack modern energy-efficient features like Low-E coatings and argon gas fills. We offer free assessments to help you determine whether repair or replacement is the best option."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What window material is most energy efficient?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fiberglass and composite windows offer the highest energy efficiency due to their low thermal conductivity and tight seals. However, all four of our window materials — vinyl, fiberglass, wood, and composite — are available with double or triple-pane glass, Low-E coatings, and argon gas fills that dramatically reduce heat transfer. The frame material affects efficiency by a few percentage points; the glass package is the biggest factor."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How long does window installation take?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A typical whole-home window replacement of 10-15 windows takes two to three days. Each individual window takes roughly 30-60 minutes to install. We work efficiently to minimize disruption and always ensure a weathertight seal before leaving each opening. We schedule projects to maintain your home's comfort throughout the process."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will new windows lower my energy bills?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Upgrading from single-pane or older double-pane windows to modern energy-efficient windows can reduce heating and cooling costs noticeably — especially in Minnesota where extreme temperatures put heavy demands on your home's envelope. Many homeowners see the investment pay for itself over time through reduced energy costs and increased home comfort."
-          }
-        }
-      ]
+      "@type": "Question",
+      "name": "Do you work with HOAs and property managers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Hoyt Exteriors specializes in multifamily and HOA exterior projects across the Twin Cities. We coordinate directly with property managers, minimize tenant disruption, and provide detailed documentation for board approvals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What siding do you recommend for Minnesota winters?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We recommend LP SmartSide engineered wood siding for Minnesota's climate. It handles freeze-thaw cycles, carries a 50-year limited warranty, and is impact-resistant to Class 4 hail — the highest rating available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer drone roof inspections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Hoyt Exteriors uses AI-powered drone inspections and thermal imaging to identify damage without putting anyone on the roof. We serve all of the Twin Cities metro area."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are you licensed and insured in Minnesota?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Hoyt Exteriors is fully licensed and insured in Minnesota. We are a GAF-certified roofing contractor and carry full liability and workers compensation coverage."
+      }
     }
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "name": "Hoyt Exteriors",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "47",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
+
 </head>
 
 <body>
@@ -204,7 +240,7 @@ body{font-family:var(--font);background:var(--black);color:var(--white);-webkit-
       <div class="container">
         <div class="hero-text reveal">
           <span class="section-label">WINDOW INSTALLATION · TWIN CITIES</span>
-          <h1>The Clear Choice for<br><span class="red">Window Installation</span></h1>
+          <h1>Window Replacement Minneapolis & Twin Cities | Hoyt Exteriors</h1>
           <p class="hero-description" style="font-size:1.1rem;color:var(--gray-300);max-width:580px;line-height:1.7;margin-bottom:var(--space-xl);">New windows do more than improve your view — they transform your home's comfort, energy efficiency, and curb appeal. We install premium vinyl, fiberglass, wood, and composite windows built to handle Minnesota's extremes.</p>
           <div class="hero-ctas" style="display:flex;gap:var(--space-md);flex-wrap:wrap;">
             <a href="../contact/" class="btn-primary">Get Free Estimate <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
