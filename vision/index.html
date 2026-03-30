@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoyt Vision - AI Field Inspection Assistant</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+    <meta name="theme-color" content="#0A0A0A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-logo">
+                    <h1 class="brand-title">Hoyt Vision</h1>
+                    <p class="brand-subtitle">AI-Powered Field Inspection Assistant</p>
+                </div>
+                <button id="settingsBtn" class="settings-btn" aria-label="Settings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="1"></circle>
+                        <path d="M12 1v6m0 6v6"></path>
+                        <path d="M4.22 4.22a1 1 0 1 1 1.415 1.415m4.242-1.415a1 1 0 0 1 1.415-1.415"></path>
+                        <path d="M19.78 4.22a1 1 0 0 0-1.415-1.415m1.415 4.242a1 1 0 0 1-1.415 1.415"></path>
+                        <path d="M4.22 19.78a1 1 0 0 1 1.415-1.415m4.242 1.415a1 1 0 1 1 1.415 1.415"></path>
+                        <path d="M19.78 19.78a1 1 0 0 0-1.415 1.415m1.415-4.242a1 1 0 0 1-1.415-1.415"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="header-tagline">Hoyt Exteriors · Apple Valley, MN · Est. 2000</p>
+        </header>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel">
+            <div class="settings-content">
+                <h2>Settings</h2>
+                <button id="closeSettingsBtn" class="close-btn">×</button>
+
+                <div class="settings-group">
+                    <label for="geminiKey">Gemini API Key</label>
+                    <input type="password" id="geminiKey" placeholder="Enter your Gemini API key">
+                    <small>Your key is stored locally and never sent to our servers.</small>
+                </div>
+
+                <div class="settings-group">
+                    <label for="wraybotUrl">Wraybot Gateway URL</label>
+                    <input type="text" id="wraybotUrl" placeholder="http://100.96.146.5:18789" value="http://100.96.146.5:18789">
+                </div>
+
+                <div class="settings-group">
+                    <label for="wraybotToken">Wraybot Gateway Token</label>
+                    <input type="password" id="wraybotToken" placeholder="Enter gateway token">
+                </div>
+
+                <div class="settings-group">
+                    <label for="enableVoiceOutput">
+                        <input type="checkbox" id="enableVoiceOutput" checked>
+                        Enable Voice Output (Text-to-Speech)
+                    </label>
+                </div>
+
+                <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+            </div>
+            <div class="settings-overlay"></div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="upload">Upload</button>
+                <button class="tab-btn" data-tab="camera">Live Camera</button>
+            </div>
+
+            <!-- Upload Mode -->
+            <div id="uploadTab" class="tab-content active">
+                <div class="upload-container">
+                    <div class="drag-drop-zone" id="dragDropZone">
+                        <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <h3>Upload Photo or Video</h3>
+                        <p>Drag and drop here, or click to select</p>
+                        <small>.jpg, .png, .heic, .mp4, .mov</small>
+                        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/heic,video/mp4,video/quicktime" hidden>
+                    </div>
+
+                    <div id="previewContainer" class="preview-container" style="display: none;">
+                        <div class="preview-header">
+                            <h3>Preview</h3>
+                            <button id="clearPreviewBtn" class="btn-secondary">Change File</button>
+                        </div>
+                        <div id="preview" class="preview"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camera Mode -->
+            <div id="cameraTab" class="tab-content">
+                <div class="camera-container">
+                    <div class="camera-feed" id="cameraFeed">
+                        <video id="videoElement" autoplay playsinline></video>
+                        <div class="camera-overlay">
+                            <div class="camera-target"></div>
+                        </div>
+                        <div class="camera-status" id="cameraStatus">Initializing camera...</div>
+                    </div>
+                    <div class="camera-controls">
+                        <button id="toggleCameraBtn" class="btn btn-primary">Start Camera</button>
+                        <button id="captureFrameBtn" class="btn btn-secondary" disabled>Analyze Frame</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Chat Interface -->
+        <div class="chat-interface">
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome-message">
+                    <h2>Welcome to Hoyt Vision</h2>
+                    <p>Upload a photo, start your camera, or ask a question about what you see.</p>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-controls">
+                    <button id="voiceInputBtn" class="input-btn" title="Voice Input">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    <input
+                        type="text"
+                        id="chatInput"
+                        placeholder="Ask about what you see..."
+                        autocomplete="off"
+                    >
+                    <button id="sendBtn" class="btn btn-primary">Send</button>
+                </div>
+                <div id="voiceIndicator" class="voice-indicator" style="display: none;">
+                    <span class="listening-dot"></span> Listening...
+                </div>
+            </div>
+        </div>
+
+        <!-- Processing Indicator -->
+        <div id="processingIndicator" class="processing-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyzing...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
