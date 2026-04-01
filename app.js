@@ -357,72 +357,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ─────────────────────────────────────────────────
-     CONTACT PAGE FULL FORM (contact/index.html)
+     CONTACT FORMS → Formspree AJAX
   ───────────────────────────────────────────────── */
-  const allForms = document.querySelectorAll('#contactForm, #quoteForm, #estimate-form, #commercial-form, [data-source]');
-  allForms.forEach(form => {
-    if (form.id === 'cpForm') return; // panel form handles itself
-    if (form.hasAttribute('action')) return; // form has native action, let it submit naturally
-
+  document.querySelectorAll('#contactForm, [data-source]').forEach(form => {
+    if (form.id === 'cpForm') return;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const successDiv = form.closest('section')?.querySelector('.form-success')
-        || document.getElementById('formSuccess')
-        || document.getElementById('form-success');
-      const source = form.dataset.source || detectSource();
-
-      // Clear errors
-      form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-      let valid = true;
-      form.querySelectorAll('[required]').forEach(field => {
-        if (!field.value.trim()) { field.closest('.form-group')?.classList.add('error'); valid = false; }
-      });
-      const emailField = form.querySelector('[type="email"]');
-      if (emailField && emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-        emailField.closest('.form-group')?.classList.add('error'); valid = false;
-      }
-      const phoneField = form.querySelector('[type="tel"]');
-      if (phoneField && phoneField.value && !/^\d{10,}$/.test(phoneField.value.replace(/\D/g, ''))) {
-        phoneField.closest('.form-group')?.classList.add('error'); valid = false;
-      }
-      if (!valid) return;
-
-      // Build FormData directly from the form — simple and reliable
-      const formData = new FormData(form);
-      formData.append('source', source);
-
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'SENDING…';
-      submitBtn.disabled = true;
-
-      // Get or create error element (prevents duplicate error messages)
-      let errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
-      if (!errEl) {
-        errEl = document.createElement('p');
-        errEl.className = 'form-error';
-        errEl.style.cssText = 'color:var(--red);margin-top:12px;font-size:0.9rem;';
-        errEl.textContent = 'Error sending — please call (651) 212-4965.';
-        errEl.setAttribute('hidden', '');
-        submitBtn.after(errEl);
-      }
-
+      const btn = form.querySelector('[type="submit"]');
+      btn.textContent = 'SENDING…';
+      btn.disabled = true;
       try {
         const res = await fetch('https://formspree.io/f/xjgpobwn', {
           method: 'POST',
-          body: formData,
+          body: new FormData(form),
           headers: { 'Accept': 'application/json' },
         });
-        if (res.ok) {
-          form.style.display = 'none';
-          if (successDiv) { successDiv.removeAttribute('hidden'); successDiv.classList.add('show'); }
-        } else {
-          throw new Error('Form submission failed: ' + res.status);
-        }
-      } catch {
-        submitBtn.textContent = 'TRY AGAIN';
-        submitBtn.disabled = false;
-        errEl.removeAttribute('hidden');
+        if (!res.ok) throw new Error(res.status);
+        form.style.display = 'none';
+        const ok = document.getElementById('formSuccess');
+        if (ok) { ok.removeAttribute('hidden'); ok.classList.add('show'); }
+      } catch (err) {
+        btn.textContent = 'TRY AGAIN';
+        btn.disabled = false;
+        alert('Error sending form. Please call (651) 212-4965.');
       }
     });
   });
