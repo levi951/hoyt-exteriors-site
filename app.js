@@ -308,10 +308,17 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch {
         // Fallback: try Formspree email
         try {
+          const formData = new FormData();
+          Object.keys(payload).forEach(key => {
+            if (Array.isArray(payload[key])) {
+              payload[key].forEach(val => formData.append(key, val));
+            } else {
+              formData.append(key, payload[key]);
+            }
+          });
           const formspreeRes = await fetch('https://formspree.io/f/xjgpobwn', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
+            body: formData,
           });
           if (formspreeRes.ok) {
             form.setAttribute('hidden', '');
@@ -437,10 +444,17 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch {
         // Fallback: try Formspree email
         try {
+          const formspreeData = new FormData();
+          Object.keys(data).forEach(key => {
+            if (Array.isArray(data[key])) {
+              data[key].forEach(val => formspreeData.append(key, val));
+            } else {
+              formspreeData.append(key, data[key]);
+            }
+          });
           const formspreeRes = await fetch('https://formspree.io/f/xjgpobwn', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
+            body: formspreeData,
           });
           if (formspreeRes.ok) {
             form.style.display = 'none';
