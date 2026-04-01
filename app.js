@@ -385,6 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const allForms = document.querySelectorAll('#contactForm, #quoteForm, #estimate-form, #commercial-form, [data-source]');
   allForms.forEach(form => {
     if (form.id === 'cpForm') return; // panel form handles itself
+    if (form.hasAttribute('action')) return; // form has native action, let it submit naturally
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
