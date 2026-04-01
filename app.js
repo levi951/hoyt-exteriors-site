@@ -388,49 +388,41 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (!valid) return;
 
-      // Build payload — collect multi-value fields (services checkboxes) as array
-      const data = {};
-      const fd = new FormData(form);
-      fd.forEach((value, key) => {
-        if (key === 'services') {
-          if (!Array.isArray(data.services)) data.services = [];
-          data.services.push(value);
-        } else {
-          data[key] = value;
-        }
-      });
-      data.source = source;
+      // Build FormData directly from the form — simple and reliable
+      const formData = new FormData(form);
+      formData.append('source', source);
 
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'SENDING…';
       submitBtn.disabled = true;
 
+      // Get or create error element (prevents duplicate error messages)
+      let errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
+      if (!errEl) {
+        errEl = document.createElement('p');
+        errEl.className = 'form-error';
+        errEl.style.cssText = 'color:var(--red);margin-top:12px;font-size:0.9rem;';
+        errEl.textContent = 'Error sending — please call (651) 212-4965.';
+        errEl.setAttribute('hidden', '');
+        submitBtn.after(errEl);
+      }
+
       try {
-        const formspreeData = new FormData();
-        Object.keys(data).forEach(key => {
-          if (Array.isArray(data[key])) {
-            data[key].forEach(val => formspreeData.append(key, val));
-          } else {
-            formspreeData.append(key, data[key]);
-          }
-        });
         const res = await fetch('https://formspree.io/f/xjgpobwn', {
           method: 'POST',
-          body: formspreeData,
+          body: formData,
           headers: { 'Accept': 'application/json' },
         });
         if (res.ok) {
           form.style.display = 'none';
           if (successDiv) { successDiv.removeAttribute('hidden'); successDiv.classList.add('show'); }
         } else {
-          throw new Error('Form submission failed');
+          throw new Error('Form submission failed: ' + res.status);
         }
       } catch {
         submitBtn.textContent = 'TRY AGAIN';
         submitBtn.disabled = false;
-        const errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
-        if (errEl) { errEl.removeAttribute('hidden'); }
-        else { submitBtn.insertAdjacentText('afterend', ' Error sending — please call (651) 212-4965.'); }
+        errEl.removeAttribute('hidden');
       }
     });
   });
