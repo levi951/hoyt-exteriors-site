@@ -357,25 +357,32 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ─────────────────────────────────────────────────
-     CONTACT FORMS → Formspree AJAX
+     ALL FORMS → Formspree AJAX
+     Catches: #contactForm, #commercial-form, #comm-contact-form, [data-source]
   ───────────────────────────────────────────────── */
-  document.querySelectorAll('#contactForm, [data-source]').forEach(form => {
+  document.querySelectorAll('#contactForm, #commercial-form, #comm-contact-form, [data-source]').forEach(form => {
     if (form.id === 'cpForm') return;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = form.querySelector('[type="submit"]');
+      const origText = btn.textContent;
       btn.textContent = 'SENDING…';
       btn.disabled = true;
       try {
-        const res = await fetch('https://formspree.io/f/xjgpobwn', {
+        const endpoint = form.action || 'https://formspree.io/f/xjgpobwn';
+        const res = await fetch(endpoint, {
           method: 'POST',
           body: new FormData(form),
           headers: { 'Accept': 'application/json' },
         });
         if (!res.ok) throw new Error(res.status);
         form.style.display = 'none';
-        const ok = document.getElementById('formSuccess');
-        if (ok) { ok.removeAttribute('hidden'); ok.classList.add('show'); }
+        // Find the closest success div — each page names it differently
+        const ok = document.getElementById('formSuccess')
+          || document.getElementById('comm-form-success')
+          || form.querySelector('.form-success')
+          || form.closest('section')?.querySelector('.form-success, .comm-form-success');
+        if (ok) { ok.removeAttribute('hidden'); ok.style.display = ''; ok.classList.add('show'); }
       } catch (err) {
         btn.textContent = 'TRY AGAIN';
         btn.disabled = false;
