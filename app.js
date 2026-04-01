@@ -292,46 +292,23 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        // Try PM Lead API first
-        const res = await fetch('http://159.203.114.9:3001/leads', {
+        const formData = new FormData();
+        Object.keys(payload).forEach(key => formData.append(key, payload[key]));
+        const res = await fetch('https://formspree.io/f/xjgpobwn', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
+          body: formData,
+          headers: { 'Accept': 'application/json' },
         });
         if (res.ok) {
           form.setAttribute('hidden', '');
           success.removeAttribute('hidden');
-          return;
         } else {
-          throw new Error('PM Lead API non-ok');
+          throw new Error('Form submission failed');
         }
       } catch {
-        // Fallback: try Formspree email
-        try {
-          const formData = new FormData();
-          Object.keys(payload).forEach(key => {
-            if (Array.isArray(payload[key])) {
-              payload[key].forEach(val => formData.append(key, val));
-            } else {
-              formData.append(key, payload[key]);
-            }
-          });
-          const formspreeRes = await fetch('https://formspree.io/f/xjgpobwn', {
-            method: 'POST',
-            body: formData,
-          });
-          if (formspreeRes.ok) {
-            form.setAttribute('hidden', '');
-            success.removeAttribute('hidden');
-            return;
-          } else {
-            throw new Error('Formspree non-ok');
-          }
-        } catch {
-          errMsg.removeAttribute('hidden');
-          submitBtn.textContent = 'GET MY FREE QUOTE →';
-          submitBtn.disabled = false;
-        }
+        errMsg.removeAttribute('hidden');
+        submitBtn.textContent = 'GET MY FREE QUOTE →';
+        submitBtn.disabled = false;
       }
     });
   }
@@ -429,49 +406,31 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
 
       try {
-        // Try PM Lead API first
-        const res = await fetch('http://159.203.114.9:3001/leads', {
+        const formspreeData = new FormData();
+        Object.keys(data).forEach(key => {
+          if (Array.isArray(data[key])) {
+            data[key].forEach(val => formspreeData.append(key, val));
+          } else {
+            formspreeData.append(key, data[key]);
+          }
+        });
+        const res = await fetch('https://formspree.io/f/xjgpobwn', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
+          body: formspreeData,
+          headers: { 'Accept': 'application/json' },
         });
         if (res.ok) {
           form.style.display = 'none';
           if (successDiv) { successDiv.removeAttribute('hidden'); successDiv.classList.add('show'); }
-          return;
         } else {
-          throw new Error('PM Lead API non-ok');
+          throw new Error('Form submission failed');
         }
       } catch {
-        // Fallback: try Formspree email
-        try {
-          const formspreeData = new FormData();
-          Object.keys(data).forEach(key => {
-            if (Array.isArray(data[key])) {
-              data[key].forEach(val => formspreeData.append(key, val));
-            } else {
-              formspreeData.append(key, data[key]);
-            }
-          });
-          const formspreeRes = await fetch('https://formspree.io/f/xjgpobwn', {
-            method: 'POST',
-            body: formspreeData,
-          });
-          if (formspreeRes.ok) {
-            form.style.display = 'none';
-            if (successDiv) { successDiv.removeAttribute('hidden'); successDiv.classList.add('show'); }
-            return;
-          } else {
-            throw new Error('Formspree non-ok');
-          }
-        } catch {
-          submitBtn.textContent = 'TRY AGAIN';
-          submitBtn.disabled = false;
-          // Show inline error if the form has one, otherwise surface a message
-          const errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
-          if (errEl) { errEl.removeAttribute('hidden'); }
-          else { submitBtn.insertAdjacentText('afterend', ' Error sending — please call (651) 212-4965.'); }
-        }
+        submitBtn.textContent = 'TRY AGAIN';
+        submitBtn.disabled = false;
+        const errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
+        if (errEl) { errEl.removeAttribute('hidden'); }
+        else { submitBtn.insertAdjacentText('afterend', ' Error sending — please call (651) 212-4965.'); }
       }
     });
   });
