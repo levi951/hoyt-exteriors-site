@@ -292,7 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        const res = await fetch('/api/contact', {
+        // Try PM Lead API first
+        const res = await fetch('http://159.203.114.9:3001/leads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -300,13 +301,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.ok) {
           form.setAttribute('hidden', '');
           success.removeAttribute('hidden');
+          return;
         } else {
-          throw new Error('non-ok');
+          throw new Error('PM Lead API non-ok');
         }
       } catch {
-        errMsg.removeAttribute('hidden');
-        submitBtn.textContent = 'GET MY FREE QUOTE →';
-        submitBtn.disabled = false;
+        // Fallback: try Formspree email
+        try {
+          const formspreeRes = await fetch('https://formspree.io/f/xjgpobwn', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (formspreeRes.ok) {
+            form.setAttribute('hidden', '');
+            success.removeAttribute('hidden');
+            return;
+          } else {
+            throw new Error('Formspree non-ok');
+          }
+        } catch {
+          errMsg.removeAttribute('hidden');
+          submitBtn.textContent = 'GET MY FREE QUOTE →';
+          submitBtn.disabled = false;
+        }
       }
     });
   }
@@ -403,7 +421,8 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.disabled = true;
 
       try {
-        const res = await fetch('/api/contact', {
+        // Try PM Lead API first
+        const res = await fetch('http://159.203.114.9:3001/leads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
@@ -411,16 +430,33 @@ document.addEventListener('DOMContentLoaded', () => {
         if (res.ok) {
           form.style.display = 'none';
           if (successDiv) { successDiv.removeAttribute('hidden'); successDiv.classList.add('show'); }
+          return;
         } else {
-          throw new Error('non-ok');
+          throw new Error('PM Lead API non-ok');
         }
       } catch {
-        submitBtn.textContent = 'TRY AGAIN';
-        submitBtn.disabled = false;
-        // Show inline error if the form has one, otherwise surface a message
-        const errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
-        if (errEl) { errEl.removeAttribute('hidden'); }
-        else { submitBtn.insertAdjacentText('afterend', ' Error sending — please call (651) 212-4965.'); }
+        // Fallback: try Formspree email
+        try {
+          const formspreeRes = await fetch('https://formspree.io/f/xjgpobwn', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          if (formspreeRes.ok) {
+            form.style.display = 'none';
+            if (successDiv) { successDiv.removeAttribute('hidden'); successDiv.classList.add('show'); }
+            return;
+          } else {
+            throw new Error('Formspree non-ok');
+          }
+        } catch {
+          submitBtn.textContent = 'TRY AGAIN';
+          submitBtn.disabled = false;
+          // Show inline error if the form has one, otherwise surface a message
+          const errEl = form.querySelector('.form-error') || form.querySelector('.error-message');
+          if (errEl) { errEl.removeAttribute('hidden'); }
+          else { submitBtn.insertAdjacentText('afterend', ' Error sending — please call (651) 212-4965.'); }
+        }
       }
     });
   });
