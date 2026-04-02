@@ -16,7 +16,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const DEFAULTS = {
-    wrayUrl: 'http://159.65.33.45:18789',
+    wrayUrl: '',  // Set in Settings — e.g. http://wray:18789 (Tailscale) or gateway IP
     wrayToken: '',
     geminiKey: '',
     role: 'tech',

@@ -1,7 +1,7 @@
 /**
  * Hover OAuth Callback — CREDENTIALS REMOVED
  * This file is intentionally blank. OAuth token exchange is now handled
- * server-side on Wraybot (164.92.95.204:3003).
+ * server-side on Wray (see HOYT-AI-MASTER-MAP for current IP).
  * @see /opt/quoticker-webhook/server.js
  */
 export async function onRequestGet(context) {
