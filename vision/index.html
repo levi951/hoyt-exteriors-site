@@ -2,165 +2,195 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hoyt Vision - AI Field Inspection Assistant</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hoyt Vision</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0A0A0A">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="style.css">
+    <meta name="apple-mobile-web-app-title" content="Hoyt Vision">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Markdown rendering + sanitization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.1/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.9/purify.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
+    <div id="app">
         <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="header-logo">
-                    <h1 class="brand-title">Hoyt Vision</h1>
-                    <p class="brand-subtitle">AI-Powered Field Inspection Assistant</p>
+        <header id="header">
+            <div class="header-inner">
+                <div class="header-left">
+                    <div class="brand-mark">HV</div>
+                    <div>
+                        <h1 class="brand-name">Hoyt Vision</h1>
+                        <p class="brand-sub">AI Field Inspection</p>
+                    </div>
                 </div>
-                <button id="settingsBtn" class="settings-btn" aria-label="Settings">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="1"></circle>
-                        <path d="M12 1v6m0 6v6"></path>
-                        <path d="M4.22 4.22a1 1 0 1 1 1.415 1.415m4.242-1.415a1 1 0 0 1 1.415-1.415"></path>
-                        <path d="M19.78 4.22a1 1 0 0 0-1.415-1.415m1.415 4.242a1 1 0 0 1-1.415 1.415"></path>
-                        <path d="M4.22 19.78a1 1 0 0 1 1.415-1.415m4.242 1.415a1 1 0 1 1 1.415 1.415"></path>
-                        <path d="M19.78 19.78a1 1 0 0 0-1.415 1.415m1.415-4.242a1 1 0 0 1-1.415-1.415"></path>
-                    </svg>
-                </button>
+                <div class="header-right">
+                    <div id="connectionStatus" class="status-pill offline" title="Wray Gateway">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Offline</span>
+                    </div>
+                    <button id="settingsBtn" class="icon-btn" aria-label="Settings">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                </div>
             </div>
-            <p class="header-tagline">Hoyt Exteriors · Apple Valley, MN · Est. 2000</p>
         </header>
 
-        <!-- Settings Panel -->
-        <div id="settingsPanel" class="settings-panel">
-            <div class="settings-content">
-                <h2>Settings</h2>
-                <button id="closeSettingsBtn" class="close-btn">×</button>
-
-                <div class="settings-group">
-                    <label for="geminiKey">Gemini API Key</label>
-                    <input type="password" id="geminiKey" placeholder="Enter your Gemini API key">
-                    <small>Your key is stored locally and never sent to our servers.</small>
+        <!-- Settings Drawer -->
+        <div id="settingsDrawer" class="drawer">
+            <div class="drawer-backdrop"></div>
+            <div class="drawer-panel">
+                <div class="drawer-header">
+                    <h2>Settings</h2>
+                    <button id="closeSettings" class="icon-btn" aria-label="Close">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
                 </div>
-
-                <div class="settings-group">
-                    <label for="wraybotUrl">Wraybot Gateway URL</label>
-                    <input type="text" id="wraybotUrl" placeholder="http://100.96.146.5:18789" value="http://100.96.146.5:18789">
+                <div class="drawer-body">
+                    <div class="field">
+                        <label for="geminiKey">Gemini API Key</label>
+                        <input type="password" id="geminiKey" placeholder="AIza...">
+                        <small>Stored locally on this device only.</small>
+                    </div>
+                    <div class="field">
+                        <label for="wrayUrl">Wray Gateway URL</label>
+                        <input type="text" id="wrayUrl" placeholder="http://159.65.33.45:18789">
+                    </div>
+                    <div class="field">
+                        <label for="wrayToken">Wray Gateway Token</label>
+                        <input type="password" id="wrayToken" placeholder="clawx-...">
+                    </div>
+                    <hr>
+                    <div class="field">
+                        <label for="roleSelect">Your Role</label>
+                        <select id="roleSelect">
+                            <option value="tech">Field Technician</option>
+                            <option value="john">John (Service Manager)</option>
+                            <option value="jonny">Jonny (Project Manager)</option>
+                            <option value="lisa">Lisa (Office Manager)</option>
+                            <option value="levi">Levi (Owner)</option>
+                            <option value="paul">Paul</option>
+                        </select>
+                    </div>
+                    <div class="field toggle-field">
+                        <label for="voiceToggle">Voice Output</label>
+                        <input type="checkbox" id="voiceToggle" checked>
+                    </div>
+                    <div class="field toggle-field">
+                        <label for="autoAnalyze">Auto-Analyze on Capture</label>
+                        <input type="checkbox" id="autoAnalyze">
+                    </div>
+                    <button id="saveSettings" class="btn-primary full-width">Save Settings</button>
+                    <button id="testConnection" class="btn-secondary full-width">Test Wray Connection</button>
                 </div>
-
-                <div class="settings-group">
-                    <label for="wraybotToken">Wraybot Gateway Token</label>
-                    <input type="password" id="wraybotToken" placeholder="Enter gateway token">
-                </div>
-
-                <div class="settings-group">
-                    <label for="enableVoiceOutput">
-                        <input type="checkbox" id="enableVoiceOutput" checked>
-                        Enable Voice Output (Text-to-Speech)
-                    </label>
-                </div>
-
-                <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
             </div>
-            <div class="settings-overlay"></div>
         </div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Tab Navigation -->
-            <div class="tab-navigation">
-                <button class="tab-btn active" data-tab="upload">Upload</button>
-                <button class="tab-btn" data-tab="camera">Live Camera</button>
+        <!-- Main Area: Tabs + Visual -->
+        <main id="main">
+            <!-- Tab Bar -->
+            <div class="tab-bar">
+                <button class="tab active" data-tab="camera">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                    Camera
+                </button>
+                <button class="tab" data-tab="upload">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Upload
+                </button>
             </div>
 
-            <!-- Upload Mode -->
-            <div id="uploadTab" class="tab-content active">
-                <div class="upload-container">
-                    <div class="drag-drop-zone" id="dragDropZone">
-                        <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                        <h3>Upload Photo or Video</h3>
-                        <p>Drag and drop here, or click to select</p>
-                        <small>.jpg, .png, .heic, .mp4, .mov</small>
-                        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/heic,video/mp4,video/quicktime" hidden>
+            <!-- Camera Tab -->
+            <div id="cameraTab" class="tab-panel active">
+                <div class="camera-wrapper">
+                    <video id="videoEl" autoplay playsinline muted></video>
+                    <div id="cameraPlaceholder" class="camera-placeholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        <p>Tap to start camera</p>
                     </div>
-
-                    <div id="previewContainer" class="preview-container" style="display: none;">
-                        <div class="preview-header">
-                            <h3>Preview</h3>
-                            <button id="clearPreviewBtn" class="btn-secondary">Change File</button>
+                    <canvas id="captureCanvas" style="display:none"></canvas>
+                    <!-- Camera HUD -->
+                    <div id="cameraHud" class="camera-hud" style="display:none">
+                        <div class="hud-top">
+                            <span id="cameraLabel" class="hud-pill">REAR CAM</span>
+                            <span id="gpsLabel" class="hud-pill">GPS: --</span>
                         </div>
-                        <div id="preview" class="preview"></div>
                     </div>
+                </div>
+                <div class="camera-actions">
+                    <button id="startCameraBtn" class="btn-primary">Start Camera</button>
+                    <button id="captureBtn" class="btn-accent" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+                        Capture
+                    </button>
+                    <button id="flipCameraBtn" class="btn-ghost" disabled title="Flip camera">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+                    </button>
                 </div>
             </div>
 
-            <!-- Camera Mode -->
-            <div id="cameraTab" class="tab-content">
-                <div class="camera-container">
-                    <div class="camera-feed" id="cameraFeed">
-                        <video id="videoElement" autoplay playsinline></video>
-                        <div class="camera-overlay">
-                            <div class="camera-target"></div>
-                        </div>
-                        <div class="camera-status" id="cameraStatus">Initializing camera...</div>
-                    </div>
-                    <div class="camera-controls">
-                        <button id="toggleCameraBtn" class="btn btn-primary">Start Camera</button>
-                        <button id="captureFrameBtn" class="btn btn-secondary" disabled>Analyze Frame</button>
-                    </div>
+            <!-- Upload Tab -->
+            <div id="uploadTab" class="tab-panel">
+                <div id="dropZone" class="drop-zone">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p>Drop photo here or tap to select</p>
+                    <small>.jpg .png .heic .mp4 .mov</small>
+                    <input type="file" id="fileInput" accept="image/*,video/*" hidden>
+                </div>
+                <div id="previewBox" class="preview-box" style="display:none">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button id="clearPreview" class="btn-ghost small">Change</button>
                 </div>
             </div>
         </main>
 
-        <!-- Chat Interface -->
-        <div class="chat-interface">
-            <div class="chat-messages" id="chatMessages">
-                <div class="welcome-message">
-                    <h2>Welcome to Hoyt Vision</h2>
-                    <p>Upload a photo, start your camera, or ask a question about what you see.</p>
+        <!-- Chat -->
+        <section id="chat">
+            <div id="messages" class="messages">
+                <div class="welcome">
+                    <div class="welcome-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <h3>Hoyt Vision</h3>
+                    <p>Point your camera at any roof, siding, gutter, or deck — then ask a question.</p>
+                    <div class="quick-actions">
+                        <button class="quick-btn" data-prompt="What damage do you see?">Damage Check</button>
+                        <button class="quick-btn" data-prompt="What material is this and what condition is it in?">Material ID</button>
+                        <button class="quick-btn" data-prompt="Estimate repair scope and priority for what you see.">Repair Scope</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="chat-input-area">
-                <div class="input-controls">
-                    <button id="voiceInputBtn" class="input-btn" title="Voice Input">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                            <line x1="12" y1="19" x2="12" y2="23"></line>
-                            <line x1="8" y1="23" x2="16" y2="23"></line>
-                        </svg>
-                    </button>
-                    <input
-                        type="text"
-                        id="chatInput"
-                        placeholder="Ask about what you see..."
-                        autocomplete="off"
-                    >
-                    <button id="sendBtn" class="btn btn-primary">Send</button>
-                </div>
-                <div id="voiceIndicator" class="voice-indicator" style="display: none;">
-                    <span class="listening-dot"></span> Listening...
-                </div>
+            <!-- Input Bar -->
+            <div class="input-bar">
+                <button id="voiceBtn" class="input-icon-btn" title="Voice input">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                </button>
+                <input type="text" id="chatInput" placeholder="Ask about what you see..." autocomplete="off">
+                <button id="sendBtn" class="send-btn" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
             </div>
-        </div>
+        </section>
 
-        <!-- Processing Indicator -->
-        <div id="processingIndicator" class="processing-indicator" style="display: none;">
-            <div class="spinner"></div>
-            <p>Analyzing...</p>
-        </div>
+        <!-- Toast Container -->
+        <div id="toasts" class="toast-container"></div>
     </div>
 
     <script src="app.js"></script>

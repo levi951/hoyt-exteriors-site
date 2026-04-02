@@ -1,587 +1,765 @@
 /**
- * HOYT VISION - Application Logic
+ * HOYT VISION — Web Application
  * AI-Powered Field Inspection Assistant
+ * Hoyt Exteriors · Apple Valley, MN · Est. 2000
  *
- * Handles:
- * - File upload & preview
- * - Live camera feed capture
- * - Gemini Vision API integration
- * - OpenClaw/Wraybot tool execution
- * - Chat interface & messaging
- * - Voice input/output
- * - Settings persistence
+ * Architecture:
+ *   Camera/Upload → Gemini Vision API → AI Response
+ *   Tool calls → Wray OpenClaw Gateway → KB / Jobber / Team
+ *
+ * No backend required. Runs entirely in-browser.
+ * Degrades gracefully when Wray gateway is unreachable.
  */
 
-// ============================================================================
-// STATE MANAGEMENT
-// ============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
+// SETTINGS (persisted in-memory for session, localStorage for persistence)
+// ─────────────────────────────────────────────────────────────────────────────
 
-const state = {
-    currentMode: 'upload', // 'upload' or 'camera'
-    currentImage: null,
-    currentImageBase64: null,
-    cameraStream: null,
-    isRecording: false,
-    chatMessages: [],
-    isProcessing: false,
-    voiceRecognition: null,
-    voiceIsActive: false,
+const DEFAULTS = {
+    wrayUrl: 'http://159.65.33.45:18789',
+    wrayToken: '',
+    geminiKey: '',
+    role: 'tech',
+    voiceOutput: true,
+    autoAnalyze: false,
 };
 
-// ============================================================================
-// INITIALIZATION
-// ============================================================================
+let settings = { ...DEFAULTS };
 
-document.addEventListener('DOMContentLoaded', () => {
-    initializeSettings();
-    initializeEventListeners();
-    initializeVoiceInput();
-    console.log('Hoyt Vision initialized');
-});
-
-// ============================================================================
-// SETTINGS MANAGEMENT
-// ============================================================================
-
-function initializeSettings() {
-    const savedSettings = JSON.parse(localStorage.getItem('hoytVisionSettings') || '{}');
-
-    const geminiKey = document.getElementById('geminiKey');
-    const wraybotUrl = document.getElementById('wraybotUrl');
-    const wraybotToken = document.getElementById('wraybotToken');
-    const enableVoiceOutput = document.getElementById('enableVoiceOutput');
-
-    geminiKey.value = savedSettings.geminiKey || 'AIzaSyCt4mtXYoafxagEWa3JRAkZT5QYJXEjxE8';
-    wraybotUrl.value = savedSettings.wraybotUrl || '';
-    wraybotToken.value = savedSettings.wraybotToken || '';
-    if (savedSettings.enableVoiceOutput !== undefined) enableVoiceOutput.checked = savedSettings.enableVoiceOutput;
+function loadSettings() {
+    try {
+        const saved = JSON.parse(localStorage.getItem('hoyt-vision') || '{}');
+        settings = { ...DEFAULTS, ...saved };
+    } catch { /* use defaults */ }
 }
 
-function getSettings() {
-    return {
-        geminiKey: document.getElementById('geminiKey').value,
-        wraybotUrl: document.getElementById('wraybotUrl').value,
-        wraybotToken: document.getElementById('wraybotToken').value,
-        enableVoiceOutput: document.getElementById('enableVoiceOutput').checked,
-    };
+function saveSettingsToDisk() {
+    try {
+        localStorage.setItem('hoyt-vision', JSON.stringify(settings));
+    } catch { /* storage full or blocked */ }
 }
 
-function saveSettings() {
-    const settings = getSettings();
-    localStorage.setItem('hoytVisionSettings', JSON.stringify(settings));
-    showNotification('Settings saved successfully');
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────────────────
 
-// ============================================================================
-// EVENT LISTENERS
-// ============================================================================
+const state = {
+    cameraStream: null,
+    facingMode: 'environment',
+    currentImageB64: null,     // base64 without prefix
+    currentImageDataUrl: null, // full data URL for thumbnails
+    isProcessing: false,
+    wrayOnline: false,
+    gpsCoords: null,
+    voiceRecognition: null,
+    voiceActive: false,
+    chatHistory: [],           // {role, content} for Gemini context
+};
 
-function initializeEventListeners() {
-    // Settings
-    document.getElementById('settingsBtn').addEventListener('click', openSettings);
-    document.getElementById('closeSettingsBtn').addEventListener('click', closeSettings);
-    document.getElementById('saveSettingsBtn').addEventListener('click', saveSettings);
-    document.querySelector('.settings-overlay').addEventListener('click', closeSettings);
+// ─────────────────────────────────────────────────────────────────────────────
+// SAFE MARKDOWN RENDERING
+// ─────────────────────────────────────────────────────────────────────────────
 
-    // Tabs
-    document.querySelectorAll('.tab-btn').forEach((btn) => {
-        btn.addEventListener('click', (e) => switchTab(e.target.dataset.tab));
-    });
-
-    // Upload
-    const dragDropZone = document.getElementById('dragDropZone');
-    dragDropZone.addEventListener('click', () => document.getElementById('fileInput').click());
-    dragDropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dragDropZone.classList.add('dragover');
-    });
-    dragDropZone.addEventListener('dragleave', () => dragDropZone.classList.remove('dragover'));
-    dragDropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dragDropZone.classList.remove('dragover');
-        handleFileDrop(e.dataTransfer.files);
-    });
-
-    document.getElementById('fileInput').addEventListener('change', (e) => {
-        handleFileDrop(e.target.files);
-    });
-
-    document.getElementById('clearPreviewBtn').addEventListener('click', clearPreview);
-
-    // Camera
-    document.getElementById('toggleCameraBtn').addEventListener('click', toggleCamera);
-    document.getElementById('captureFrameBtn').addEventListener('click', captureAndAnalyzeFrame);
-
-    // Chat
-    document.getElementById('sendBtn').addEventListener('click', sendMessage);
-    document.getElementById('chatInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
-    });
-
-    // Voice
-    document.getElementById('voiceInputBtn').addEventListener('click', toggleVoiceInput);
-}
-
-// ============================================================================
-// SETTINGS PANEL
-// ============================================================================
-
-function openSettings() {
-    document.getElementById('settingsPanel').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeSettings() {
-    document.getElementById('settingsPanel').classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-// ============================================================================
-// TAB SWITCHING
-// ============================================================================
-
-function switchTab(tabName) {
-    state.currentMode = tabName;
-
-    // Update tab buttons
-    document.querySelectorAll('.tab-btn').forEach((btn) => {
-        btn.classList.toggle('active', btn.dataset.tab === tabName);
-    });
-
-    // Update tab content
-    document.querySelectorAll('.tab-content').forEach((tab) => {
-        tab.classList.toggle('active', tab.id === `${tabName}Tab`);
-    });
-
-    // Stop camera if switching away
-    if (tabName !== 'camera') {
-        stopCamera();
+function renderMarkdown(text) {
+    if (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined') {
+        const rawHtml = marked.parse(text, { breaks: true });
+        return DOMPurify.sanitize(rawHtml);
     }
+    // Fallback: escape HTML and return as-is
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
-// ============================================================================
-// FILE UPLOAD & PREVIEW
-// ============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
+// SYSTEM PROMPT
+// ─────────────────────────────────────────────────────────────────────────────
 
-function handleFileDrop(files) {
-    if (files.length === 0) return;
+function buildSystemPrompt() {
+    const role = settings.role;
+    const roleContext = {
+        tech: 'You are assisting a field technician doing on-site inspections.',
+        john: 'You are assisting John, the Service Manager, who coordinates field operations.',
+        jonny: 'You are assisting Jonny, the Project Manager, who manages larger projects.',
+        lisa: 'You are assisting Lisa, the Office Manager, who handles scheduling and customer communication.',
+        levi: 'You are assisting Levi, the owner. Full access to all information.',
+        paul: 'You are assisting Paul, co-owner. Keep responses clear and simple.',
+    }[role] || '';
 
-    const file = files[0];
-    const validTypes = ['image/jpeg', 'image/png', 'image/heic', 'video/mp4', 'video/quicktime'];
+    return `You are Hoyt Vision, the AI field inspection assistant for Hoyt Exteriors — a 3rd-generation, family-owned exterior construction company in Apple Valley, Minnesota. Est. 2000.
 
-    if (!validTypes.some((type) => file.type.startsWith(type.split('/')[0]) || file.type === type)) {
-        showNotification('Please upload a photo or video', 'error');
+${roleContext}
+
+## YOUR EXPERTISE
+You are an expert in residential and commercial exterior construction with deep knowledge of:
+
+**Roofing:** Asphalt shingles (3-tab, architectural, luxury), metal roofing (standing seam, corrugated), flat/low-slope (TPO, EPDM, modified bitumen), cedar shakes, slate, tile. Ice & water shield requirements, ridge vents, valley flashing, pipe boots, step flashing, drip edge.
+
+**Siding:** LP SmartSide (engineered wood — must be back-primed, gaps per LP specs), vinyl, fiber cement (HardiePlank), cedar, stucco, stone veneer, EIFS. J-channel, utility trim, starter strips, house wrap (Tyvek).
+
+**Gutters:** K-style, half-round, box gutters. Aluminum, copper, galvanized. Seamless vs sectional. Gutter guards (micro-mesh, reverse curve, foam, screen). Downspout sizing, splash blocks, underground drainage.
+
+**Decks & Concrete:** Composite (Trex, TimberTech), pressure-treated lumber, cedar, PVC. Ledger board flashing, post footings (42" frost line in MN), joist hangers, railing code (36"/42" height, 4" baluster spacing). Concrete flatwork, stoops, steps, mudjacking, poly-leveling.
+
+**Windows & Insulation:** Vinyl, fiberglass, wood-clad, aluminum. Double/triple pane, Low-E, argon fill. Proper flashing tape sequence. Blown-in cellulose, fiberglass batts, spray foam, attic insulation R-values for MN (R-49 to R-60).
+
+## MINNESOTA-SPECIFIC KNOWLEDGE
+- **Frost line:** 42 inches — all footings must go below this
+- **Ice dams:** Caused by heat loss + freeze-thaw cycles. Proper fix = air sealing + insulation + ventilation, NOT just ice guard
+- **Freeze-thaw cycles:** Major cause of concrete spalling, siding gaps, and roof damage
+- **Wind:** Design for 90+ mph wind zones. Shingle nailing patterns critical
+- **Snow load:** Roof structures must handle 35-50 psf ground snow load
+- **Building codes:** Minnesota State Building Code (based on IRC/IBC), plus local amendments
+- **Common insurance claims:** Wind, hail, ice dams, water intrusion
+
+## INSPECTION PROTOCOL
+When analyzing photos:
+1. **Identify materials** — What type, brand if visible, approximate age
+2. **Assess condition** — Rate as Good / Fair / Poor / Critical
+3. **Document damage** — Type, location, extent, likely cause
+4. **Prioritize** — Immediate safety concern > Water intrusion risk > Cosmetic
+5. **Recommend** — Repair vs replace, estimated scope, urgency
+6. **Flag** — Anything that needs a closer look or specialist
+
+## RESPONSE STYLE
+- Be direct and specific. Field techs need actionable info, not essays.
+- Use technical terms but explain if uncommon.
+- When you see damage, say what it is, how bad, and what to do about it.
+- If you're not sure, say so — don't guess on structural issues.
+- For cost questions, give ranges and note that final pricing requires on-site measurement.
+
+## ESCALATION TRIGGERS
+Flag for immediate manager attention if you see:
+- Structural damage (sagging ridge, compromised rafters, foundation cracks)
+- Active water intrusion
+- Mold or rot
+- Electrical hazards near exterior work
+- Asbestos-era materials (pre-1980 siding, insulation, floor tiles)
+- Code violations that could affect safety
+
+## TOOL DELEGATION
+If the user asks you to look something up in the company knowledge base, check pricing, create a ticket, or message the team — acknowledge the request and note that it requires the Wray gateway connection. Do NOT fabricate company-specific pricing or scheduling information.`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GEMINI API
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function callGemini(userMessage) {
+    if (!settings.geminiKey) {
+        throw new Error('Gemini API key not configured. Open Settings to add it.');
+    }
+
+    // Build conversation context (last 6 turns for efficiency)
+    const recentHistory = state.chatHistory.slice(-6);
+    const parts = [];
+
+    // System instruction + conversation context
+    let contextText = buildSystemPrompt() + '\n\n';
+    for (const msg of recentHistory) {
+        contextText += `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n\n`;
+    }
+    contextText += `User: ${userMessage}`;
+    parts.push({ text: contextText });
+
+    // Attach current image if available
+    if (state.currentImageB64) {
+        parts.push({
+            inlineData: {
+                mimeType: 'image/jpeg',
+                data: state.currentImageB64,
+            }
+        });
+    }
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${settings.geminiKey}`;
+
+    const resp = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            contents: [{ parts }],
+            generationConfig: {
+                temperature: 0.6,
+                maxOutputTokens: 2048,
+            },
+        }),
+    });
+
+    if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error?.message || `Gemini API error (${resp.status})`);
+    }
+
+    const data = await resp.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) throw new Error('Empty response from Gemini');
+
+    return text;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// WRAY GATEWAY (OpenClaw)
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function checkWrayConnection() {
+    if (!settings.wrayUrl || !settings.wrayToken) {
+        updateConnectionStatus('offline');
         return;
     }
+    updateConnectionStatus('checking');
+    try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        state.currentImage = file;
-        state.currentImageBase64 = e.target.result;
-        displayPreview(file, e.target.result);
-    };
-    reader.readAsDataURL(file);
-}
+        const resp = await fetch(`${settings.wrayUrl}/v1/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${settings.wrayToken}`,
+            },
+            body: JSON.stringify({
+                messages: [{ role: 'user', content: 'ping' }],
+                channel: 'web',
+                max_tokens: 5,
+            }),
+            signal: controller.signal,
+        });
+        clearTimeout(timeout);
 
-function displayPreview(file, dataUrl) {
-    const previewContainer = document.getElementById('previewContainer');
-    const preview = document.getElementById('preview');
-
-    preview.innerHTML = '';
-
-    if (file.type.startsWith('image/')) {
-        const img = document.createElement('img');
-        img.src = dataUrl;
-        preview.appendChild(img);
-    } else if (file.type.startsWith('video/')) {
-        const video = document.createElement('video');
-        video.src = dataUrl;
-        video.controls = true;
-        preview.appendChild(video);
+        state.wrayOnline = resp.ok;
+        updateConnectionStatus(resp.ok ? 'online' : 'offline');
+    } catch {
+        state.wrayOnline = false;
+        updateConnectionStatus('offline');
     }
-
-    document.getElementById('dragDropZone').style.display = 'none';
-    previewContainer.style.display = 'block';
 }
 
-function clearPreview() {
-    state.currentImage = null;
-    state.currentImageBase64 = null;
-    document.getElementById('previewContainer').style.display = 'none';
-    document.getElementById('dragDropZone').style.display = 'flex';
-    document.getElementById('fileInput').value = '';
+async function queryWray(message) {
+    if (!state.wrayOnline) return null;
+
+    const sessionKey = `agent:main:${settings.role === 'tech' ? 'tech' : settings.role}`;
+
+    try {
+        const resp = await fetch(`${settings.wrayUrl}/v1/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${settings.wrayToken}`,
+                'x-session-key': sessionKey,
+                'x-channel': 'vision-web',
+            },
+            body: JSON.stringify({
+                messages: [{ role: 'user', content: message }],
+                channel: 'vision-web',
+            }),
+        });
+
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        return data.choices?.[0]?.message?.content || null;
+    } catch {
+        return null;
+    }
 }
 
-// ============================================================================
-// CAMERA MANAGEMENT
-// ============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
+// CAMERA
+// ─────────────────────────────────────────────────────────────────────────────
 
-async function toggleCamera() {
-    const btn = document.getElementById('toggleCameraBtn');
-    const captureBtn = document.getElementById('captureFrameBtn');
-    const status = document.getElementById('cameraStatus');
+async function startCamera() {
+    try {
+        if (state.cameraStream) stopCamera();
 
-    if (!state.cameraStream) {
-        btn.textContent = 'Stop Camera';
-        status.textContent = 'Starting camera...';
-        try {
-            const constraints = {
-                video: {
-                    facingMode: 'environment',
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 },
-                },
-                audio: false,
-            };
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: state.facingMode,
+                width: { ideal: 1920 },
+                height: { ideal: 1080 },
+            },
+            audio: false,
+        });
 
-            state.cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
-            document.getElementById('videoElement').srcObject = state.cameraStream;
-            status.textContent = 'Camera ready';
-            captureBtn.disabled = false;
-            state.isRecording = true;
+        state.cameraStream = stream;
+        const video = document.getElementById('videoEl');
+        video.srcObject = stream;
 
-            // Start auto-capture loop
-            startAutoCapture();
-        } catch (err) {
-            console.error('Camera error:', err);
-            status.textContent = 'Camera access denied';
-            btn.textContent = 'Start Camera';
-            showNotification('Unable to access camera', 'error');
-        }
-    } else {
-        stopCamera();
-        btn.textContent = 'Start Camera';
-        captureBtn.disabled = true;
-        status.textContent = 'Camera stopped';
+        document.getElementById('cameraPlaceholder').classList.add('hidden');
+        document.getElementById('cameraHud').style.display = '';
+        document.getElementById('captureBtn').disabled = false;
+        document.getElementById('flipCameraBtn').disabled = false;
+        document.getElementById('startCameraBtn').textContent = 'Stop Camera';
+
+        requestGPS();
+        toast('Camera ready', 'success');
+    } catch (err) {
+        console.error('Camera error:', err);
+        toast('Camera access denied — check permissions', 'error');
     }
 }
 
 function stopCamera() {
     if (state.cameraStream) {
-        state.cameraStream.getTracks().forEach((track) => track.stop());
+        state.cameraStream.getTracks().forEach(t => t.stop());
         state.cameraStream = null;
-        state.isRecording = false;
     }
+    const video = document.getElementById('videoEl');
+    video.srcObject = null;
+    document.getElementById('cameraPlaceholder').classList.remove('hidden');
+    document.getElementById('cameraHud').style.display = 'none';
+    document.getElementById('captureBtn').disabled = true;
+    document.getElementById('flipCameraBtn').disabled = true;
+    document.getElementById('startCameraBtn').textContent = 'Start Camera';
 }
 
-// Capture frames at ~1fps for continuous analysis
-let captureInterval = null;
+function captureFrame() {
+    const video = document.getElementById('videoEl');
+    if (!video.videoWidth) return;
 
-function startAutoCapture() {
-    captureInterval = setInterval(() => {
-        if (state.isRecording && !state.isProcessing) {
-            // Capture frame but don't analyze automatically
-            // User will click "Analyze Frame" button
-        }
-    }, 1000);
-}
-
-async function captureAndAnalyzeFrame() {
-    if (!state.cameraStream) return;
-
-    const video = document.getElementById('videoElement');
-    const canvas = document.createElement('canvas');
+    const canvas = document.getElementById('captureCanvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-
     const ctx = canvas.getContext('2d');
     ctx.drawImage(video, 0, 0);
 
-    const frameBase64 = canvas.toDataURL('image/jpeg').split(',')[1];
-    state.currentImageBase64 = frameBase64;
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+    state.currentImageDataUrl = dataUrl;
+    state.currentImageB64 = dataUrl.split(',')[1];
 
-    // Analyze the frame
-    await analyzeImage('Camera frame captured. What do you see?');
+    // Flash effect
+    const wrapper = document.querySelector('.camera-wrapper');
+    wrapper.style.opacity = '0.5';
+    setTimeout(() => { wrapper.style.opacity = '1'; }, 100);
+
+    toast('Photo captured', 'success');
+
+    if (settings.autoAnalyze) {
+        sendMessage('What do you see? Identify any damage or issues.');
+    }
 }
 
-// ============================================================================
-// GEMINI INTEGRATION
-// ============================================================================
+async function flipCamera() {
+    state.facingMode = state.facingMode === 'environment' ? 'user' : 'environment';
+    const label = document.getElementById('cameraLabel');
+    label.textContent = state.facingMode === 'environment' ? 'REAR CAM' : 'FRONT CAM';
+    await startCamera();
+}
 
-async function analyzeImage(userPrompt) {
-    const settings = getSettings();
+function requestGPS() {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            state.gpsCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+            const label = document.getElementById('gpsLabel');
+            label.textContent = `GPS: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
+        },
+        () => {
+            document.getElementById('gpsLabel').textContent = 'GPS: unavailable';
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+    );
+}
 
-    if (!settings.geminiKey) {
-        showNotification('Please configure Gemini API key in settings', 'error');
+// ─────────────────────────────────────────────────────────────────────────────
+// FILE UPLOAD
+// ─────────────────────────────────────────────────────────────────────────────
+
+function handleFileSelect(file) {
+    if (!file) return;
+    if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+        toast('Please select a photo or video', 'error');
         return;
     }
 
-    if (!state.currentImageBase64) {
-        showNotification('No image selected', 'error');
-        return;
-    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        state.currentImageDataUrl = dataUrl;
+        state.currentImageB64 = dataUrl.split(',')[1];
 
-    showProcessing(true);
+        document.getElementById('dropZone').style.display = 'none';
+        const previewBox = document.getElementById('previewBox');
+        previewBox.style.display = 'block';
+        document.getElementById('previewImg').src = dataUrl;
 
-    try {
-        // Add user message to chat
-        addMessage(userPrompt, 'user');
-
-        // Call Gemini API
-        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=' + settings.geminiKey, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                contents: [
-                    {
-                        parts: [
-                            {
-                                text: buildSystemPrompt() + '\n\nUser question: ' + userPrompt,
-                            },
-                            {
-                                inlineData: {
-                                    mimeType: 'image/jpeg',
-                                    data: state.currentImageBase64,
-                                },
-                            },
-                        ],
-                    },
-                ],
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 1024,
-                },
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            console.error('Gemini API error:', error);
-            throw new Error(error.error?.message || 'API error');
-        }
-
-        const data = await response.json();
-        const aiResponse = data.contents?.[0]?.parts?.[0]?.text || 'No response';
-
-        // Check for tool calls
-        if (aiResponse.includes('[TOOL_CALL]')) {
-            await handleToolCall(aiResponse);
-        } else {
-            addMessage(aiResponse, 'ai');
-
-            // Read response aloud if enabled
-            if (getSettings().enableVoiceOutput) {
-                speakText(aiResponse);
-            }
-        }
-    } catch (err) {
-        console.error('Analysis error:', err);
-        addMessage(`Error: ${err.message}`, 'ai');
-        showNotification('Analysis failed', 'error');
-    }
-
-    showProcessing(false);
+        toast('Photo loaded', 'success');
+    };
+    reader.readAsDataURL(file);
 }
 
-function buildSystemPrompt() {
-    return `You are Hoyt Vision, an AI field inspection assistant for Hoyt Exteriors, a roofing and exterior construction company in Apple Valley, MN.
-
-Your role:
-- Analyze photos and videos of roofs, siding, gutters, decks, windows, and other building exteriors
-- Provide detailed inspection reports with observations about condition, damage, and needed repairs
-- Answer questions about what's shown in images
-- Provide professional, clear assessments that field technicians can use
-- Suggest next steps and when repairs should be prioritized
-
-Be direct, specific, and professional. Use technical language but keep it understandable.
-Format responses clearly with sections when appropriate.
-Always identify the type of damage (if any) and severity.
-Mention material types observed (asphalt shingles, vinyl siding, etc.)
-If you identify issues that need urgent attention, flag them clearly.
-
-If the user asks you to perform an action that requires field service coordination, respond with:
-[TOOL_CALL] action: create_job | customer: [name] | location: [address] | issue: [description] | priority: [high/medium/low]`;
+function clearFilePreview() {
+    state.currentImageDataUrl = null;
+    state.currentImageB64 = null;
+    document.getElementById('previewBox').style.display = 'none';
+    document.getElementById('dropZone').style.display = '';
+    document.getElementById('fileInput').value = '';
 }
 
-async function handleToolCall(response) {
-    const settings = getSettings();
+// ─────────────────────────────────────────────────────────────────────────────
+// CHAT & MESSAGING
+// ─────────────────────────────────────────────────────────────────────────────
 
-    if (!settings.wraybotToken || !settings.wraybotUrl) {
-        addMessage('Tool execution disabled: Wraybot not configured', 'ai');
-        return;
+function addMessage(role, content, opts = {}) {
+    const container = document.getElementById('messages');
+
+    // Remove welcome on first message
+    const welcome = container.querySelector('.welcome');
+    if (welcome) welcome.remove();
+
+    const div = document.createElement('div');
+    div.className = `msg ${role}`;
+
+    // Thumbnail for user messages with images
+    if (role === 'user' && opts.thumb) {
+        const img = document.createElement('img');
+        img.className = 'msg-thumb';
+        img.src = opts.thumb;
+        div.appendChild(img);
     }
-
-    try {
-        // Parse tool call from response
-        const toolMatch = response.match(/\[TOOL_CALL\](.*?)\n/s);
-        if (!toolMatch) {
-            addMessage(response, 'ai');
-            return;
-        }
-
-        const toolCall = toolMatch[1];
-
-        // Route to Wraybot
-        const wraybotResponse = await fetch(`${settings.wraybotUrl}/v1/chat/completions`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${settings.wraybotToken}`,
-            },
-            body: JSON.stringify({
-                messages: [
-                    {
-                        role: 'user',
-                        content: `Execute this tool call:\n${toolCall}`,
-                    },
-                ],
-                channel: 'web',
-            }),
-        });
-
-        if (!wraybotResponse.ok) {
-            throw new Error('Wraybot execution failed');
-        }
-
-        const wraybotData = await wraybotResponse.json();
-        const result = wraybotData.choices?.[0]?.message?.content || 'Tool executed';
-
-        addMessage(result, 'ai');
-    } catch (err) {
-        console.error('Tool call error:', err);
-        addMessage(`Tool execution error: ${err.message}`, 'ai');
-    }
-}
-
-// ============================================================================
-// CHAT INTERFACE
-// ============================================================================
-
-function addMessage(text, sender) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}`;
 
     const bubble = document.createElement('div');
-    bubble.className = 'message-bubble';
-    bubble.textContent = text;
+    bubble.className = 'msg-bubble';
 
-    messageDiv.appendChild(bubble);
+    if (role === 'ai') {
+        // Render markdown safely via DOMPurify for AI responses
+        bubble.innerHTML = renderMarkdown(content);
+    } else {
+        bubble.textContent = content;
+    }
 
-    document.getElementById('chatMessages').appendChild(messageDiv);
-    document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    div.appendChild(bubble);
 
-    state.chatMessages.push({ text, sender, timestamp: new Date() });
+    // Metadata
+    if (opts.meta) {
+        const meta = document.createElement('div');
+        meta.className = 'msg-meta';
+        meta.textContent = opts.meta;
+        div.appendChild(meta);
+    }
+
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+
+    return div;
 }
 
-async function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
+function addTypingIndicator() {
+    const container = document.getElementById('messages');
+    const div = document.createElement('div');
+    div.className = 'msg ai';
+    div.id = 'typingIndicator';
 
-    if (!message) return;
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble typing-indicator';
+    bubble.innerHTML = DOMPurify.sanitize('<span></span><span></span><span></span>');
+    div.appendChild(bubble);
+
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const el = document.getElementById('typingIndicator');
+    if (el) el.remove();
+}
+
+async function sendMessage(forcedText) {
+    const input = document.getElementById('chatInput');
+    const text = forcedText || input.value.trim();
+    if (!text || state.isProcessing) return;
 
     input.value = '';
+    updateSendButton();
+    state.isProcessing = true;
 
-    if (!state.currentImageBase64) {
-        addMessage(message, 'user');
-        addMessage('Please upload a photo or capture a camera frame first', 'ai');
+    // Show user message (with image thumbnail if image is attached)
+    addMessage('user', text, {
+        thumb: state.currentImageB64 ? state.currentImageDataUrl : null,
+        meta: state.gpsCoords
+            ? `${new Date().toLocaleTimeString()} · ${state.gpsCoords.lat.toFixed(4)}, ${state.gpsCoords.lng.toFixed(4)}`
+            : new Date().toLocaleTimeString(),
+    });
+
+    state.chatHistory.push({ role: 'user', content: text });
+
+    addTypingIndicator();
+
+    try {
+        const response = await callGemini(text);
+        removeTypingIndicator();
+
+        let meta = new Date().toLocaleTimeString();
+        if (state.wrayOnline) {
+            meta += ' · Wray connected';
+        }
+
+        addMessage('ai', response, { meta });
+        state.chatHistory.push({ role: 'assistant', content: response });
+
+        // Voice output
+        if (settings.voiceOutput) {
+            speak(response);
+        }
+
+    } catch (err) {
+        removeTypingIndicator();
+        addMessage('ai', `**Error:** ${err.message}\n\nMake sure your Gemini API key is configured in Settings.`, {
+            meta: 'Error',
+        });
+        toast(err.message, 'error');
+    }
+
+    state.isProcessing = false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VOICE
+// ─────────────────────────────────────────────────────────────────────────────
+
+function initVoice() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) {
+        document.getElementById('voiceBtn').style.display = 'none';
         return;
     }
 
-    await analyzeImage(message);
-}
+    const recognition = new SR();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
 
-// ============================================================================
-// VOICE INPUT/OUTPUT
-// ============================================================================
-
-function initializeVoiceInput() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-        document.getElementById('voiceInputBtn').disabled = true;
-        document.getElementById('voiceInputBtn').title = 'Voice input not supported on this device';
-        return;
-    }
-
-    state.voiceRecognition = new SpeechRecognition();
-    state.voiceRecognition.continuous = false;
-    state.voiceRecognition.interimResults = false;
-    state.voiceRecognition.lang = 'en-US';
-
-    state.voiceRecognition.onstart = () => {
-        state.voiceIsActive = true;
-        document.getElementById('voiceInputBtn').classList.add('active');
-        document.getElementById('voiceIndicator').style.display = 'flex';
+    recognition.onstart = () => {
+        state.voiceActive = true;
+        document.getElementById('voiceBtn').classList.add('active');
     };
 
-    state.voiceRecognition.onend = () => {
-        state.voiceIsActive = false;
-        document.getElementById('voiceInputBtn').classList.remove('active');
-        document.getElementById('voiceIndicator').style.display = 'none';
+    recognition.onend = () => {
+        state.voiceActive = false;
+        document.getElementById('voiceBtn').classList.remove('active');
     };
 
-    state.voiceRecognition.onresult = (event) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-            transcript += event.results[i][0].transcript;
+    recognition.onresult = (e) => {
+        let final = '';
+        let interim = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+            const transcript = e.results[i][0].transcript;
+            if (e.results[i].isFinal) {
+                final += transcript;
+            } else {
+                interim += transcript;
+            }
         }
 
-        if (event.results[0].isFinal) {
-            document.getElementById('chatInput').value = transcript;
+        const input = document.getElementById('chatInput');
+        if (final) {
+            input.value = final;
+            updateSendButton();
+            // Auto-send after voice recognition completes
+            setTimeout(() => sendMessage(), 300);
+        } else {
+            input.value = interim;
         }
     };
 
-    state.voiceRecognition.onerror = (event) => {
-        console.error('Voice error:', event.error);
-        showNotification(`Voice error: ${event.error}`, 'error');
+    recognition.onerror = (e) => {
+        if (e.error !== 'no-speech') {
+            toast(`Voice error: ${e.error}`, 'error');
+        }
     };
+
+    state.voiceRecognition = recognition;
 }
 
-function toggleVoiceInput() {
+function toggleVoice() {
     if (!state.voiceRecognition) return;
-
-    if (state.voiceIsActive) {
+    if (state.voiceActive) {
         state.voiceRecognition.stop();
     } else {
         state.voiceRecognition.start();
     }
 }
 
-function speakText(text) {
-    if (!('speechSynthesis' in window)) {
-        console.warn('Text-to-speech not supported');
-        return;
-    }
+function speak(text) {
+    if (!('speechSynthesis' in window) || !settings.voiceOutput) return;
 
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.volume = 1;
+    // Strip markdown for cleaner speech
+    const clean = text
+        .replace(/#{1,4}\s*/g, '')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/\*(.*?)\*/g, '$1')
+        .replace(/`(.*?)`/g, '$1')
+        .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+        .replace(/[-*] /g, '')
+        .trim();
+
+    // Limit speech length (long responses are tedious to listen to)
+    const truncated = clean.length > 500 ? clean.substring(0, 500) + '...' : clean;
 
     window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(truncated);
+    utterance.rate = 1.05;
+    utterance.pitch = 1;
     window.speechSynthesis.speak(utterance);
 }
 
-// ============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
 // UI HELPERS
-// ============================================================================
+// ─────────────────────────────────────────────────────────────────────────────
 
-function showProcessing(show) {
-    state.isProcessing = show;
-    const indicator = document.getElementById('processingIndicator');
-    indicator.style.display = show ? 'flex' : 'none';
-    document.getElementById('sendBtn').disabled = show;
-    document.getElementById('captureFrameBtn').disabled = show;
+function updateConnectionStatus(status) {
+    const pill = document.getElementById('connectionStatus');
+    pill.className = `status-pill ${status}`;
+    const text = pill.querySelector('.status-text');
+    text.textContent = status === 'online' ? 'Wray' : status === 'checking' ? 'Checking...' : 'Offline';
 }
 
-function showNotification(message, type = 'info') {
-    console.log(`[${type.toUpperCase()}] ${message}`);
-    // Could be enhanced with a toast notification UI
+function updateSendButton() {
+    const input = document.getElementById('chatInput');
+    document.getElementById('sendBtn').disabled = !input.value.trim();
 }
 
-// ============================================================================
-// ERROR HANDLING
-// ============================================================================
+function toast(message, type = 'info') {
+    const container = document.getElementById('toasts');
+    const div = document.createElement('div');
+    div.className = `toast ${type}`;
+    div.textContent = message;
+    container.appendChild(div);
 
-window.addEventListener('error', (e) => {
-    console.error('Global error:', e);
+    setTimeout(() => {
+        div.classList.add('out');
+        setTimeout(() => div.remove(), 200);
+    }, 3000);
+}
+
+function switchTab(tabName) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tabName));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === `${tabName}Tab`));
+
+    if (tabName !== 'camera') stopCamera();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SETTINGS UI
+// ─────────────────────────────────────────────────────────────────────────────
+
+function openSettings() {
+    document.getElementById('settingsDrawer').classList.add('open');
+    document.getElementById('geminiKey').value = settings.geminiKey || '';
+    document.getElementById('wrayUrl').value = settings.wrayUrl || '';
+    document.getElementById('wrayToken').value = settings.wrayToken || '';
+    document.getElementById('roleSelect').value = settings.role || 'tech';
+    document.getElementById('voiceToggle').checked = settings.voiceOutput;
+    document.getElementById('autoAnalyze').checked = settings.autoAnalyze;
+}
+
+function closeSettingsDrawer() {
+    document.getElementById('settingsDrawer').classList.remove('open');
+}
+
+function applySettings() {
+    settings.geminiKey = document.getElementById('geminiKey').value.trim();
+    settings.wrayUrl = document.getElementById('wrayUrl').value.trim().replace(/\/$/, '');
+    settings.wrayToken = document.getElementById('wrayToken').value.trim();
+    settings.role = document.getElementById('roleSelect').value;
+    settings.voiceOutput = document.getElementById('voiceToggle').checked;
+    settings.autoAnalyze = document.getElementById('autoAnalyze').checked;
+
+    saveSettingsToDisk();
+    toast('Settings saved', 'success');
+    closeSettingsDrawer();
+    checkWrayConnection();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INITIALIZATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadSettings();
+    initVoice();
+
+    // Configure marked.js
+    if (typeof marked !== 'undefined') {
+        marked.setOptions({ breaks: true, gfm: true });
+    }
+
+    // Header
+    document.getElementById('settingsBtn').addEventListener('click', openSettings);
+
+    // Settings drawer
+    document.getElementById('closeSettings').addEventListener('click', closeSettingsDrawer);
+    document.querySelector('.drawer-backdrop').addEventListener('click', closeSettingsDrawer);
+    document.getElementById('saveSettings').addEventListener('click', applySettings);
+    document.getElementById('testConnection').addEventListener('click', async () => {
+        toast('Testing Wray connection...', 'info');
+        settings.wrayUrl = document.getElementById('wrayUrl').value.trim().replace(/\/$/, '');
+        settings.wrayToken = document.getElementById('wrayToken').value.trim();
+        await checkWrayConnection();
+        toast(state.wrayOnline ? 'Wray is online!' : 'Wray unreachable — check URL and token', state.wrayOnline ? 'success' : 'error');
+    });
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // Camera
+    document.getElementById('startCameraBtn').addEventListener('click', () => {
+        state.cameraStream ? stopCamera() : startCamera();
+    });
+    document.getElementById('cameraPlaceholder').addEventListener('click', startCamera);
+    document.getElementById('captureBtn').addEventListener('click', captureFrame);
+    document.getElementById('flipCameraBtn').addEventListener('click', flipCamera);
+
+    // Upload
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('click', () => document.getElementById('fileInput').click());
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) handleFileSelect(e.dataTransfer.files[0]);
+    });
+    document.getElementById('fileInput').addEventListener('change', (e) => {
+        if (e.target.files.length) handleFileSelect(e.target.files[0]);
+    });
+    document.getElementById('clearPreview').addEventListener('click', clearFilePreview);
+
+    // Chat input
+    const chatInput = document.getElementById('chatInput');
+    chatInput.addEventListener('input', updateSendButton);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', () => sendMessage());
+
+    // Voice
+    document.getElementById('voiceBtn').addEventListener('click', toggleVoice);
+
+    // Quick actions
+    document.querySelectorAll('.quick-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const prompt = btn.dataset.prompt;
+            if (!state.currentImageB64) {
+                toast('Capture or upload a photo first', 'info');
+                return;
+            }
+            sendMessage(prompt);
+        });
+    });
+
+    // Check Wray on load + periodic
+    checkWrayConnection();
+    setInterval(checkWrayConnection, 60000);
+
+    console.log('Hoyt Vision initialized');
 });
 
-window.addEventListener('unhandledrejection', (e) => {
-    console.error('Unhandled promise rejection:', e);
-});
+// Global error handling
+window.addEventListener('error', (e) => console.error('Error:', e));
+window.addEventListener('unhandledrejection', (e) => console.error('Unhandled:', e));
