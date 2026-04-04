@@ -28,12 +28,26 @@ export async function onRequestPost(context) {
     'Access-Control-Allow-Headers': 'Content-Type',
   };
 
-  // ── Parse body ────────────────────────────────────────────────────────────
+  // ── Parse body (JSON or FormData) ────────────────────────────────────────
   let body;
   try {
-    body = await request.json();
+    const contentType = request.headers.get('content-type') || '';
+    if (contentType.includes('application/json')) {
+      body = await request.json();
+    } else {
+      // Fallback: HTML form submit without JS (no-JS graceful degradation)
+      const fd = await request.formData();
+      body = Object.fromEntries(fd.entries());
+    }
   } catch {
     return json({ ok: false, error: 'Invalid request body' }, 400, corsHeaders);
+  }
+
+  // Normalize name field — JS sends firstName/lastName, raw HTML form sends name
+  if (!body.firstName && body.name) {
+    const parts = body.name.trim().split(' ');
+    body.firstName = parts[0] || body.name;
+    body.lastName  = parts.slice(1).join(' ') || '';
   }
 
   const {

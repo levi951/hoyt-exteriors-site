@@ -292,12 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        const formData = new FormData();
-        Object.keys(payload).forEach(key => formData.append(key, payload[key]));
-        const res = await fetch('https://formspree.io/f/xjgpobwn', {
+        const res = await fetch('/api/contact', {
           method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         });
         if (res.ok) {
           form.setAttribute('hidden', '');
@@ -369,11 +367,24 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.textContent = 'SENDING…';
       btn.disabled = true;
       try {
-        const endpoint = form.action || 'https://formspree.io/f/xjgpobwn';
-        const res = await fetch(endpoint, {
+        // Build JSON payload — normalize name → firstName/lastName for /api/contact
+        const fd = new FormData(form);
+        const rawName = (fd.get('name') || '').trim();
+        const nameParts = rawName.split(' ');
+        const payload = {
+          firstName:  nameParts[0] || rawName,
+          lastName:   nameParts.slice(1).join(' ') || '',
+          email:      (fd.get('email') || '').trim(),
+          phone:      (fd.get('phone') || '').trim(),
+          services:   fd.get('service') || fd.get('services') || 'Not specified',
+          message:    (fd.get('message') || '').trim(),
+          smsConsent: fd.get('sms_consent') === 'yes' ? 'yes' : 'no',
+          source:     fd.get('source') || form.dataset.source || detectSource(),
+        };
+        const res = await fetch('/api/contact', {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         });
         if (!res.ok) throw new Error(res.status);
         form.style.display = 'none';
