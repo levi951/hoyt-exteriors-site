@@ -292,16 +292,32 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        });
-        if (res.ok) {
+        // Build FormData copy for Formspree (paid failsafe + monitoring)
+        const fsData = new FormData();
+        Object.keys(payload).forEach(k => fsData.append(k, payload[k]));
+
+        // Fire both in parallel — AI pipeline + Formspree failsafe
+        const [apiResult, fsResult] = await Promise.allSettled([
+          fetch('https://wray.hoytexteriors.com/api/contact', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          }),
+          fetch('https://formspree.io/f/xjgpobwn', {
+            method: 'POST',
+            body: fsData,
+            headers: { 'Accept': 'application/json' },
+          }),
+        ]);
+
+        const apiOk = apiResult.status === 'fulfilled' && apiResult.value.ok;
+        const fsOk  = fsResult.status  === 'fulfilled' && fsResult.value.ok;
+
+        if (apiOk || fsOk) {
           form.setAttribute('hidden', '');
           success.removeAttribute('hidden');
         } else {
-          throw new Error('Form submission failed');
+          throw new Error('Both endpoints failed');
         }
       } catch {
         errMsg.removeAttribute('hidden');
@@ -381,12 +397,25 @@ document.addEventListener('DOMContentLoaded', () => {
           smsConsent: fd.get('sms_consent') === 'yes' ? 'yes' : 'no',
           source:     fd.get('source') || form.dataset.source || detectSource(),
         };
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        });
-        if (!res.ok) throw new Error(res.status);
+        // Fire both in parallel — AI pipeline + Formspree failsafe
+        // Formspree gets raw FormData (native field names); /api/contact gets normalized JSON
+        const [apiResult, fsResult] = await Promise.allSettled([
+          fetch('https://wray.hoytexteriors.com/api/contact', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          }),
+          fetch('https://formspree.io/f/xjgpobwn', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' },
+          }),
+        ]);
+
+        const apiOk = apiResult.status === 'fulfilled' && apiResult.value.ok;
+        const fsOk  = fsResult.status  === 'fulfilled' && fsResult.value.ok;
+        if (!apiOk && !fsOk) throw new Error('Both endpoints failed');
+
         form.style.display = 'none';
         // Find the closest success div — each page names it differently
         const ok = document.getElementById('formSuccess')
