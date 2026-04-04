@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Talk to Betty — Hoyt Family</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;background:#0A0A0A;color:#fff;height:100vh;display:flex;flex-direction:column}
+header{padding:16px 20px;border-bottom:1px solid #222;display:flex;align-items:center;gap:12px}
+header .logo{font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;letter-spacing:-0.02em}
+header .sub{font-size:0.7rem;color:#888;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+header .agent-badge{margin-left:auto;background:#E8567F;color:#fff;padding:6px 14px;border-radius:20px;font-size:0.75rem;font-weight:700;letter-spacing:0.04em}
+#hoyt-talk{flex:1;overflow:hidden;display:flex;flex-direction:column}
+footer{padding:12px 20px;text-align:center;font-size:11px;color:#555;border-top:1px solid #1a1a1a}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="logo">Hoyt Family</div>
+    <div class="sub">Private</div>
+  </div>
+  <div class="agent-badge">Betty</div>
+</header>
+<div id="hoyt-talk"></div>
+<footer>Family use only</footer>
+<script>
+window.HOYT_AGENT = {
+  name: 'Betty',
+  path: 'betty',
+  greeting: "Hey! It's Betty. What's up?"
+};
+</script>
+<script src="/talk/agent-widget.js"></script>
+</body>
+</html>
