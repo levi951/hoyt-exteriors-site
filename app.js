@@ -296,9 +296,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const fsData = new FormData();
         Object.keys(payload).forEach(k => fsData.append(k, payload[k]));
 
-        // Fire both in parallel — AI pipeline + Formspree failsafe
+        // Fire both in parallel — Daemon API + Formspree failsafe
         const [apiResult, fsResult] = await Promise.allSettled([
-          fetch('https://wray.hoytexteriors.com/api/contact', {
+          fetch('http://159.65.33.45:3000/api/contact', {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -397,10 +397,10 @@ document.addEventListener('DOMContentLoaded', () => {
           smsConsent: fd.get('sms_consent') === 'yes' ? 'yes' : 'no',
           source:     fd.get('source') || form.dataset.source || detectSource(),
         };
-        // Fire both in parallel — AI pipeline + Formspree failsafe
+        // Fire both in parallel — Daemon API + Formspree failsafe
         // Formspree gets raw FormData (native field names); /api/contact gets normalized JSON
         const [apiResult, fsResult] = await Promise.allSettled([
-          fetch('https://wray.hoytexteriors.com/api/contact', {
+          fetch('http://159.65.33.45:3000/api/contact', {
             method: 'POST',
             body: JSON.stringify(payload),
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
